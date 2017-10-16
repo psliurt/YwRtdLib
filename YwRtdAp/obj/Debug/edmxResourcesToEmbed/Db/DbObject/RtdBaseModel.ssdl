@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RtdBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BizGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="GroupName" Type="nvarchar" MaxLength="40" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BizGroupSymbol">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SymbolId" Type="int" Nullable="false" />
+    <Property Name="BizGroupId" Type="int" Nullable="false" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Concept">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="ConceptName" Type="nvarchar" MaxLength="32" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ConceptSymbol">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SymbolId" Type="int" Nullable="false" />
+    <Property Name="ConceptId" Type="int" Nullable="false" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Industry">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="IndustryName" Type="nvarchar" MaxLength="32" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IndustrySymbol">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SymbolId" Type="int" Nullable="false" />
+    <Property Name="IndustryId" Type="int" Nullable="false" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PointerIndex">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="PointerName" Type="nvarchar" MaxLength="32" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PointerIndexSymbol">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SymbolId" Type="int" Nullable="false" />
+    <Property Name="PointerIndexId" Type="int" Nullable="false" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Symbol">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="SymbolName" Type="nvarchar" MaxLength="32" Nullable="false" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="RtdBaseModelStoreContainer">
+    <EntitySet Name="BizGroup" EntityType="Self.BizGroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BizGroupSymbol" EntityType="Self.BizGroupSymbol" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Concept" EntityType="Self.Concept" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ConceptSymbol" EntityType="Self.ConceptSymbol" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Industry" EntityType="Self.Industry" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IndustrySymbol" EntityType="Self.IndustrySymbol" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PointerIndex" EntityType="Self.PointerIndex" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PointerIndexSymbol" EntityType="Self.PointerIndexSymbol" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Symbol" EntityType="Self.Symbol" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

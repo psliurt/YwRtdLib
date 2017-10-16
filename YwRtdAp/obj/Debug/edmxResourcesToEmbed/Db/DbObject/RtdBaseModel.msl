@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RtdBaseModelStoreContainer" CdmEntityContainer="RtdBaseContext">
+    <EntitySetMapping Name="BizGroup">
+      <EntityTypeMapping TypeName="RtdBaseModel.BizGroup">
+        <MappingFragment StoreEntitySet="BizGroup">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Concept">
+      <EntityTypeMapping TypeName="RtdBaseModel.Concept">
+        <MappingFragment StoreEntitySet="Concept">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ConceptName" ColumnName="ConceptName" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Industry">
+      <EntityTypeMapping TypeName="RtdBaseModel.Industry">
+        <MappingFragment StoreEntitySet="Industry">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="IndustryName" ColumnName="IndustryName" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PointerIndex">
+      <EntityTypeMapping TypeName="RtdBaseModel.PointerIndex">
+        <MappingFragment StoreEntitySet="PointerIndex">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="PointerName" ColumnName="PointerName" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Symbol">
+      <EntityTypeMapping TypeName="RtdBaseModel.Symbol">
+        <MappingFragment StoreEntitySet="Symbol">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="SymbolName" ColumnName="SymbolName" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BizGroupSymbol">
+      <EntityTypeMapping TypeName="RtdBaseModel.BizGroupSymbol">
+        <MappingFragment StoreEntitySet="BizGroupSymbol">
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="BizGroupId" ColumnName="BizGroupId" />
+          <ScalarProperty Name="SymbolId" ColumnName="SymbolId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ConceptSymbol">
+      <EntityTypeMapping TypeName="RtdBaseModel.ConceptSymbol">
+        <MappingFragment StoreEntitySet="ConceptSymbol">
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="ConceptId" ColumnName="ConceptId" />
+          <ScalarProperty Name="SymbolId" ColumnName="SymbolId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IndustrySymbol">
+      <EntityTypeMapping TypeName="RtdBaseModel.IndustrySymbol">
+        <MappingFragment StoreEntitySet="IndustrySymbol">
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="IndustryId" ColumnName="IndustryId" />
+          <ScalarProperty Name="SymbolId" ColumnName="SymbolId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PointerIndexSymbol">
+      <EntityTypeMapping TypeName="RtdBaseModel.PointerIndexSymbol">
+        <MappingFragment StoreEntitySet="PointerIndexSymbol">
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="PointerIndexId" ColumnName="PointerIndexId" />
+          <ScalarProperty Name="SymbolId" ColumnName="SymbolId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
