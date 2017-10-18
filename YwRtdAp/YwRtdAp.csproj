@@ -74,7 +74,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CombineObject\CombineQuote.cs" />
     <Compile Include="CombineObject\DayTradeQuote.cs" />
+    <Compile Include="CombineObject\IndustryQuote.cs" />
     <Compile Include="Db\Dal\RtdRepository.cs" />
     <Compile Include="Db\DbObject\BizGroup.cs">
       <DependentUpon>RtdBaseModel.tt</DependentUpon>

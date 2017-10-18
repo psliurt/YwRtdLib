@@ -37,7 +37,7 @@ namespace YwRtdAp
         private List<string> _dayTradeGVSymbols { get; set; }
 
         private List<string> _selectedIndustrySymbols { get; set; }
-        private List<DayTradeQuote> _selectedIndustryQuote { get; set; }
+        private List<IndustryQuote> _selectedIndustryQuote { get; set; }
 
         private List<string> _selectedBizGroupSymbols { get; set; }
         private List<DayTradeQuote> _selectedBizGroupQuote { get; set; }
@@ -177,7 +177,7 @@ namespace YwRtdAp
             this._unfilterRawDatas = new ConcurrentBag<DayTradeQuote>();
 
             this._selectedIndustrySymbols = new List<string>();
-            this._selectedIndustryQuote = new List<DayTradeQuote>();
+            this._selectedIndustryQuote = new List<IndustryQuote>();
 
             this._selectedBizGroupSymbols = new List<string>();
             this._selectedBizGroupQuote = new List<DayTradeQuote>();
@@ -675,8 +675,8 @@ namespace YwRtdAp
             if (_subscribeBasicQuote.ContainsKey(basicQuote.Symbol) == false)
             {
                 _subscribeBasicQuote.TryAdd(basicQuote.Symbol, basicQuote);
-                this._dayTradeQuoteDatas.Add(new DayTradeQuote(ref basicQuote));
-                this._unfilterRawDatas.Add(new DayTradeQuote(ref basicQuote));                               
+                //this._dayTradeQuoteDatas.Add(new DayTradeQuote(ref basicQuote));
+                //this._unfilterRawDatas.Add(new DayTradeQuote(ref basicQuote));                               
             }
             
             //UpdateGridView(this._symbolGV);
@@ -959,9 +959,14 @@ namespace YwRtdAp
             this._selectedIndustrySymbols.Clear();            
             List<string> symbolCodes = this._rep.Query<Symbol>(x => symbolIdList.Contains(x.Id)).Select(x => x.Code).ToList();
             this._selectedIndustrySymbols.AddRange(symbolCodes);
-
+            List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => symbolCodes.Contains(x.Symbol)).ToList();
             this._selectedIndustryQuote.Clear();
-            this._selectedIndustryQuote.AddRange(this._unfilterRawDatas.Where(x => symbolCodes.Contains(x.Symbol)).ToList());
+            for(int i = 0 ;i < filteredCommodities.Count;i ++)
+            {
+                YwCommodity c = filteredCommodities[i];
+                this._selectedIndustryQuote.Add(new IndustryQuote(ref c));
+            }
+            
             this._filteredIndustryGV.DataSource = null;
             this._filteredIndustryGV.DataSource = this._selectedIndustryQuote;
             this._filteredIndustryGV.Refresh();
@@ -1204,6 +1209,6 @@ namespace YwRtdAp
                 this._symbolManageLV.Items.Add(lvi);
             }
             this._symbolManageLV.Refresh();  
-        }
+        }        
     }
 }
