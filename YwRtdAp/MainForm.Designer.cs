@@ -44,6 +44,7 @@
             this._filterCeilPriceStockBtn = new System.Windows.Forms.Button();
             this._stockInfoPage = new System.Windows.Forms.TabPage();
             this._stockQueryPage = new System.Windows.Forms.TabPage();
+            this._pointerIndexQueryPage = new System.Windows.Forms.TabPage();
             this._industryQueryPage = new System.Windows.Forms.TabPage();
             this._filteredIndustryGV = new System.Windows.Forms.DataGridView();
             this._industrySelectLbl = new System.Windows.Forms.Label();
@@ -85,11 +86,14 @@
             this._manageSymbolNameLbl = new System.Windows.Forms.Label();
             this._manageSymbolLbl = new System.Windows.Forms.Label();
             this._manageSymbolTxt = new System.Windows.Forms.TextBox();
-            this._pointerIndexQueryPage = new System.Windows.Forms.TabPage();
+            this._selectPointerIndexLbl = new System.Windows.Forms.Label();
+            this._pointerIndexSelectCmb = new System.Windows.Forms.ComboBox();
+            this._filteredPointerIndexGV = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this._symbolGV)).BeginInit();
             this._switchTabCtrl.SuspendLayout();
             this._dayTradePage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dayTradeStockGV)).BeginInit();
+            this._pointerIndexQueryPage.SuspendLayout();
             this._industryQueryPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._filteredIndustryGV)).BeginInit();
             this._bizGroupQueryPage.SuspendLayout();
@@ -98,6 +102,7 @@
             ((System.ComponentModel.ISupportInitialize)(this._filteredConceptGV)).BeginInit();
             this._testPage.SuspendLayout();
             this._symbolManagePage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._filteredPointerIndexGV)).BeginInit();
             this.SuspendLayout();
             // 
             // _symbolGV
@@ -281,6 +286,18 @@
             this._stockQueryPage.TabIndex = 3;
             this._stockQueryPage.Text = "股票查詢";
             this._stockQueryPage.UseVisualStyleBackColor = true;
+            // 
+            // _pointerIndexQueryPage
+            // 
+            this._pointerIndexQueryPage.Controls.Add(this._filteredPointerIndexGV);
+            this._pointerIndexQueryPage.Controls.Add(this._selectPointerIndexLbl);
+            this._pointerIndexQueryPage.Controls.Add(this._pointerIndexSelectCmb);
+            this._pointerIndexQueryPage.Location = new System.Drawing.Point(4, 22);
+            this._pointerIndexQueryPage.Name = "_pointerIndexQueryPage";
+            this._pointerIndexQueryPage.Size = new System.Drawing.Size(1180, 567);
+            this._pointerIndexQueryPage.TabIndex = 8;
+            this._pointerIndexQueryPage.Text = "指標股";
+            this._pointerIndexQueryPage.UseVisualStyleBackColor = true;
             // 
             // _industryQueryPage
             // 
@@ -702,14 +719,38 @@
             this._manageSymbolTxt.Size = new System.Drawing.Size(100, 22);
             this._manageSymbolTxt.TabIndex = 0;
             // 
-            // _pointerIndexQueryPage
+            // _selectPointerIndexLbl
             // 
-            this._pointerIndexQueryPage.Location = new System.Drawing.Point(4, 22);
-            this._pointerIndexQueryPage.Name = "_pointerIndexQueryPage";
-            this._pointerIndexQueryPage.Size = new System.Drawing.Size(1180, 567);
-            this._pointerIndexQueryPage.TabIndex = 8;
-            this._pointerIndexQueryPage.Text = "指標股";
-            this._pointerIndexQueryPage.UseVisualStyleBackColor = true;
+            this._selectPointerIndexLbl.Location = new System.Drawing.Point(15, 12);
+            this._selectPointerIndexLbl.Name = "_selectPointerIndexLbl";
+            this._selectPointerIndexLbl.Size = new System.Drawing.Size(100, 25);
+            this._selectPointerIndexLbl.TabIndex = 3;
+            this._selectPointerIndexLbl.Text = "指標股";
+            this._selectPointerIndexLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // _pointerIndexSelectCmb
+            // 
+            this._pointerIndexSelectCmb.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this._pointerIndexSelectCmb.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this._pointerIndexSelectCmb.FormattingEnabled = true;
+            this._pointerIndexSelectCmb.Location = new System.Drawing.Point(121, 17);
+            this._pointerIndexSelectCmb.Name = "_pointerIndexSelectCmb";
+            this._pointerIndexSelectCmb.Size = new System.Drawing.Size(200, 20);
+            this._pointerIndexSelectCmb.TabIndex = 2;
+            this._pointerIndexSelectCmb.SelectedIndexChanged += new System.EventHandler(this._pointerIndexSelectCmb_SelectedIndexChanged);
+            // 
+            // _filteredPointerIndexGV
+            // 
+            this._filteredPointerIndexGV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._filteredPointerIndexGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this._filteredPointerIndexGV.Location = new System.Drawing.Point(3, 115);
+            this._filteredPointerIndexGV.Name = "_filteredPointerIndexGV";
+            this._filteredPointerIndexGV.RowTemplate.Height = 24;
+            this._filteredPointerIndexGV.Size = new System.Drawing.Size(1172, 449);
+            this._filteredPointerIndexGV.TabIndex = 4;
+            this._filteredPointerIndexGV.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this._filteredPointerIndexGV_CellFormatting);
             // 
             // MainForm
             // 
@@ -724,6 +765,7 @@
             this._switchTabCtrl.ResumeLayout(false);
             this._dayTradePage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._dayTradeStockGV)).EndInit();
+            this._pointerIndexQueryPage.ResumeLayout(false);
             this._industryQueryPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._filteredIndustryGV)).EndInit();
             this._bizGroupQueryPage.ResumeLayout(false);
@@ -734,6 +776,7 @@
             this._testPage.PerformLayout();
             this._symbolManagePage.ResumeLayout(false);
             this._symbolManagePage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._filteredPointerIndexGV)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -798,6 +841,9 @@
         private System.Windows.Forms.Button _manageIndustryQryBtn;
         private System.Windows.Forms.Button _manageGroupQryBtn;
         private System.Windows.Forms.TabPage _pointerIndexQueryPage;
+        private System.Windows.Forms.Label _selectPointerIndexLbl;
+        private System.Windows.Forms.ComboBox _pointerIndexSelectCmb;
+        private System.Windows.Forms.DataGridView _filteredPointerIndexGV;
     }
 }
 

@@ -40,10 +40,13 @@ namespace YwRtdAp
         private List<IndustryQuote> _selectedIndustryQuote { get; set; }
 
         private List<string> _selectedBizGroupSymbols { get; set; }
-        private List<DayTradeQuote> _selectedBizGroupQuote { get; set; }
+        private List<BizGroupQuote> _selectedBizGroupQuote { get; set; }
 
         private List<string> _selectedConceptSymbols { get; set; }
-        private List<DayTradeQuote> _selectedConceptQuote { get; set; }        
+        private List<ConceptQuote> _selectedConceptQuote { get; set; }
+
+        private List<string> _selectedPointerIndexSymbols { get; set; }
+        private List<PointerIndexQuote> _selectedPointerIndexQuote { get; set; }
 
         private RtdRepository _rep { get; set; }
 
@@ -180,10 +183,13 @@ namespace YwRtdAp
             this._selectedIndustryQuote = new List<IndustryQuote>();
 
             this._selectedBizGroupSymbols = new List<string>();
-            this._selectedBizGroupQuote = new List<DayTradeQuote>();
+            this._selectedBizGroupQuote = new List<BizGroupQuote>();
 
             this._selectedConceptSymbols = new List<string>();
-            this._selectedConceptQuote = new List<DayTradeQuote>();
+            this._selectedConceptQuote = new List<ConceptQuote>();
+
+            this._selectedPointerIndexSymbols = new List<string>();
+            this._selectedPointerIndexQuote = new List<PointerIndexQuote>();
 
             this._dayTradeGVSymbols = new List<string>();
             this._symbolGV.AutoGenerateColumns = true;
@@ -207,6 +213,7 @@ namespace YwRtdAp
             LoadIndustryDropListData();
             LoadBizGroupDropListData();
             LoadConceptDropListData();
+            LoadPointerIndexDropListData();
 
             LoadManagePageSymbolsData();
 
@@ -241,6 +248,14 @@ namespace YwRtdAp
                 
             }
             
+        }
+
+        private void LoadPointerIndexDropListData()
+        {
+            var pointerIndexList = this._rep.FetchAll<PointerIndex>().ToList();
+            this._pointerIndexSelectCmb.ValueMember = "Code";
+            this._pointerIndexSelectCmb.DisplayMember = "PointerName";
+            this._pointerIndexSelectCmb.DataSource = pointerIndexList;  
         }
 
         private void LoadIndustryDropListData()
@@ -610,23 +625,23 @@ namespace YwRtdAp
                 string[] pointerIndexs = pointerIndexData.Split(new string[] { "\r\n" }, StringSplitOptions.None);
                 foreach (string s in pointerIndexs)
                 {
-                    string pointerIdx = s.Trim();
-                    if (string.IsNullOrEmpty(pointerIdx) == false)
-                    {
-                        int maxId = 0;
-                        PointerIndex lastPiObj = this._rep.FetchAll<PointerIndex>().OrderByDescending(x => x.Id).FirstOrDefault();
-                        if (lastPiObj != null)
-                        {
-                            maxId = lastPiObj.Id;
-                        }
-                        this._rep.Insert<PointerIndex>(new PointerIndex
-                        {
-                            Code = string.Format("PI_{0}", maxId + 1),
-                            PointerName = pointerIdx,
-                            CreateTime = DateTime.Now
-                        });
-                        this._rep.Commit();
-                    }
+                    //string pointerIdx = s.Trim();
+                    //if (string.IsNullOrEmpty(pointerIdx) == false)
+                    //{
+                    //    int maxId = 0;
+                    //    PointerIndex lastPiObj = this._rep.FetchAll<PointerIndex>().OrderByDescending(x => x.Id).FirstOrDefault();
+                    //    if (lastPiObj != null)
+                    //    {
+                    //        maxId = lastPiObj.Id;
+                    //    }
+                    //    this._rep.Insert<PointerIndex>(new PointerIndex
+                    //    {
+                    //        Code = string.Format("PI_{0}", maxId + 1),
+                    //        PointerName = pointerIdx,
+                    //        CreateTime = DateTime.Now
+                    //    });
+                    //    this._rep.Commit();
+                    //}
                 }
 
             }
@@ -986,8 +1001,14 @@ namespace YwRtdAp
             List<string> symbolCodes = this._rep.Query<Symbol>(x => symbolIdList.Contains(x.Id)).Select(x => x.Code).ToList();
             this._selectedBizGroupSymbols.AddRange(symbolCodes);
 
+            List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => symbolCodes.Contains(x.Symbol)).ToList();
             this._selectedBizGroupQuote.Clear();
-            this._selectedBizGroupQuote.AddRange(this._unfilterRawDatas.Where(x => symbolCodes.Contains(x.Symbol)).ToList());
+            for (int i = 0; i < filteredCommodities.Count; i++)
+            {
+                YwCommodity c = filteredCommodities[i];
+                this._selectedBizGroupQuote.Add(new BizGroupQuote(ref c));
+            }           
+            
             this._filteredBizGroupGV.DataSource = null;
             this._filteredBizGroupGV.DataSource = this._selectedBizGroupQuote;
             this._filteredBizGroupGV.Refresh();
@@ -1007,8 +1028,14 @@ namespace YwRtdAp
             List<string> symbolCodes = this._rep.Query<Symbol>(x => symbolIdList.Contains(x.Id)).Select(x => x.Code).ToList();
             this._selectedConceptSymbols.AddRange(symbolCodes);
 
+            List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => symbolCodes.Contains(x.Symbol)).ToList();
             this._selectedConceptQuote.Clear();
-            this._selectedConceptQuote.AddRange(this._unfilterRawDatas.Where(x => symbolCodes.Contains(x.Symbol)).ToList());
+            for (int i = 0; i < filteredCommodities.Count; i++)
+            {
+                YwCommodity c = filteredCommodities[i];
+                this._selectedConceptQuote.Add(new ConceptQuote(ref c));
+            }                  
+
             this._filteredConceptGV.DataSource = null;
             this._filteredConceptGV.DataSource = this._selectedConceptQuote;
             this._filteredConceptGV.Refresh();
@@ -1209,6 +1236,62 @@ namespace YwRtdAp
                 this._symbolManageLV.Items.Add(lvi);
             }
             this._symbolManageLV.Refresh();  
+        }
+
+        private void _pointerIndexSelectCmb_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string pointerIndexCode = ((PointerIndex)this._pointerIndexSelectCmb.SelectedItem).Code;
+
+            var selectedPointerIndex = this._rep.Query<PointerIndex>(x => x.Code == pointerIndexCode);
+            var allPointerIndexSymbolMap = this._rep.FetchAll<PointerIndexSymbol>();
+            var symbolIdList = (from pointerIndexes in selectedPointerIndex
+                                join symbols in allPointerIndexSymbolMap
+                                on pointerIndexes.Id equals symbols.PointerIndexId
+                                select symbols.SymbolId).ToList();
+
+            this._selectedPointerIndexSymbols.Clear();
+            List<string> symbolCodes = this._rep.Query<Symbol>(x => symbolIdList.Contains(x.Id)).Select(x => x.Code).ToList();
+            this._selectedPointerIndexSymbols.AddRange(symbolCodes);
+            List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => symbolCodes.Contains(x.Symbol)).ToList();
+            this._selectedPointerIndexQuote.Clear();
+            for (int i = 0; i < filteredCommodities.Count; i++)
+            {
+                YwCommodity c = filteredCommodities[i];
+                this._selectedPointerIndexQuote.Add(new PointerIndexQuote(ref c));
+            }
+
+            this._filteredPointerIndexGV.DataSource = null;
+            this._filteredPointerIndexGV.DataSource = this._selectedPointerIndexQuote;
+            this._filteredPointerIndexGV.Refresh();
+        }
+
+        private void _filteredPointerIndexGV_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (this._filteredPointerIndexGV.DataSource == null)
+            {
+                e.FormattingApplied = true;
+                return;
+            }
+            if (this._filteredPointerIndexGV.Columns[e.ColumnIndex].Name == "Change")
+            {
+                decimal upOrDown = Convert.ToDecimal(this._filteredPointerIndexGV.Rows[e.RowIndex].Cells[8].Value);
+                if (upOrDown > 0)
+                {
+                    this._filteredPointerIndexGV.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
+                    e.FormattingApplied = true;
+                    return;
+                }
+                if (upOrDown < 0)
+                {
+                    this._filteredPointerIndexGV.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Green;
+                    e.FormattingApplied = true;
+                    return;
+                }
+                else
+                {
+                    return;
+                }
+            }
         }        
     }
 }
