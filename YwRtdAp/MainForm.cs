@@ -255,7 +255,11 @@ namespace YwRtdAp
             var pointerIndexList = this._rep.FetchAll<PointerIndex>().ToList();
             this._pointerIndexSelectCmb.ValueMember = "Code";
             this._pointerIndexSelectCmb.DisplayMember = "PointerName";
-            this._pointerIndexSelectCmb.DataSource = pointerIndexList;  
+            this._pointerIndexSelectCmb.DataSource = pointerIndexList;
+
+            this._symbolCatPICmb.ValueMember = "Code";
+            this._symbolCatPICmb.DisplayMember = "PointerName";
+            this._symbolCatPICmb.DataSource = pointerIndexList;
         }
 
         private void LoadIndustryDropListData()
@@ -263,7 +267,11 @@ namespace YwRtdAp
             var industryList = this._rep.FetchAll<Industry>().ToList();
             this._industrySelectCmb.ValueMember = "Code";
             this._industrySelectCmb.DisplayMember = "IndustryName";
-            this._industrySelectCmb.DataSource = industryList;            
+            this._industrySelectCmb.DataSource = industryList;
+
+            this._symbolCatIndustryCmb.ValueMember = "Code";
+            this._symbolCatIndustryCmb.DisplayMember = "IndustryName";
+            this._symbolCatIndustryCmb.DataSource = industryList;        
         }
 
         private void LoadBizGroupDropListData()
@@ -272,6 +280,10 @@ namespace YwRtdAp
             this._bizGroupSelectCmb.ValueMember = "Code";
             this._bizGroupSelectCmb.DisplayMember = "GroupName";
             this._bizGroupSelectCmb.DataSource = bizGroupList;
+
+            this._symbolCatBizGroupCmb.ValueMember = "Code";
+            this._symbolCatBizGroupCmb.DisplayMember = "GroupName";
+            this._symbolCatBizGroupCmb.DataSource = bizGroupList;
         }
 
         private void LoadConceptDropListData()
@@ -280,6 +292,10 @@ namespace YwRtdAp
             this._conceptSelectCmb.ValueMember = "Code";
             this._conceptSelectCmb.DisplayMember = "ConceptName";
             this._conceptSelectCmb.DataSource = conceptList;
+
+            this._symbolCatConceptCmb.ValueMember = "Code";
+            this._symbolCatConceptCmb.DisplayMember = "ConceptName";
+            this._symbolCatConceptCmb.DataSource = conceptList;
         }
 
         private void LoadBizGroupSymbol()
@@ -1292,6 +1308,69 @@ namespace YwRtdAp
                     return;
                 }
             }
+        }
+
+        private void _symbolCatQueryBtn_Click(object sender, EventArgs e)
+        {
+            string symbolCodeOrName = this._symbolCatQueryTxt.Text.Trim();
+            Symbol symbolObj =
+                this._rep.DefaultOne<Symbol>(x => x.Code == symbolCodeOrName || x.SymbolName == symbolCodeOrName);
+
+            this._symbolNameCatLbl.Text = symbolObj.SymbolName;
+            this._symbolCatQueryTxt.Text = symbolObj.Code;
+
+            this._symbolCatPILB.DataSource = null;
+            var allPointerIndexName = from sym in this._rep.Query<PointerIndexSymbol>(x => x.SymbolId == symbolObj.Id)
+                                      join pi in this._rep.FetchAll<PointerIndex>()
+                                      on sym.PointerIndexId equals pi.Id
+                                      select pi.PointerName;
+
+            this._symbolCatPILB.DataSource = allPointerIndexName.ToList();
+            this._symbolCatPILB.Refresh();
+
+            this._symbolCatIndustryLB.DataSource = null;
+            var allIndustryName = from sym in this._rep.Query<IndustrySymbol>(x => x.SymbolId == symbolObj.Id)
+                                      join ind in this._rep.FetchAll<Industry>()
+                                      on sym.IndustryId equals ind.Id
+                                      select ind.IndustryName;
+
+            this._symbolCatIndustryLB.DataSource = allIndustryName.ToList();
+            this._symbolCatIndustryLB.Refresh();
+
+
+            this._symbolCatBizGroupLB.DataSource = null;
+            var allBizGroupName = from sym in this._rep.Query<BizGroupSymbol>(x => x.SymbolId == symbolObj.Id)
+                                      join biz in this._rep.FetchAll<BizGroup>()
+                                      on sym.BizGroupId equals biz.Id
+                                      select biz.GroupName;
+
+            this._symbolCatBizGroupLB.DataSource = allBizGroupName.ToList();
+            this._symbolCatBizGroupLB.Refresh();
+
+
+            this._symbolCatConceptLB.DataSource = null;
+            var allConceptName = from sym in this._rep.Query<ConceptSymbol>(x => x.SymbolId == symbolObj.Id)
+                                      join con in this._rep.FetchAll<Concept>()
+                                      on sym.ConceptId equals con.Id
+                                      select con.ConceptName;
+
+            this._symbolCatConceptLB.DataSource = allConceptName.ToList();
+            this._symbolCatConceptLB.Refresh();
+        }
+
+        private void _symbolCatClearBtn_Click(object sender, EventArgs e)
+        {
+            this._symbolNameCatLbl.Text = "";
+            this._symbolCatQueryTxt.Text = "";
+            this._symbolCatConceptLB.DataSource = null;
+            this._symbolCatBizGroupLB.DataSource = null;
+            this._symbolCatIndustryLB.DataSource = null;
+            this._symbolCatPILB.DataSource = null;
+        }
+
+        private void _symbolCatPIAddBtn_Click(object sender, EventArgs e)
+        {
+
         }        
     }
 }
