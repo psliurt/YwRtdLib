@@ -1654,6 +1654,121 @@ namespace YwRtdAp
 
             this._symbolCatConceptLB.DataSource = allConceptName.ToList();
             this._symbolCatConceptLB.Refresh();
+        }
+
+        private void _symbolCatPIRdoBtn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this._symbolCatPIRdoBtn.Checked == false)
+            { return; }
+
+            this._symbolCategoryCmb.DataSource = null;
+            var pointerIndexList = this._rep.FetchAll<PointerIndex>().ToList();            
+
+            this._symbolCategoryCmb.ValueMember = "Code";
+            this._symbolCategoryCmb.DisplayMember = "PointerName";
+            this._symbolCategoryCmb.DataSource = pointerIndexList;
+        }
+
+        private void _symbolCatIndustryRdoBtn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this._symbolCatIndustryRdoBtn.Checked == false)
+            { return; }
+
+            this._symbolCategoryCmb.DataSource = null;
+            var industryList = this._rep.FetchAll<Industry>().ToList();
+
+            this._symbolCategoryCmb.ValueMember = "Code";
+            this._symbolCategoryCmb.DisplayMember = "IndustryName";
+            this._symbolCategoryCmb.DataSource = industryList;  
+        }
+
+        private void _symbolCatBizGroupRdoBtn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this._symbolCatBizGroupRdoBtn.Checked == false)
+            { return; }
+
+            this._symbolCategoryCmb.DataSource = null;
+            var bizGroupList = this._rep.FetchAll<BizGroup>().ToList();
+
+            this._symbolCategoryCmb.ValueMember = "Code";
+            this._symbolCategoryCmb.DisplayMember = "GroupName";
+            this._symbolCategoryCmb.DataSource = bizGroupList;
+        }
+
+        private void _symbolCatConceptRdoBtn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this._symbolCatConceptRdoBtn.Checked == false)
+            { return; }
+
+
+            this._symbolCategoryCmb.DataSource = null;
+            var conceptList = this._rep.FetchAll<Concept>().ToList();
+
+            this._symbolCategoryCmb.ValueMember = "Code";
+            this._symbolCategoryCmb.DisplayMember = "ConceptName";
+            this._symbolCategoryCmb.DataSource = conceptList;
+        }
+
+        private void _symbolCatClearRdoBtn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this._symbolCatClearRdoBtn.Checked == false)
+            { return; }
+
+            this._symbolCategoryCmb.DataSource = null;
+        }
+
+        private void _symbolCategoryCmb_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this._symbolCatClearRdoBtn.Checked)
+            {
+                this._categorySymbolLV.Items.Clear();
+                return;
+            }
+            IQueryable<Symbol> filterSymbols = null;
+            List<int> symbolIds = null;
+            if (this._symbolCatPIRdoBtn.Checked)
+            { 
+                PointerIndex obj = this._symbolCategoryCmb.SelectedItem as PointerIndex;
+                symbolIds =
+                    this._rep.Query<PointerIndexSymbol>(x => x.PointerIndexId == obj.Id).Select(x => x.SymbolId).ToList();                
+            }
+
+            if (this._symbolCatIndustryRdoBtn.Checked)
+            {
+                Industry obj = this._symbolCategoryCmb.SelectedItem as Industry;
+                symbolIds =
+                    this._rep.Query<IndustrySymbol>(x => x.IndustryId == obj.Id).Select(x => x.SymbolId).ToList();    
+            }
+
+            if (this._symbolCatBizGroupRdoBtn.Checked)
+            {
+                BizGroup obj = this._symbolCategoryCmb.SelectedItem as BizGroup;
+                symbolIds =
+                    this._rep.Query<BizGroupSymbol>(x => x.BizGroupId == obj.Id).Select(x => x.SymbolId).ToList();    
+            }
+
+            if (this._symbolCatConceptRdoBtn.Checked)
+            {
+                Concept obj = this._symbolCategoryCmb.SelectedItem as Concept;
+                symbolIds =
+                    this._rep.Query<ConceptSymbol>(x => x.ConceptId == obj.Id).Select(x => x.SymbolId).ToList();    
+            }
+
+            
+            filterSymbols = this._rep.Query<Symbol>(x => symbolIds.Contains(x.Id));
+            if (filterSymbols != null)
+            {
+                this._categorySymbolLV.Clear();
+                this._categorySymbolLV.Columns.Add("股票代碼");
+                this._categorySymbolLV.Columns.Add("名稱");
+                foreach (var s in filterSymbols)
+                {
+                    ListViewItem lvi = new ListViewItem(new string[] { s.Code, s.SymbolName });
+                    this._categorySymbolLV.Items.Add(lvi);
+                }
+                this._categorySymbolLV.Refresh(); 
+            }            
+                     
         }        
     }
 }

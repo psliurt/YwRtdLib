@@ -129,6 +129,7 @@
             this._symbolCatPICmb = new System.Windows.Forms.ComboBox();
             this._symbolCatQueryLbl = new System.Windows.Forms.Label();
             this._symbolCatQueryTxt = new System.Windows.Forms.TextBox();
+            this._symbolCatClearRdoBtn = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this._symbolGV)).BeginInit();
             this._switchTabCtrl.SuspendLayout();
             this._dayTradePage.SuspendLayout();
@@ -1002,9 +1003,11 @@
             this._categorySymbolLV.Size = new System.Drawing.Size(591, 348);
             this._categorySymbolLV.TabIndex = 19;
             this._categorySymbolLV.UseCompatibleStateImageBehavior = false;
+            this._categorySymbolLV.View = System.Windows.Forms.View.Details;
             // 
             // _symbolCatGrpBox
             // 
+            this._symbolCatGrpBox.Controls.Add(this._symbolCatClearRdoBtn);
             this._symbolCatGrpBox.Controls.Add(this._symbolCategoryLbl);
             this._symbolCatGrpBox.Controls.Add(this._symbolCategoryCmb);
             this._symbolCatGrpBox.Controls.Add(this._symbolCatPIRdoBtn);
@@ -1034,6 +1037,7 @@
             this._symbolCategoryCmb.Name = "_symbolCategoryCmb";
             this._symbolCategoryCmb.Size = new System.Drawing.Size(342, 20);
             this._symbolCategoryCmb.TabIndex = 18;
+            this._symbolCategoryCmb.SelectedIndexChanged += new System.EventHandler(this._symbolCategoryCmb_SelectedIndexChanged);
             // 
             // _symbolCatPIRdoBtn
             // 
@@ -1041,9 +1045,9 @@
             this._symbolCatPIRdoBtn.Name = "_symbolCatPIRdoBtn";
             this._symbolCatPIRdoBtn.Size = new System.Drawing.Size(110, 25);
             this._symbolCatPIRdoBtn.TabIndex = 14;
-            this._symbolCatPIRdoBtn.TabStop = true;
             this._symbolCatPIRdoBtn.Text = "指標類股";
             this._symbolCatPIRdoBtn.UseVisualStyleBackColor = true;
+            this._symbolCatPIRdoBtn.CheckedChanged += new System.EventHandler(this._symbolCatPIRdoBtn_CheckedChanged);
             // 
             // _symbolCatConceptRdoBtn
             // 
@@ -1051,9 +1055,9 @@
             this._symbolCatConceptRdoBtn.Name = "_symbolCatConceptRdoBtn";
             this._symbolCatConceptRdoBtn.Size = new System.Drawing.Size(110, 25);
             this._symbolCatConceptRdoBtn.TabIndex = 17;
-            this._symbolCatConceptRdoBtn.TabStop = true;
             this._symbolCatConceptRdoBtn.Text = "概念類股";
             this._symbolCatConceptRdoBtn.UseVisualStyleBackColor = true;
+            this._symbolCatConceptRdoBtn.CheckedChanged += new System.EventHandler(this._symbolCatConceptRdoBtn_CheckedChanged);
             // 
             // _symbolCatIndustryRdoBtn
             // 
@@ -1061,9 +1065,9 @@
             this._symbolCatIndustryRdoBtn.Name = "_symbolCatIndustryRdoBtn";
             this._symbolCatIndustryRdoBtn.Size = new System.Drawing.Size(110, 25);
             this._symbolCatIndustryRdoBtn.TabIndex = 15;
-            this._symbolCatIndustryRdoBtn.TabStop = true;
             this._symbolCatIndustryRdoBtn.Text = "產業股";
             this._symbolCatIndustryRdoBtn.UseVisualStyleBackColor = true;
+            this._symbolCatIndustryRdoBtn.CheckedChanged += new System.EventHandler(this._symbolCatIndustryRdoBtn_CheckedChanged);
             // 
             // _symbolCatBizGroupRdoBtn
             // 
@@ -1071,9 +1075,9 @@
             this._symbolCatBizGroupRdoBtn.Name = "_symbolCatBizGroupRdoBtn";
             this._symbolCatBizGroupRdoBtn.Size = new System.Drawing.Size(110, 25);
             this._symbolCatBizGroupRdoBtn.TabIndex = 16;
-            this._symbolCatBizGroupRdoBtn.TabStop = true;
             this._symbolCatBizGroupRdoBtn.Text = "集團股";
             this._symbolCatBizGroupRdoBtn.UseVisualStyleBackColor = true;
+            this._symbolCatBizGroupRdoBtn.CheckedChanged += new System.EventHandler(this._symbolCatBizGroupRdoBtn_CheckedChanged);
             // 
             // _symbolCatConceptLB
             // 
@@ -1195,6 +1199,19 @@
             this._symbolCatQueryTxt.Size = new System.Drawing.Size(144, 22);
             this._symbolCatQueryTxt.TabIndex = 0;
             // 
+            // _symbolCatClearRdoBtn
+            // 
+            this._symbolCatClearRdoBtn.AutoSize = true;
+            this._symbolCatClearRdoBtn.Checked = true;
+            this._symbolCatClearRdoBtn.Location = new System.Drawing.Point(470, 25);
+            this._symbolCatClearRdoBtn.Name = "_symbolCatClearRdoBtn";
+            this._symbolCatClearRdoBtn.Size = new System.Drawing.Size(64, 16);
+            this._symbolCatClearRdoBtn.TabIndex = 20;
+            this._symbolCatClearRdoBtn.TabStop = true;
+            this._symbolCatClearRdoBtn.Text = "Uncheck";
+            this._symbolCatClearRdoBtn.UseVisualStyleBackColor = true;
+            this._symbolCatClearRdoBtn.CheckedChanged += new System.EventHandler(this._symbolCatClearRdoBtn_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1223,6 +1240,7 @@
             this._symbolCategoryPage.ResumeLayout(false);
             this._symbolCategoryPage.PerformLayout();
             this._symbolCatGrpBox.ResumeLayout(false);
+            this._symbolCatGrpBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1330,6 +1348,7 @@
         private System.Windows.Forms.Button _symbolCatPIDeleteBtn;
         private System.Windows.Forms.Button _symbolCatClearBtn;
         private System.Windows.Forms.Label _symbolNameCatLbl;
+        private System.Windows.Forms.RadioButton _symbolCatClearRdoBtn;
     }
 }
 
