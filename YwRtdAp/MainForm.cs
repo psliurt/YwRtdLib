@@ -1369,8 +1369,291 @@ namespace YwRtdAp
         }
 
         private void _symbolCatPIAddBtn_Click(object sender, EventArgs e)
-        {
+        {            
+            string symbolCodeOrName = this._symbolCatQueryTxt.Text.Trim();
+            Symbol symbolObj =
+                this._rep.DefaultOne<Symbol>(x => x.Code == symbolCodeOrName || x.SymbolName == symbolCodeOrName);
 
+            PointerIndex piObj = this._symbolCatPICmb.SelectedItem as PointerIndex;            
+
+            if (MessageBox.Show(string.Format("確定要把 {0} 跟指標類 [{1}] 作關連?", symbolObj.SymbolName, piObj.PointerName), "Warning", MessageBoxButtons.YesNoCancel) != System.Windows.Forms.DialogResult.Yes)
+            {
+                return;
+            }
+
+            PointerIndexSymbol existRelation = this._rep.DefaultOne<PointerIndexSymbol>(x => x.PointerIndexId == piObj.Id && x.SymbolId == symbolObj.Id);
+            if (existRelation == null)
+            {
+                this._rep.Insert<PointerIndexSymbol>(new PointerIndexSymbol
+                {
+                    CreateTime = DateTime.Now,
+                    PointerIndexId = piObj.Id,
+                    SymbolId = symbolObj.Id
+                });
+                this._rep.Commit();
+            }
+
+            MessageBox.Show("新增完畢");
+
+            this._symbolCatPILB.DataSource = null;
+            var allPointerIndexName = from sym in this._rep.Query<PointerIndexSymbol>(x => x.SymbolId == symbolObj.Id)
+                                      join pi in this._rep.FetchAll<PointerIndex>()
+                                      on sym.PointerIndexId equals pi.Id
+                                      select pi.PointerName;
+
+            this._symbolCatPILB.DataSource = allPointerIndexName.ToList();
+            this._symbolCatPILB.Refresh();
+        }
+
+        private void _symbolCatPIDeleteBtn_Click(object sender, EventArgs e)
+        {
+            string symbolCodeOrName = this._symbolCatQueryTxt.Text.Trim();
+            Symbol symbolObj =
+                this._rep.DefaultOne<Symbol>(x => x.Code == symbolCodeOrName || x.SymbolName == symbolCodeOrName);
+
+            string pointerIndexName = this._symbolCatPILB.SelectedItem as string;
+
+            PointerIndex piObj = this._rep.DefaultOne<PointerIndex>(x => x.PointerName == pointerIndexName);
+
+            if (MessageBox.Show(string.Format("確定要把 {0} 跟指標類 [{1}] 的關連刪除?", symbolObj.SymbolName, piObj.PointerName), "Warning", MessageBoxButtons.YesNoCancel) != System.Windows.Forms.DialogResult.Yes)
+            {
+                return;
+            }
+
+            PointerIndexSymbol existRelation = this._rep.DefaultOne<PointerIndexSymbol>(x => x.PointerIndexId == piObj.Id && x.SymbolId == symbolObj.Id);
+            if (existRelation != null)
+            {
+                this._rep.Delete<PointerIndexSymbol>(existRelation);
+                this._rep.Commit();
+            }
+
+            MessageBox.Show("刪除完畢");
+            //重新reload
+
+            this._symbolCatPILB.DataSource = null;
+            var allPointerIndexName = from sym in this._rep.Query<PointerIndexSymbol>(x => x.SymbolId == symbolObj.Id)
+                                      join pi in this._rep.FetchAll<PointerIndex>()
+                                      on sym.PointerIndexId equals pi.Id
+                                      select pi.PointerName;
+
+            this._symbolCatPILB.DataSource = allPointerIndexName.ToList();
+            this._symbolCatPILB.Refresh();
+        }
+
+        private void _symbolCatIndustryAddBtn_Click(object sender, EventArgs e)
+        {
+            string symbolCodeOrName = this._symbolCatQueryTxt.Text.Trim();
+            Symbol symbolObj =
+                this._rep.DefaultOne<Symbol>(x => x.Code == symbolCodeOrName || x.SymbolName == symbolCodeOrName);
+
+            Industry indObj = this._symbolCatIndustryCmb.SelectedItem as Industry;
+
+            if (MessageBox.Show(string.Format("確定要把 {0} 跟產業類 [{1}] 作關連?", symbolObj.SymbolName, indObj.IndustryName), "Warning", MessageBoxButtons.YesNoCancel) != System.Windows.Forms.DialogResult.Yes)
+            {
+                return;
+            }
+
+            IndustrySymbol existRelation = this._rep.DefaultOne<IndustrySymbol>(x => x.IndustryId == indObj.Id && x.SymbolId == symbolObj.Id);
+            if (existRelation == null)
+            {
+                this._rep.Insert<IndustrySymbol>(new IndustrySymbol
+                {
+                    CreateTime = DateTime.Now,
+                    IndustryId = indObj.Id,
+                    SymbolId = symbolObj.Id
+                });
+                this._rep.Commit();
+            }
+
+            MessageBox.Show("新增完畢");
+
+            this._symbolCatIndustryLB.DataSource = null;
+            var allIndustryName = from sym in this._rep.Query<IndustrySymbol>(x => x.SymbolId == symbolObj.Id)
+                                  join ind in this._rep.FetchAll<Industry>()
+                                      on sym.IndustryId equals ind.Id
+                                  select ind.IndustryName;
+
+            this._symbolCatIndustryLB.DataSource = allIndustryName.ToList();
+            this._symbolCatIndustryLB.Refresh();
+        }
+
+        private void _symbolCatIndustryDeleteBtn_Click(object sender, EventArgs e)
+        {
+            string symbolCodeOrName = this._symbolCatQueryTxt.Text.Trim();
+            Symbol symbolObj =
+                this._rep.DefaultOne<Symbol>(x => x.Code == symbolCodeOrName || x.SymbolName == symbolCodeOrName);
+
+            string industryName = this._symbolCatIndustryLB.SelectedItem as string;
+
+            Industry indObj = this._rep.DefaultOne<Industry>(x => x.IndustryName == industryName);            
+
+            if (MessageBox.Show(string.Format("確定要把 {0} 跟產業類 [{1}] 的關連刪除?", symbolObj.SymbolName, indObj.IndustryName), "Warning", MessageBoxButtons.YesNoCancel) != System.Windows.Forms.DialogResult.Yes)
+            {
+                return;
+            }
+
+            IndustrySymbol existRelation = this._rep.DefaultOne<IndustrySymbol>(x => x.IndustryId == indObj.Id && x.SymbolId == symbolObj.Id);
+            if (existRelation != null)
+            {
+                this._rep.Delete<IndustrySymbol>(existRelation);
+                this._rep.Commit();
+            }
+
+            MessageBox.Show("刪除完畢");
+            //重新reload
+
+            this._symbolCatIndustryLB.DataSource = null;
+            var allIndustryName = from sym in this._rep.Query<IndustrySymbol>(x => x.SymbolId == symbolObj.Id)
+                                      join ind in this._rep.FetchAll<Industry>()
+                                      on sym.IndustryId equals ind.Id
+                                      select ind.IndustryName;
+
+            this._symbolCatIndustryLB.DataSource = allIndustryName.ToList();
+            this._symbolCatIndustryLB.Refresh();
+        }
+
+        private void _symbolCatBizGroupDeleteBtn_Click(object sender, EventArgs e)
+        {
+            string symbolCodeOrName = this._symbolCatQueryTxt.Text.Trim();
+            Symbol symbolObj =
+                this._rep.DefaultOne<Symbol>(x => x.Code == symbolCodeOrName || x.SymbolName == symbolCodeOrName);            
+
+            string grpName = this._symbolCatBizGroupLB.SelectedItem as string;
+
+            BizGroup grpObj = this._rep.DefaultOne<BizGroup>(x => x.GroupName == grpName);
+
+            if (MessageBox.Show(string.Format("確定要把 {0} 跟集團類 [{1}] 的關連刪除?", symbolObj.SymbolName, grpObj.GroupName), "Warning", MessageBoxButtons.YesNoCancel) != System.Windows.Forms.DialogResult.Yes)
+            {
+                return;
+            }
+
+            BizGroupSymbol existRelation = this._rep.DefaultOne<BizGroupSymbol>(x => x.BizGroupId == grpObj.Id && x.SymbolId == symbolObj.Id);
+            if (existRelation != null)
+            {
+                this._rep.Delete<BizGroupSymbol>(existRelation);
+                this._rep.Commit();
+            }
+
+            MessageBox.Show("刪除完畢");
+            //重新reload
+
+            this._symbolCatBizGroupLB.DataSource = null;
+            var allBizGroupName = from sym in this._rep.Query<BizGroupSymbol>(x => x.SymbolId == symbolObj.Id)
+                                  join grp in this._rep.FetchAll<BizGroup>()
+                                  on sym.BizGroupId equals grp.Id
+                                  select grp.GroupName;
+
+            this._symbolCatBizGroupLB.DataSource = allBizGroupName.ToList();
+            this._symbolCatBizGroupLB.Refresh();
+        }
+
+        private void _symbolCatBizGroupAddBtn_Click(object sender, EventArgs e)
+        {
+            string symbolCodeOrName = this._symbolCatQueryTxt.Text.Trim();
+            Symbol symbolObj =
+                this._rep.DefaultOne<Symbol>(x => x.Code == symbolCodeOrName || x.SymbolName == symbolCodeOrName);
+
+            BizGroup grpObj = this._symbolCatBizGroupCmb.SelectedItem as BizGroup;
+
+            if (MessageBox.Show(string.Format("確定要把 {0} 跟集團類 [{1}] 作關連?", symbolObj.SymbolName, grpObj.GroupName), "Warning", MessageBoxButtons.YesNoCancel) != System.Windows.Forms.DialogResult.Yes)
+            {
+                return;
+            }
+
+            BizGroupSymbol existRelation = this._rep.DefaultOne<BizGroupSymbol>(x => x.BizGroupId == grpObj.Id && x.SymbolId == symbolObj.Id);
+            if (existRelation == null)
+            {
+                this._rep.Insert<BizGroupSymbol>(new BizGroupSymbol
+                {
+                    CreateTime = DateTime.Now,
+                    BizGroupId = grpObj.Id,
+                    SymbolId = symbolObj.Id
+                });
+                this._rep.Commit();
+            }
+
+            MessageBox.Show("新增完畢");
+
+            this._symbolCatBizGroupLB.DataSource = null;
+            var allBizGroupName = from sym in this._rep.Query<BizGroupSymbol>(x => x.SymbolId == symbolObj.Id)
+                                  join grp in this._rep.FetchAll<BizGroup>()
+                                      on sym.BizGroupId equals grp.Id
+                                  select grp.GroupName;
+
+            this._symbolCatBizGroupLB.DataSource = allBizGroupName.ToList();
+            this._symbolCatBizGroupLB.Refresh();
+        }
+
+        private void _symbolCatConceptAddBtn_Click(object sender, EventArgs e)
+        {
+            string symbolCodeOrName = this._symbolCatQueryTxt.Text.Trim();
+            Symbol symbolObj =
+                this._rep.DefaultOne<Symbol>(x => x.Code == symbolCodeOrName || x.SymbolName == symbolCodeOrName);
+
+            Concept conObj = this._symbolCatConceptCmb.SelectedItem as Concept;
+
+            if (MessageBox.Show(string.Format("確定要把 {0} 跟概念類 [{1}] 作關連?", symbolObj.SymbolName, conObj.ConceptName), "Warning", MessageBoxButtons.YesNoCancel) != System.Windows.Forms.DialogResult.Yes)
+            {
+                return;
+            }
+
+            ConceptSymbol existRelation = this._rep.DefaultOne<ConceptSymbol>(x => x.ConceptId == conObj.Id && x.SymbolId == symbolObj.Id);
+            if (existRelation == null)
+            {
+                this._rep.Insert<ConceptSymbol>(new ConceptSymbol
+                {
+                    CreateTime = DateTime.Now,
+                    ConceptId = conObj.Id,
+                    SymbolId = symbolObj.Id
+                });
+                this._rep.Commit();
+            }
+
+            MessageBox.Show("新增完畢");
+
+            this._symbolCatConceptLB.DataSource = null;
+            var allConceptName = from sym in this._rep.Query<ConceptSymbol>(x => x.SymbolId == symbolObj.Id)
+                                  join con in this._rep.FetchAll<Concept>()
+                                      on sym.ConceptId equals con.Id
+                                  select con.ConceptName;
+
+            this._symbolCatConceptLB.DataSource = allConceptName.ToList();
+            this._symbolCatConceptLB.Refresh();
+        }
+
+        private void _symbolCatConceptDeleteBtn_Click(object sender, EventArgs e)
+        {
+            string symbolCodeOrName = this._symbolCatQueryTxt.Text.Trim();
+            Symbol symbolObj =
+                this._rep.DefaultOne<Symbol>(x => x.Code == symbolCodeOrName || x.SymbolName == symbolCodeOrName);
+
+            string conName = this._symbolCatConceptLB.SelectedItem as string;
+
+            Concept conObj = this._rep.DefaultOne<Concept>(x => x.ConceptName == conName);            
+
+            if (MessageBox.Show(string.Format("確定要把 {0} 跟概念類 [{1}] 的關連刪除?", symbolObj.SymbolName, conObj.ConceptName), "Warning", MessageBoxButtons.YesNoCancel) != System.Windows.Forms.DialogResult.Yes)
+            {
+                return;
+            }
+
+            ConceptSymbol existRelation = this._rep.DefaultOne<ConceptSymbol>(x => x.ConceptId == conObj.Id && x.SymbolId == symbolObj.Id);
+            if (existRelation != null)
+            {
+                this._rep.Delete<ConceptSymbol>(existRelation);
+                this._rep.Commit();
+            }
+
+            MessageBox.Show("刪除完畢");
+            //重新reload
+
+            this._symbolCatConceptLB.DataSource = null;
+            var allConceptName = from sym in this._rep.Query<ConceptSymbol>(x => x.SymbolId == symbolObj.Id)
+                                  join con in this._rep.FetchAll<Concept>()
+                                  on sym.ConceptId equals con.Id
+                                  select con.ConceptName;
+
+            this._symbolCatConceptLB.DataSource = allConceptName.ToList();
+            this._symbolCatConceptLB.Refresh();
         }        
     }
 }

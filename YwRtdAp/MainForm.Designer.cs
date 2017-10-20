@@ -90,45 +90,45 @@
             this._manageSymbolLbl = new System.Windows.Forms.Label();
             this._manageSymbolTxt = new System.Windows.Forms.TextBox();
             this._symbolCategoryPage = new System.Windows.Forms.TabPage();
-            this._symbolCatQueryTxt = new System.Windows.Forms.TextBox();
-            this._symbolCatQueryLbl = new System.Windows.Forms.Label();
-            this._symbolCatPICmb = new System.Windows.Forms.ComboBox();
-            this._symbolCatPILbl = new System.Windows.Forms.Label();
-            this._symbolCatIndustryLbl = new System.Windows.Forms.Label();
-            this._symbolCatIndustryCmb = new System.Windows.Forms.ComboBox();
-            this._symbolCatBizGroupLbl = new System.Windows.Forms.Label();
-            this._symbolCatBizGroupCmb = new System.Windows.Forms.ComboBox();
-            this._symbolCatConceptLbl = new System.Windows.Forms.Label();
-            this._symbolCatConceptCmb = new System.Windows.Forms.ComboBox();
-            this._symbolCatPILB = new System.Windows.Forms.ListBox();
-            this._symbolCatIndustryLB = new System.Windows.Forms.ListBox();
-            this._symbolCatBizGroupLB = new System.Windows.Forms.ListBox();
-            this._symbolCatConceptLB = new System.Windows.Forms.ListBox();
-            this._symbolCatPIRdoBtn = new System.Windows.Forms.RadioButton();
-            this._symbolCatIndustryRdoBtn = new System.Windows.Forms.RadioButton();
-            this._symbolCatBizGroupRdoBtn = new System.Windows.Forms.RadioButton();
-            this._symbolCatConceptRdoBtn = new System.Windows.Forms.RadioButton();
-            this._symbolCatGrpBox = new System.Windows.Forms.GroupBox();
-            this._symbolCategoryCmb = new System.Windows.Forms.ComboBox();
-            this._symbolCategoryLbl = new System.Windows.Forms.Label();
-            this._categorySymbolLV = new System.Windows.Forms.ListView();
-            this._symbolCatQueryBtn = new System.Windows.Forms.Button();
-            this._categorySymbolCodeLbl = new System.Windows.Forms.Label();
-            this._categorySymbolNameLbl = new System.Windows.Forms.Label();
-            this._categorySymbolCodeTxt = new System.Windows.Forms.TextBox();
-            this._categorySymbolNameTxt = new System.Windows.Forms.TextBox();
-            this._categorySymbolAddBtn = new System.Windows.Forms.Button();
-            this._categorySymbolDeleteBtn = new System.Windows.Forms.Button();
-            this._symbolCatPIDeleteBtn = new System.Windows.Forms.Button();
-            this._symbolCatPIAddBtn = new System.Windows.Forms.Button();
-            this._symbolCatIndustryAddBtn = new System.Windows.Forms.Button();
-            this._symbolCatIndustryDeleteBtn = new System.Windows.Forms.Button();
-            this._symbolCatBizGroupAddBtn = new System.Windows.Forms.Button();
-            this._symbolCatBizGroupDeleteBtn = new System.Windows.Forms.Button();
+            this._symbolCatClearBtn = new System.Windows.Forms.Button();
+            this._symbolNameCatLbl = new System.Windows.Forms.Label();
             this._symbolCatConceptAddBtn = new System.Windows.Forms.Button();
             this._symbolCatConceptDeleteBtn = new System.Windows.Forms.Button();
-            this._symbolNameCatLbl = new System.Windows.Forms.Label();
-            this._symbolCatClearBtn = new System.Windows.Forms.Button();
+            this._symbolCatBizGroupAddBtn = new System.Windows.Forms.Button();
+            this._symbolCatBizGroupDeleteBtn = new System.Windows.Forms.Button();
+            this._symbolCatIndustryAddBtn = new System.Windows.Forms.Button();
+            this._symbolCatIndustryDeleteBtn = new System.Windows.Forms.Button();
+            this._symbolCatPIAddBtn = new System.Windows.Forms.Button();
+            this._symbolCatPIDeleteBtn = new System.Windows.Forms.Button();
+            this._categorySymbolDeleteBtn = new System.Windows.Forms.Button();
+            this._categorySymbolAddBtn = new System.Windows.Forms.Button();
+            this._categorySymbolNameTxt = new System.Windows.Forms.TextBox();
+            this._categorySymbolCodeTxt = new System.Windows.Forms.TextBox();
+            this._categorySymbolNameLbl = new System.Windows.Forms.Label();
+            this._categorySymbolCodeLbl = new System.Windows.Forms.Label();
+            this._symbolCatQueryBtn = new System.Windows.Forms.Button();
+            this._categorySymbolLV = new System.Windows.Forms.ListView();
+            this._symbolCatGrpBox = new System.Windows.Forms.GroupBox();
+            this._symbolCategoryLbl = new System.Windows.Forms.Label();
+            this._symbolCategoryCmb = new System.Windows.Forms.ComboBox();
+            this._symbolCatPIRdoBtn = new System.Windows.Forms.RadioButton();
+            this._symbolCatConceptRdoBtn = new System.Windows.Forms.RadioButton();
+            this._symbolCatIndustryRdoBtn = new System.Windows.Forms.RadioButton();
+            this._symbolCatBizGroupRdoBtn = new System.Windows.Forms.RadioButton();
+            this._symbolCatConceptLB = new System.Windows.Forms.ListBox();
+            this._symbolCatBizGroupLB = new System.Windows.Forms.ListBox();
+            this._symbolCatIndustryLB = new System.Windows.Forms.ListBox();
+            this._symbolCatPILB = new System.Windows.Forms.ListBox();
+            this._symbolCatConceptLbl = new System.Windows.Forms.Label();
+            this._symbolCatConceptCmb = new System.Windows.Forms.ComboBox();
+            this._symbolCatBizGroupLbl = new System.Windows.Forms.Label();
+            this._symbolCatBizGroupCmb = new System.Windows.Forms.ComboBox();
+            this._symbolCatIndustryLbl = new System.Windows.Forms.Label();
+            this._symbolCatIndustryCmb = new System.Windows.Forms.ComboBox();
+            this._symbolCatPILbl = new System.Windows.Forms.Label();
+            this._symbolCatPICmb = new System.Windows.Forms.ComboBox();
+            this._symbolCatQueryLbl = new System.Windows.Forms.Label();
+            this._symbolCatQueryTxt = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this._symbolGV)).BeginInit();
             this._switchTabCtrl.SuspendLayout();
             this._dayTradePage.SuspendLayout();
@@ -837,125 +837,203 @@
             this._symbolCategoryPage.Text = "股票組別設定";
             this._symbolCategoryPage.UseVisualStyleBackColor = true;
             // 
-            // _symbolCatQueryTxt
+            // _symbolCatClearBtn
             // 
-            this._symbolCatQueryTxt.Location = new System.Drawing.Point(118, 10);
-            this._symbolCatQueryTxt.Name = "_symbolCatQueryTxt";
-            this._symbolCatQueryTxt.Size = new System.Drawing.Size(144, 22);
-            this._symbolCatQueryTxt.TabIndex = 0;
+            this._symbolCatClearBtn.Location = new System.Drawing.Point(480, 8);
+            this._symbolCatClearBtn.Name = "_symbolCatClearBtn";
+            this._symbolCatClearBtn.Size = new System.Drawing.Size(100, 25);
+            this._symbolCatClearBtn.TabIndex = 36;
+            this._symbolCatClearBtn.Text = "清除";
+            this._symbolCatClearBtn.UseVisualStyleBackColor = true;
+            this._symbolCatClearBtn.Click += new System.EventHandler(this._symbolCatClearBtn_Click);
             // 
-            // _symbolCatQueryLbl
+            // _symbolNameCatLbl
             // 
-            this._symbolCatQueryLbl.Location = new System.Drawing.Point(12, 9);
-            this._symbolCatQueryLbl.Name = "_symbolCatQueryLbl";
-            this._symbolCatQueryLbl.Size = new System.Drawing.Size(100, 25);
-            this._symbolCatQueryLbl.TabIndex = 1;
-            this._symbolCatQueryLbl.Text = "股票名稱、代碼";
-            this._symbolCatQueryLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this._symbolNameCatLbl.Location = new System.Drawing.Point(268, 7);
+            this._symbolNameCatLbl.Name = "_symbolNameCatLbl";
+            this._symbolNameCatLbl.Size = new System.Drawing.Size(100, 25);
+            this._symbolNameCatLbl.TabIndex = 35;
+            this._symbolNameCatLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // _symbolCatPICmb
+            // _symbolCatConceptAddBtn
             // 
-            this._symbolCatPICmb.FormattingEnabled = true;
-            this._symbolCatPICmb.Location = new System.Drawing.Point(118, 49);
-            this._symbolCatPICmb.Name = "_symbolCatPICmb";
-            this._symbolCatPICmb.Size = new System.Drawing.Size(175, 20);
-            this._symbolCatPICmb.TabIndex = 2;
+            this._symbolCatConceptAddBtn.Location = new System.Drawing.Point(407, 326);
+            this._symbolCatConceptAddBtn.Name = "_symbolCatConceptAddBtn";
+            this._symbolCatConceptAddBtn.Size = new System.Drawing.Size(100, 25);
+            this._symbolCatConceptAddBtn.TabIndex = 34;
+            this._symbolCatConceptAddBtn.Text = "加入";
+            this._symbolCatConceptAddBtn.UseVisualStyleBackColor = true;
+            this._symbolCatConceptAddBtn.Click += new System.EventHandler(this._symbolCatConceptAddBtn_Click);
             // 
-            // _symbolCatPILbl
+            // _symbolCatConceptDeleteBtn
             // 
-            this._symbolCatPILbl.Location = new System.Drawing.Point(12, 46);
-            this._symbolCatPILbl.Name = "_symbolCatPILbl";
-            this._symbolCatPILbl.Size = new System.Drawing.Size(100, 25);
-            this._symbolCatPILbl.TabIndex = 3;
-            this._symbolCatPILbl.Text = "指標股";
-            this._symbolCatPILbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this._symbolCatConceptDeleteBtn.Location = new System.Drawing.Point(301, 326);
+            this._symbolCatConceptDeleteBtn.Name = "_symbolCatConceptDeleteBtn";
+            this._symbolCatConceptDeleteBtn.Size = new System.Drawing.Size(100, 25);
+            this._symbolCatConceptDeleteBtn.TabIndex = 33;
+            this._symbolCatConceptDeleteBtn.Text = "刪除";
+            this._symbolCatConceptDeleteBtn.UseVisualStyleBackColor = true;
+            this._symbolCatConceptDeleteBtn.Click += new System.EventHandler(this._symbolCatConceptDeleteBtn_Click);
             // 
-            // _symbolCatIndustryLbl
+            // _symbolCatBizGroupAddBtn
             // 
-            this._symbolCatIndustryLbl.Location = new System.Drawing.Point(299, 46);
-            this._symbolCatIndustryLbl.Name = "_symbolCatIndustryLbl";
-            this._symbolCatIndustryLbl.Size = new System.Drawing.Size(100, 25);
-            this._symbolCatIndustryLbl.TabIndex = 5;
-            this._symbolCatIndustryLbl.Text = "產業股";
-            this._symbolCatIndustryLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this._symbolCatBizGroupAddBtn.Location = new System.Drawing.Point(120, 326);
+            this._symbolCatBizGroupAddBtn.Name = "_symbolCatBizGroupAddBtn";
+            this._symbolCatBizGroupAddBtn.Size = new System.Drawing.Size(100, 25);
+            this._symbolCatBizGroupAddBtn.TabIndex = 32;
+            this._symbolCatBizGroupAddBtn.Text = "加入";
+            this._symbolCatBizGroupAddBtn.UseVisualStyleBackColor = true;
+            this._symbolCatBizGroupAddBtn.Click += new System.EventHandler(this._symbolCatBizGroupAddBtn_Click);
             // 
-            // _symbolCatIndustryCmb
+            // _symbolCatBizGroupDeleteBtn
             // 
-            this._symbolCatIndustryCmb.FormattingEnabled = true;
-            this._symbolCatIndustryCmb.Location = new System.Drawing.Point(405, 49);
-            this._symbolCatIndustryCmb.Name = "_symbolCatIndustryCmb";
-            this._symbolCatIndustryCmb.Size = new System.Drawing.Size(175, 20);
-            this._symbolCatIndustryCmb.TabIndex = 4;
+            this._symbolCatBizGroupDeleteBtn.Location = new System.Drawing.Point(14, 326);
+            this._symbolCatBizGroupDeleteBtn.Name = "_symbolCatBizGroupDeleteBtn";
+            this._symbolCatBizGroupDeleteBtn.Size = new System.Drawing.Size(100, 25);
+            this._symbolCatBizGroupDeleteBtn.TabIndex = 31;
+            this._symbolCatBizGroupDeleteBtn.Text = "刪除";
+            this._symbolCatBizGroupDeleteBtn.UseVisualStyleBackColor = true;
+            this._symbolCatBizGroupDeleteBtn.Click += new System.EventHandler(this._symbolCatBizGroupDeleteBtn_Click);
             // 
-            // _symbolCatBizGroupLbl
+            // _symbolCatIndustryAddBtn
             // 
-            this._symbolCatBizGroupLbl.Location = new System.Drawing.Point(12, 298);
-            this._symbolCatBizGroupLbl.Name = "_symbolCatBizGroupLbl";
-            this._symbolCatBizGroupLbl.Size = new System.Drawing.Size(100, 25);
-            this._symbolCatBizGroupLbl.TabIndex = 7;
-            this._symbolCatBizGroupLbl.Text = "集團股";
-            this._symbolCatBizGroupLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this._symbolCatIndustryAddBtn.Location = new System.Drawing.Point(407, 75);
+            this._symbolCatIndustryAddBtn.Name = "_symbolCatIndustryAddBtn";
+            this._symbolCatIndustryAddBtn.Size = new System.Drawing.Size(100, 25);
+            this._symbolCatIndustryAddBtn.TabIndex = 30;
+            this._symbolCatIndustryAddBtn.Text = "加入";
+            this._symbolCatIndustryAddBtn.UseVisualStyleBackColor = true;
+            this._symbolCatIndustryAddBtn.Click += new System.EventHandler(this._symbolCatIndustryAddBtn_Click);
             // 
-            // _symbolCatBizGroupCmb
+            // _symbolCatIndustryDeleteBtn
             // 
-            this._symbolCatBizGroupCmb.FormattingEnabled = true;
-            this._symbolCatBizGroupCmb.Location = new System.Drawing.Point(118, 301);
-            this._symbolCatBizGroupCmb.Name = "_symbolCatBizGroupCmb";
-            this._symbolCatBizGroupCmb.Size = new System.Drawing.Size(175, 20);
-            this._symbolCatBizGroupCmb.TabIndex = 6;
+            this._symbolCatIndustryDeleteBtn.Location = new System.Drawing.Point(301, 75);
+            this._symbolCatIndustryDeleteBtn.Name = "_symbolCatIndustryDeleteBtn";
+            this._symbolCatIndustryDeleteBtn.Size = new System.Drawing.Size(100, 25);
+            this._symbolCatIndustryDeleteBtn.TabIndex = 29;
+            this._symbolCatIndustryDeleteBtn.Text = "刪除";
+            this._symbolCatIndustryDeleteBtn.UseVisualStyleBackColor = true;
+            this._symbolCatIndustryDeleteBtn.Click += new System.EventHandler(this._symbolCatIndustryDeleteBtn_Click);
             // 
-            // _symbolCatConceptLbl
+            // _symbolCatPIAddBtn
             // 
-            this._symbolCatConceptLbl.Location = new System.Drawing.Point(299, 298);
-            this._symbolCatConceptLbl.Name = "_symbolCatConceptLbl";
-            this._symbolCatConceptLbl.Size = new System.Drawing.Size(100, 25);
-            this._symbolCatConceptLbl.TabIndex = 9;
-            this._symbolCatConceptLbl.Text = "概念股";
-            this._symbolCatConceptLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this._symbolCatPIAddBtn.Location = new System.Drawing.Point(120, 75);
+            this._symbolCatPIAddBtn.Name = "_symbolCatPIAddBtn";
+            this._symbolCatPIAddBtn.Size = new System.Drawing.Size(100, 25);
+            this._symbolCatPIAddBtn.TabIndex = 28;
+            this._symbolCatPIAddBtn.Text = "加入";
+            this._symbolCatPIAddBtn.UseVisualStyleBackColor = true;
+            this._symbolCatPIAddBtn.Click += new System.EventHandler(this._symbolCatPIAddBtn_Click);
             // 
-            // _symbolCatConceptCmb
+            // _symbolCatPIDeleteBtn
             // 
-            this._symbolCatConceptCmb.FormattingEnabled = true;
-            this._symbolCatConceptCmb.Location = new System.Drawing.Point(405, 301);
-            this._symbolCatConceptCmb.Name = "_symbolCatConceptCmb";
-            this._symbolCatConceptCmb.Size = new System.Drawing.Size(175, 20);
-            this._symbolCatConceptCmb.TabIndex = 8;
+            this._symbolCatPIDeleteBtn.Location = new System.Drawing.Point(14, 75);
+            this._symbolCatPIDeleteBtn.Name = "_symbolCatPIDeleteBtn";
+            this._symbolCatPIDeleteBtn.Size = new System.Drawing.Size(100, 25);
+            this._symbolCatPIDeleteBtn.TabIndex = 27;
+            this._symbolCatPIDeleteBtn.Text = "刪除";
+            this._symbolCatPIDeleteBtn.UseVisualStyleBackColor = true;
+            this._symbolCatPIDeleteBtn.Click += new System.EventHandler(this._symbolCatPIDeleteBtn_Click);
             // 
-            // _symbolCatPILB
+            // _categorySymbolDeleteBtn
             // 
-            this._symbolCatPILB.FormattingEnabled = true;
-            this._symbolCatPILB.ItemHeight = 12;
-            this._symbolCatPILB.Location = new System.Drawing.Point(14, 111);
-            this._symbolCatPILB.Name = "_symbolCatPILB";
-            this._symbolCatPILB.Size = new System.Drawing.Size(279, 184);
-            this._symbolCatPILB.TabIndex = 10;
+            this._categorySymbolDeleteBtn.Location = new System.Drawing.Point(594, 146);
+            this._categorySymbolDeleteBtn.Name = "_categorySymbolDeleteBtn";
+            this._categorySymbolDeleteBtn.Size = new System.Drawing.Size(275, 47);
+            this._categorySymbolDeleteBtn.TabIndex = 26;
+            this._categorySymbolDeleteBtn.Text = "將股票從該群組移出";
+            this._categorySymbolDeleteBtn.UseVisualStyleBackColor = true;
             // 
-            // _symbolCatIndustryLB
+            // _categorySymbolAddBtn
             // 
-            this._symbolCatIndustryLB.FormattingEnabled = true;
-            this._symbolCatIndustryLB.ItemHeight = 12;
-            this._symbolCatIndustryLB.Location = new System.Drawing.Point(301, 111);
-            this._symbolCatIndustryLB.Name = "_symbolCatIndustryLB";
-            this._symbolCatIndustryLB.Size = new System.Drawing.Size(279, 184);
-            this._symbolCatIndustryLB.TabIndex = 11;
+            this._categorySymbolAddBtn.Location = new System.Drawing.Point(879, 146);
+            this._categorySymbolAddBtn.Name = "_categorySymbolAddBtn";
+            this._categorySymbolAddBtn.Size = new System.Drawing.Size(275, 47);
+            this._categorySymbolAddBtn.TabIndex = 25;
+            this._categorySymbolAddBtn.Text = "將股票加入該群組";
+            this._categorySymbolAddBtn.UseVisualStyleBackColor = true;
             // 
-            // _symbolCatBizGroupLB
+            // _categorySymbolNameTxt
             // 
-            this._symbolCatBizGroupLB.FormattingEnabled = true;
-            this._symbolCatBizGroupLB.ItemHeight = 12;
-            this._symbolCatBizGroupLB.Location = new System.Drawing.Point(14, 363);
-            this._symbolCatBizGroupLB.Name = "_symbolCatBizGroupLB";
-            this._symbolCatBizGroupLB.Size = new System.Drawing.Size(279, 184);
-            this._symbolCatBizGroupLB.TabIndex = 12;
+            this._categorySymbolNameTxt.Location = new System.Drawing.Point(979, 118);
+            this._categorySymbolNameTxt.Name = "_categorySymbolNameTxt";
+            this._categorySymbolNameTxt.Size = new System.Drawing.Size(175, 22);
+            this._categorySymbolNameTxt.TabIndex = 24;
             // 
-            // _symbolCatConceptLB
+            // _categorySymbolCodeTxt
             // 
-            this._symbolCatConceptLB.FormattingEnabled = true;
-            this._symbolCatConceptLB.ItemHeight = 12;
-            this._symbolCatConceptLB.Location = new System.Drawing.Point(301, 363);
-            this._symbolCatConceptLB.Name = "_symbolCatConceptLB";
-            this._symbolCatConceptLB.Size = new System.Drawing.Size(279, 184);
-            this._symbolCatConceptLB.TabIndex = 13;
+            this._categorySymbolCodeTxt.Location = new System.Drawing.Point(692, 118);
+            this._categorySymbolCodeTxt.Name = "_categorySymbolCodeTxt";
+            this._categorySymbolCodeTxt.Size = new System.Drawing.Size(175, 22);
+            this._categorySymbolCodeTxt.TabIndex = 23;
+            // 
+            // _categorySymbolNameLbl
+            // 
+            this._categorySymbolNameLbl.Location = new System.Drawing.Point(873, 115);
+            this._categorySymbolNameLbl.Name = "_categorySymbolNameLbl";
+            this._categorySymbolNameLbl.Size = new System.Drawing.Size(100, 25);
+            this._categorySymbolNameLbl.TabIndex = 22;
+            this._categorySymbolNameLbl.Text = "股票名稱";
+            this._categorySymbolNameLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // _categorySymbolCodeLbl
+            // 
+            this._categorySymbolCodeLbl.Location = new System.Drawing.Point(586, 115);
+            this._categorySymbolCodeLbl.Name = "_categorySymbolCodeLbl";
+            this._categorySymbolCodeLbl.Size = new System.Drawing.Size(100, 25);
+            this._categorySymbolCodeLbl.TabIndex = 21;
+            this._categorySymbolCodeLbl.Text = "股票代碼";
+            this._categorySymbolCodeLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // _symbolCatQueryBtn
+            // 
+            this._symbolCatQueryBtn.Location = new System.Drawing.Point(374, 8);
+            this._symbolCatQueryBtn.Name = "_symbolCatQueryBtn";
+            this._symbolCatQueryBtn.Size = new System.Drawing.Size(100, 25);
+            this._symbolCatQueryBtn.TabIndex = 20;
+            this._symbolCatQueryBtn.Text = "查詢";
+            this._symbolCatQueryBtn.UseVisualStyleBackColor = true;
+            this._symbolCatQueryBtn.Click += new System.EventHandler(this._symbolCatQueryBtn_Click);
+            // 
+            // _categorySymbolLV
+            // 
+            this._categorySymbolLV.Location = new System.Drawing.Point(586, 199);
+            this._categorySymbolLV.Name = "_categorySymbolLV";
+            this._categorySymbolLV.Size = new System.Drawing.Size(591, 348);
+            this._categorySymbolLV.TabIndex = 19;
+            this._categorySymbolLV.UseCompatibleStateImageBehavior = false;
+            // 
+            // _symbolCatGrpBox
+            // 
+            this._symbolCatGrpBox.Controls.Add(this._symbolCategoryLbl);
+            this._symbolCatGrpBox.Controls.Add(this._symbolCategoryCmb);
+            this._symbolCatGrpBox.Controls.Add(this._symbolCatPIRdoBtn);
+            this._symbolCatGrpBox.Controls.Add(this._symbolCatConceptRdoBtn);
+            this._symbolCatGrpBox.Controls.Add(this._symbolCatIndustryRdoBtn);
+            this._symbolCatGrpBox.Controls.Add(this._symbolCatBizGroupRdoBtn);
+            this._symbolCatGrpBox.Location = new System.Drawing.Point(586, 10);
+            this._symbolCatGrpBox.Name = "_symbolCatGrpBox";
+            this._symbolCatGrpBox.Size = new System.Drawing.Size(591, 102);
+            this._symbolCatGrpBox.TabIndex = 18;
+            this._symbolCatGrpBox.TabStop = false;
+            this._symbolCatGrpBox.Text = "選取分類組別";
+            // 
+            // _symbolCategoryLbl
+            // 
+            this._symbolCategoryLbl.Location = new System.Drawing.Point(6, 60);
+            this._symbolCategoryLbl.Name = "_symbolCategoryLbl";
+            this._symbolCategoryLbl.Size = new System.Drawing.Size(100, 25);
+            this._symbolCategoryLbl.TabIndex = 19;
+            this._symbolCategoryLbl.Text = "分類清單";
+            this._symbolCategoryLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // _symbolCategoryCmb
+            // 
+            this._symbolCategoryCmb.FormattingEnabled = true;
+            this._symbolCategoryCmb.Location = new System.Drawing.Point(112, 63);
+            this._symbolCategoryCmb.Name = "_symbolCategoryCmb";
+            this._symbolCategoryCmb.Size = new System.Drawing.Size(342, 20);
+            this._symbolCategoryCmb.TabIndex = 18;
             // 
             // _symbolCatPIRdoBtn
             // 
@@ -966,6 +1044,16 @@
             this._symbolCatPIRdoBtn.TabStop = true;
             this._symbolCatPIRdoBtn.Text = "指標類股";
             this._symbolCatPIRdoBtn.UseVisualStyleBackColor = true;
+            // 
+            // _symbolCatConceptRdoBtn
+            // 
+            this._symbolCatConceptRdoBtn.Location = new System.Drawing.Point(354, 21);
+            this._symbolCatConceptRdoBtn.Name = "_symbolCatConceptRdoBtn";
+            this._symbolCatConceptRdoBtn.Size = new System.Drawing.Size(110, 25);
+            this._symbolCatConceptRdoBtn.TabIndex = 17;
+            this._symbolCatConceptRdoBtn.TabStop = true;
+            this._symbolCatConceptRdoBtn.Text = "概念類股";
+            this._symbolCatConceptRdoBtn.UseVisualStyleBackColor = true;
             // 
             // _symbolCatIndustryRdoBtn
             // 
@@ -987,206 +1075,125 @@
             this._symbolCatBizGroupRdoBtn.Text = "集團股";
             this._symbolCatBizGroupRdoBtn.UseVisualStyleBackColor = true;
             // 
-            // _symbolCatConceptRdoBtn
+            // _symbolCatConceptLB
             // 
-            this._symbolCatConceptRdoBtn.Location = new System.Drawing.Point(354, 21);
-            this._symbolCatConceptRdoBtn.Name = "_symbolCatConceptRdoBtn";
-            this._symbolCatConceptRdoBtn.Size = new System.Drawing.Size(110, 25);
-            this._symbolCatConceptRdoBtn.TabIndex = 17;
-            this._symbolCatConceptRdoBtn.TabStop = true;
-            this._symbolCatConceptRdoBtn.Text = "概念類股";
-            this._symbolCatConceptRdoBtn.UseVisualStyleBackColor = true;
+            this._symbolCatConceptLB.FormattingEnabled = true;
+            this._symbolCatConceptLB.ItemHeight = 12;
+            this._symbolCatConceptLB.Location = new System.Drawing.Point(301, 363);
+            this._symbolCatConceptLB.Name = "_symbolCatConceptLB";
+            this._symbolCatConceptLB.Size = new System.Drawing.Size(279, 184);
+            this._symbolCatConceptLB.TabIndex = 13;
             // 
-            // _symbolCatGrpBox
+            // _symbolCatBizGroupLB
             // 
-            this._symbolCatGrpBox.Controls.Add(this._symbolCategoryLbl);
-            this._symbolCatGrpBox.Controls.Add(this._symbolCategoryCmb);
-            this._symbolCatGrpBox.Controls.Add(this._symbolCatPIRdoBtn);
-            this._symbolCatGrpBox.Controls.Add(this._symbolCatConceptRdoBtn);
-            this._symbolCatGrpBox.Controls.Add(this._symbolCatIndustryRdoBtn);
-            this._symbolCatGrpBox.Controls.Add(this._symbolCatBizGroupRdoBtn);
-            this._symbolCatGrpBox.Location = new System.Drawing.Point(586, 10);
-            this._symbolCatGrpBox.Name = "_symbolCatGrpBox";
-            this._symbolCatGrpBox.Size = new System.Drawing.Size(591, 102);
-            this._symbolCatGrpBox.TabIndex = 18;
-            this._symbolCatGrpBox.TabStop = false;
-            this._symbolCatGrpBox.Text = "選取分類組別";
+            this._symbolCatBizGroupLB.FormattingEnabled = true;
+            this._symbolCatBizGroupLB.ItemHeight = 12;
+            this._symbolCatBizGroupLB.Location = new System.Drawing.Point(14, 363);
+            this._symbolCatBizGroupLB.Name = "_symbolCatBizGroupLB";
+            this._symbolCatBizGroupLB.Size = new System.Drawing.Size(279, 184);
+            this._symbolCatBizGroupLB.TabIndex = 12;
             // 
-            // _symbolCategoryCmb
+            // _symbolCatIndustryLB
             // 
-            this._symbolCategoryCmb.FormattingEnabled = true;
-            this._symbolCategoryCmb.Location = new System.Drawing.Point(112, 63);
-            this._symbolCategoryCmb.Name = "_symbolCategoryCmb";
-            this._symbolCategoryCmb.Size = new System.Drawing.Size(342, 20);
-            this._symbolCategoryCmb.TabIndex = 18;
+            this._symbolCatIndustryLB.FormattingEnabled = true;
+            this._symbolCatIndustryLB.ItemHeight = 12;
+            this._symbolCatIndustryLB.Location = new System.Drawing.Point(301, 111);
+            this._symbolCatIndustryLB.Name = "_symbolCatIndustryLB";
+            this._symbolCatIndustryLB.Size = new System.Drawing.Size(279, 184);
+            this._symbolCatIndustryLB.TabIndex = 11;
             // 
-            // _symbolCategoryLbl
+            // _symbolCatPILB
             // 
-            this._symbolCategoryLbl.Location = new System.Drawing.Point(6, 60);
-            this._symbolCategoryLbl.Name = "_symbolCategoryLbl";
-            this._symbolCategoryLbl.Size = new System.Drawing.Size(100, 25);
-            this._symbolCategoryLbl.TabIndex = 19;
-            this._symbolCategoryLbl.Text = "分類清單";
-            this._symbolCategoryLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this._symbolCatPILB.FormattingEnabled = true;
+            this._symbolCatPILB.ItemHeight = 12;
+            this._symbolCatPILB.Location = new System.Drawing.Point(14, 111);
+            this._symbolCatPILB.Name = "_symbolCatPILB";
+            this._symbolCatPILB.Size = new System.Drawing.Size(279, 184);
+            this._symbolCatPILB.TabIndex = 10;
             // 
-            // _categorySymbolLV
+            // _symbolCatConceptLbl
             // 
-            this._categorySymbolLV.Location = new System.Drawing.Point(586, 199);
-            this._categorySymbolLV.Name = "_categorySymbolLV";
-            this._categorySymbolLV.Size = new System.Drawing.Size(591, 348);
-            this._categorySymbolLV.TabIndex = 19;
-            this._categorySymbolLV.UseCompatibleStateImageBehavior = false;
+            this._symbolCatConceptLbl.Location = new System.Drawing.Point(299, 298);
+            this._symbolCatConceptLbl.Name = "_symbolCatConceptLbl";
+            this._symbolCatConceptLbl.Size = new System.Drawing.Size(100, 25);
+            this._symbolCatConceptLbl.TabIndex = 9;
+            this._symbolCatConceptLbl.Text = "概念股";
+            this._symbolCatConceptLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // _symbolCatQueryBtn
+            // _symbolCatConceptCmb
             // 
-            this._symbolCatQueryBtn.Location = new System.Drawing.Point(374, 8);
-            this._symbolCatQueryBtn.Name = "_symbolCatQueryBtn";
-            this._symbolCatQueryBtn.Size = new System.Drawing.Size(100, 25);
-            this._symbolCatQueryBtn.TabIndex = 20;
-            this._symbolCatQueryBtn.Text = "查詢";
-            this._symbolCatQueryBtn.UseVisualStyleBackColor = true;
-            this._symbolCatQueryBtn.Click += new System.EventHandler(this._symbolCatQueryBtn_Click);
+            this._symbolCatConceptCmb.FormattingEnabled = true;
+            this._symbolCatConceptCmb.Location = new System.Drawing.Point(405, 301);
+            this._symbolCatConceptCmb.Name = "_symbolCatConceptCmb";
+            this._symbolCatConceptCmb.Size = new System.Drawing.Size(175, 20);
+            this._symbolCatConceptCmb.TabIndex = 8;
             // 
-            // _categorySymbolCodeLbl
+            // _symbolCatBizGroupLbl
             // 
-            this._categorySymbolCodeLbl.Location = new System.Drawing.Point(586, 115);
-            this._categorySymbolCodeLbl.Name = "_categorySymbolCodeLbl";
-            this._categorySymbolCodeLbl.Size = new System.Drawing.Size(100, 25);
-            this._categorySymbolCodeLbl.TabIndex = 21;
-            this._categorySymbolCodeLbl.Text = "股票代碼";
-            this._categorySymbolCodeLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this._symbolCatBizGroupLbl.Location = new System.Drawing.Point(12, 298);
+            this._symbolCatBizGroupLbl.Name = "_symbolCatBizGroupLbl";
+            this._symbolCatBizGroupLbl.Size = new System.Drawing.Size(100, 25);
+            this._symbolCatBizGroupLbl.TabIndex = 7;
+            this._symbolCatBizGroupLbl.Text = "集團股";
+            this._symbolCatBizGroupLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // _categorySymbolNameLbl
+            // _symbolCatBizGroupCmb
             // 
-            this._categorySymbolNameLbl.Location = new System.Drawing.Point(873, 115);
-            this._categorySymbolNameLbl.Name = "_categorySymbolNameLbl";
-            this._categorySymbolNameLbl.Size = new System.Drawing.Size(100, 25);
-            this._categorySymbolNameLbl.TabIndex = 22;
-            this._categorySymbolNameLbl.Text = "股票名稱";
-            this._categorySymbolNameLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this._symbolCatBizGroupCmb.FormattingEnabled = true;
+            this._symbolCatBizGroupCmb.Location = new System.Drawing.Point(118, 301);
+            this._symbolCatBizGroupCmb.Name = "_symbolCatBizGroupCmb";
+            this._symbolCatBizGroupCmb.Size = new System.Drawing.Size(175, 20);
+            this._symbolCatBizGroupCmb.TabIndex = 6;
             // 
-            // _categorySymbolCodeTxt
+            // _symbolCatIndustryLbl
             // 
-            this._categorySymbolCodeTxt.Location = new System.Drawing.Point(692, 118);
-            this._categorySymbolCodeTxt.Name = "_categorySymbolCodeTxt";
-            this._categorySymbolCodeTxt.Size = new System.Drawing.Size(175, 22);
-            this._categorySymbolCodeTxt.TabIndex = 23;
+            this._symbolCatIndustryLbl.Location = new System.Drawing.Point(299, 46);
+            this._symbolCatIndustryLbl.Name = "_symbolCatIndustryLbl";
+            this._symbolCatIndustryLbl.Size = new System.Drawing.Size(100, 25);
+            this._symbolCatIndustryLbl.TabIndex = 5;
+            this._symbolCatIndustryLbl.Text = "產業股";
+            this._symbolCatIndustryLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // _categorySymbolNameTxt
+            // _symbolCatIndustryCmb
             // 
-            this._categorySymbolNameTxt.Location = new System.Drawing.Point(979, 118);
-            this._categorySymbolNameTxt.Name = "_categorySymbolNameTxt";
-            this._categorySymbolNameTxt.Size = new System.Drawing.Size(175, 22);
-            this._categorySymbolNameTxt.TabIndex = 24;
+            this._symbolCatIndustryCmb.FormattingEnabled = true;
+            this._symbolCatIndustryCmb.Location = new System.Drawing.Point(405, 49);
+            this._symbolCatIndustryCmb.Name = "_symbolCatIndustryCmb";
+            this._symbolCatIndustryCmb.Size = new System.Drawing.Size(175, 20);
+            this._symbolCatIndustryCmb.TabIndex = 4;
             // 
-            // _categorySymbolAddBtn
+            // _symbolCatPILbl
             // 
-            this._categorySymbolAddBtn.Location = new System.Drawing.Point(879, 146);
-            this._categorySymbolAddBtn.Name = "_categorySymbolAddBtn";
-            this._categorySymbolAddBtn.Size = new System.Drawing.Size(275, 47);
-            this._categorySymbolAddBtn.TabIndex = 25;
-            this._categorySymbolAddBtn.Text = "將股票加入該群組";
-            this._categorySymbolAddBtn.UseVisualStyleBackColor = true;
+            this._symbolCatPILbl.Location = new System.Drawing.Point(12, 46);
+            this._symbolCatPILbl.Name = "_symbolCatPILbl";
+            this._symbolCatPILbl.Size = new System.Drawing.Size(100, 25);
+            this._symbolCatPILbl.TabIndex = 3;
+            this._symbolCatPILbl.Text = "指標股";
+            this._symbolCatPILbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // _categorySymbolDeleteBtn
+            // _symbolCatPICmb
             // 
-            this._categorySymbolDeleteBtn.Location = new System.Drawing.Point(594, 146);
-            this._categorySymbolDeleteBtn.Name = "_categorySymbolDeleteBtn";
-            this._categorySymbolDeleteBtn.Size = new System.Drawing.Size(275, 47);
-            this._categorySymbolDeleteBtn.TabIndex = 26;
-            this._categorySymbolDeleteBtn.Text = "將股票從該群組移出";
-            this._categorySymbolDeleteBtn.UseVisualStyleBackColor = true;
+            this._symbolCatPICmb.FormattingEnabled = true;
+            this._symbolCatPICmb.Location = new System.Drawing.Point(118, 49);
+            this._symbolCatPICmb.Name = "_symbolCatPICmb";
+            this._symbolCatPICmb.Size = new System.Drawing.Size(175, 20);
+            this._symbolCatPICmb.TabIndex = 2;
             // 
-            // _symbolCatPIDeleteBtn
+            // _symbolCatQueryLbl
             // 
-            this._symbolCatPIDeleteBtn.Location = new System.Drawing.Point(14, 75);
-            this._symbolCatPIDeleteBtn.Name = "_symbolCatPIDeleteBtn";
-            this._symbolCatPIDeleteBtn.Size = new System.Drawing.Size(100, 25);
-            this._symbolCatPIDeleteBtn.TabIndex = 27;
-            this._symbolCatPIDeleteBtn.Text = "刪除";
-            this._symbolCatPIDeleteBtn.UseVisualStyleBackColor = true;
+            this._symbolCatQueryLbl.Location = new System.Drawing.Point(12, 9);
+            this._symbolCatQueryLbl.Name = "_symbolCatQueryLbl";
+            this._symbolCatQueryLbl.Size = new System.Drawing.Size(100, 25);
+            this._symbolCatQueryLbl.TabIndex = 1;
+            this._symbolCatQueryLbl.Text = "股票名稱、代碼";
+            this._symbolCatQueryLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // _symbolCatPIAddBtn
+            // _symbolCatQueryTxt
             // 
-            this._symbolCatPIAddBtn.Location = new System.Drawing.Point(120, 75);
-            this._symbolCatPIAddBtn.Name = "_symbolCatPIAddBtn";
-            this._symbolCatPIAddBtn.Size = new System.Drawing.Size(100, 25);
-            this._symbolCatPIAddBtn.TabIndex = 28;
-            this._symbolCatPIAddBtn.Text = "加入";
-            this._symbolCatPIAddBtn.UseVisualStyleBackColor = true;
-            this._symbolCatPIAddBtn.Click += new System.EventHandler(this._symbolCatPIAddBtn_Click);
-            // 
-            // _symbolCatIndustryAddBtn
-            // 
-            this._symbolCatIndustryAddBtn.Location = new System.Drawing.Point(407, 75);
-            this._symbolCatIndustryAddBtn.Name = "_symbolCatIndustryAddBtn";
-            this._symbolCatIndustryAddBtn.Size = new System.Drawing.Size(100, 25);
-            this._symbolCatIndustryAddBtn.TabIndex = 30;
-            this._symbolCatIndustryAddBtn.Text = "加入";
-            this._symbolCatIndustryAddBtn.UseVisualStyleBackColor = true;
-            // 
-            // _symbolCatIndustryDeleteBtn
-            // 
-            this._symbolCatIndustryDeleteBtn.Location = new System.Drawing.Point(301, 75);
-            this._symbolCatIndustryDeleteBtn.Name = "_symbolCatIndustryDeleteBtn";
-            this._symbolCatIndustryDeleteBtn.Size = new System.Drawing.Size(100, 25);
-            this._symbolCatIndustryDeleteBtn.TabIndex = 29;
-            this._symbolCatIndustryDeleteBtn.Text = "刪除";
-            this._symbolCatIndustryDeleteBtn.UseVisualStyleBackColor = true;
-            // 
-            // _symbolCatBizGroupAddBtn
-            // 
-            this._symbolCatBizGroupAddBtn.Location = new System.Drawing.Point(120, 326);
-            this._symbolCatBizGroupAddBtn.Name = "_symbolCatBizGroupAddBtn";
-            this._symbolCatBizGroupAddBtn.Size = new System.Drawing.Size(100, 25);
-            this._symbolCatBizGroupAddBtn.TabIndex = 32;
-            this._symbolCatBizGroupAddBtn.Text = "加入";
-            this._symbolCatBizGroupAddBtn.UseVisualStyleBackColor = true;
-            // 
-            // _symbolCatBizGroupDeleteBtn
-            // 
-            this._symbolCatBizGroupDeleteBtn.Location = new System.Drawing.Point(14, 326);
-            this._symbolCatBizGroupDeleteBtn.Name = "_symbolCatBizGroupDeleteBtn";
-            this._symbolCatBizGroupDeleteBtn.Size = new System.Drawing.Size(100, 25);
-            this._symbolCatBizGroupDeleteBtn.TabIndex = 31;
-            this._symbolCatBizGroupDeleteBtn.Text = "刪除";
-            this._symbolCatBizGroupDeleteBtn.UseVisualStyleBackColor = true;
-            // 
-            // _symbolCatConceptAddBtn
-            // 
-            this._symbolCatConceptAddBtn.Location = new System.Drawing.Point(407, 326);
-            this._symbolCatConceptAddBtn.Name = "_symbolCatConceptAddBtn";
-            this._symbolCatConceptAddBtn.Size = new System.Drawing.Size(100, 25);
-            this._symbolCatConceptAddBtn.TabIndex = 34;
-            this._symbolCatConceptAddBtn.Text = "加入";
-            this._symbolCatConceptAddBtn.UseVisualStyleBackColor = true;
-            // 
-            // _symbolCatConceptDeleteBtn
-            // 
-            this._symbolCatConceptDeleteBtn.Location = new System.Drawing.Point(301, 326);
-            this._symbolCatConceptDeleteBtn.Name = "_symbolCatConceptDeleteBtn";
-            this._symbolCatConceptDeleteBtn.Size = new System.Drawing.Size(100, 25);
-            this._symbolCatConceptDeleteBtn.TabIndex = 33;
-            this._symbolCatConceptDeleteBtn.Text = "刪除";
-            this._symbolCatConceptDeleteBtn.UseVisualStyleBackColor = true;
-            // 
-            // _symbolNameCatLbl
-            // 
-            this._symbolNameCatLbl.Location = new System.Drawing.Point(268, 7);
-            this._symbolNameCatLbl.Name = "_symbolNameCatLbl";
-            this._symbolNameCatLbl.Size = new System.Drawing.Size(100, 25);
-            this._symbolNameCatLbl.TabIndex = 35;
-            this._symbolNameCatLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // _symbolCatClearBtn
-            // 
-            this._symbolCatClearBtn.Location = new System.Drawing.Point(480, 8);
-            this._symbolCatClearBtn.Name = "_symbolCatClearBtn";
-            this._symbolCatClearBtn.Size = new System.Drawing.Size(100, 25);
-            this._symbolCatClearBtn.TabIndex = 36;
-            this._symbolCatClearBtn.Text = "清除";
-            this._symbolCatClearBtn.UseVisualStyleBackColor = true;
-            this._symbolCatClearBtn.Click += new System.EventHandler(this._symbolCatClearBtn_Click);
+            this._symbolCatQueryTxt.Location = new System.Drawing.Point(118, 10);
+            this._symbolCatQueryTxt.Name = "_symbolCatQueryTxt";
+            this._symbolCatQueryTxt.Size = new System.Drawing.Size(144, 22);
+            this._symbolCatQueryTxt.TabIndex = 0;
             // 
             // MainForm
             // 
