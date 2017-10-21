@@ -1769,6 +1769,94 @@ namespace YwRtdAp
                 this._categorySymbolLV.Refresh(); 
             }            
                      
+        }
+
+        private void _categorySymbolAddBtn_Click(object sender, EventArgs e)
+        {
+            if (this._symbolCatClearRdoBtn.Checked)
+            { return; }
+
+            string symbolCode = this._categorySymbolCodeTxt.Text.Trim();
+            string symbolName = this._categorySymbolNameTxt.Text.Trim();
+            Symbol symbolExist =
+                    this._rep.DefaultOne<Symbol>(x => x.Code == symbolCode && x.SymbolName == symbolName);
+            DialogResult diaResult;
+            if (this._symbolCatPIRdoBtn.Checked)
+            {
+                PointerIndex pi = this._symbolCategoryCmb.SelectedItem as PointerIndex;
+                diaResult = MessageBox.Show("", "Warning", MessageBoxButtons.YesNoCancel);
+                if (diaResult != System.Windows.Forms.DialogResult.Yes) 
+                { return; }
+                
+                if (symbolExist != null)
+                {
+                    this._rep.Insert<PointerIndexSymbol>(new PointerIndexSymbol
+                    {
+                        CreateTime = DateTime.Now,
+                        PointerIndexId = pi.Id,
+                        SymbolId = symbolExist.Id
+                    });
+                    this._rep.Commit();
+                }
+            }
+
+            if (this._symbolCatIndustryRdoBtn.Checked)
+            {
+                Industry ind = this._symbolCategoryCmb.SelectedItem as Industry;
+                diaResult = MessageBox.Show("", "Warning", MessageBoxButtons.YesNoCancel);
+                if (diaResult != System.Windows.Forms.DialogResult.Yes)
+                { return; }
+
+                if (symbolExist != null)
+                {
+                    this._rep.Insert<IndustrySymbol>(new IndustrySymbol
+                    {
+                        CreateTime = DateTime.Now,
+                        IndustryId = ind.Id,
+                        SymbolId = symbolExist.Id
+                    });
+                    this._rep.Commit();
+                }
+            }
+
+            if (this._symbolCatBizGroupRdoBtn.Checked)
+            {
+                BizGroup grp = this._symbolCategoryCmb.SelectedItem as BizGroup;
+                diaResult = MessageBox.Show("", "Warning", MessageBoxButtons.YesNoCancel);
+                if (diaResult != System.Windows.Forms.DialogResult.Yes)
+                { return; }
+
+                if (symbolExist != null)
+                {
+                    this._rep.Insert<BizGroupSymbol>(new BizGroupSymbol
+                    {
+                        CreateTime = DateTime.Now,
+                        BizGroupId = grp.Id,
+                        SymbolId = symbolExist.Id
+                    });
+                    this._rep.Commit();
+                }
+            }
+
+            if (this._symbolCatConceptRdoBtn.Checked)
+            {
+                Concept con = this._symbolCategoryCmb.SelectedItem as Concept;
+                diaResult = MessageBox.Show("", "Warning", MessageBoxButtons.YesNoCancel);
+                if (diaResult != System.Windows.Forms.DialogResult.Yes)
+                { return; }
+
+                if (symbolExist != null)
+                {
+                    this._rep.Insert<ConceptSymbol>(new ConceptSymbol
+                    {
+                        CreateTime = DateTime.Now,
+                        ConceptId = con.Id,
+                        SymbolId = symbolExist.Id
+                    });
+                    this._rep.Commit();
+                }
+            }
+
         }        
     }
 }
