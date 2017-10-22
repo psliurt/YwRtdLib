@@ -18,10 +18,11 @@ using YwRtdLib;
 
 namespace YwRtdAp
 {
-    delegate void UpdateHandler(DataGridView gv);
+    //delegate void UpdateHandler(DataGridView gv);
     public partial class MainForm : Form
     {
         private RtCore _rtdCore = RtCore.Instance();
+        private Dispatcher _dispatcher { get; set; }
 
         private ConcurrentDictionary<string, YwCommodity> _commodities { get; set; }
         private ConcurrentDictionary<string, YwBasicQuote> _subscribeBasicQuote { get; set; }
@@ -51,113 +52,114 @@ namespace YwRtdAp
         private RtdRepository _rep { get; set; }
 
 
-        private ConcurrentQueue<ChangeData> _updateEventQueue { get; set; }
-        private ConcurrentQueue<ChangeData> _bufferEventQueue { get; set; }
-        private volatile bool _runUpdateWork = true;
-        private AutoResetEvent _bufferRearResetEvent { get; set; }
+        //private ConcurrentQueue<ChangeData> _updateEventQueue { get; set; }
+        //private ConcurrentQueue<ChangeData> _bufferEventQueue { get; set; }
+        //private volatile bool _runUpdateWork = true;
+        //private AutoResetEvent _bufferRearResetEvent { get; set; }
 
-        private volatile bool _runRearWork = true;
-        private AutoResetEvent _bufferFrontResetEvent { get; set; }
+        //private volatile bool _runRearWork = true;
+        //private AutoResetEvent _bufferFrontResetEvent { get; set; }
 
-        private volatile bool _runFrontWork = true;
+        //private volatile bool _runFrontWork = true;
 
-        private Thread _updateEventThread { get; set; }
-        private Thread _bufferFrontThread { get; set; }
-        private Thread _bufferRearThread { get; set; }
+        //private Thread _updateEventThread { get; set; }
+        //private Thread _bufferFrontThread { get; set; }
+        //private Thread _bufferRearThread { get; set; }
         
 
-        private void DoFrontWork()
-        {
-            int c = 0;
-            while (this._runFrontWork)
-            {
-                this._bufferFrontResetEvent.WaitOne();
-                if (this._rtdCore == null)
-                {
-                    continue;
-                }
-                c = this._rtdCore.ChangeDataQueue.Count;
-                if (c > 0)
-                {
-                    Console.WriteLine("A ---> [[[ {0}  ]]] ---> B ", c);
-                }
+        //private void DoFrontWork()
+        //{
+        //    int c = 0;
+        //    while (this._runFrontWork)
+        //    {
+        //        this._bufferFrontResetEvent.WaitOne();
+        //        if (this._rtdCore == null)
+        //        {
+        //            continue;
+        //        }
+        //        c = this._rtdCore.ChangeDataQueue.Count;
+        //        if (c > 0)
+        //        {
+        //            Console.WriteLine("A ---> [[[ {0}  ]]] ---> B ", c);
+        //        }
 
 
-                while (c > 0)
-                {
-                    ChangeData newIncome = null;
-                    if (this._rtdCore.ChangeDataQueue.TryDequeue(out newIncome))
-                    {
-                        this._bufferEventQueue.Enqueue(newIncome);
-                    }
-                    c--;
-                }
-            }
-        }
+        //        while (c > 0)
+        //        {
+        //            ChangeData newIncome = null;
+        //            if (this._rtdCore.ChangeDataQueue.TryDequeue(out newIncome))
+        //            {
+        //                this._bufferEventQueue.Enqueue(newIncome);
+        //            }
+        //            c--;
+        //        }
+        //    }
+        //}
 
 
-        private void DoRearWork()
-        {
-            int c = 0;
+        //private void DoRearWork()
+        //{
+        //    int c = 0;
 
-            while (this._runRearWork)
-            {
-                this._bufferRearResetEvent.WaitOne();
-                c = this._bufferEventQueue.Count;
-                if (c > 0)
-                {
-                    Console.WriteLine("                         #B ---> [[[ {0}  ]]] ---> C ", c);
-                }
+        //    while (this._runRearWork)
+        //    {
+        //        this._bufferRearResetEvent.WaitOne();
+        //        c = this._bufferEventQueue.Count;
+        //        if (c > 0)
+        //        {
+        //            Console.WriteLine("                         #B ---> [[[ {0}  ]]] ---> C ", c);
+        //        }
 
 
-                while (c > 0)
-                {
-                    ChangeData buffered = null;
-                    if (this._bufferEventQueue.TryDequeue(out buffered))
-                    {
-                        this._updateEventQueue.Enqueue(buffered);
-                    }
-                    c--;
-                }
+        //        while (c > 0)
+        //        {
+        //            ChangeData buffered = null;
+        //            if (this._bufferEventQueue.TryDequeue(out buffered))
+        //            {
+        //                this._updateEventQueue.Enqueue(buffered);
+        //            }
+        //            c--;
+        //        }
 
-                this._bufferFrontResetEvent.Set();
+        //        this._bufferFrontResetEvent.Set();
 
-            }
-        }
+        //    }
+        //}
 
-        private void DoUpdateWork()
-        {
-            int c = 0;
-            while (this._runUpdateWork)
-            {
-                c = this._updateEventQueue.Count;
+        //private void DoUpdateWork()
+        //{
+        //    int c = 0;
+        //    while (this._runUpdateWork)
+        //    {
+        //        c = this._updateEventQueue.Count;
 
-                if (c <= 0)
-                {
-                    this._bufferRearResetEvent.WaitOne(1);//利用這個waitone來讓CPU的使用率不要爆高
-                }
-                else
-                {
-                    Console.WriteLine("                                                   #C ---> [[[ {0}  ]]] ---> Update ", c);
-                }
+        //        if (c <= 0)
+        //        {
+        //            this._bufferRearResetEvent.WaitOne(1);//利用這個waitone來讓CPU的使用率不要爆高
+        //        }
+        //        else
+        //        {
+        //            Console.WriteLine("                                                   #C ---> [[[ {0}  ]]] ---> Update ", c);
+        //        }
 
-                while (c > 0)
-                {
-                    ChangeData newOutcome = null;
-                    if (this._updateEventQueue.TryDequeue(out newOutcome))
-                    {
-                        UpdateGridView(this._symbolGV);
-                        //Console.WriteLine("Data Change: [ {0}  => {1} ]", newOutcome.Topic.YwFieldType.ToString(), newOutcome.Data);
-                    }
-                    c--;
-                }
-                this._bufferRearResetEvent.Set();
+        //        while (c > 0)
+        //        {
+        //            ChangeData newOutcome = null;
+        //            if (this._updateEventQueue.TryDequeue(out newOutcome))
+        //            {
+        //                UpdateGridView(this._symbolGV);
+        //                //Console.WriteLine("Data Change: [ {0}  => {1} ]", newOutcome.Topic.YwFieldType.ToString(), newOutcome.Data);
+        //            }
+        //            c--;
+        //        }
+        //        this._bufferRearResetEvent.Set();
 
-            }
-        }
+        //    }
+        //}
 
         public MainForm()
         {
+            this._dispatcher = Dispatcher.Instance(this._rtdCore);
             InitializeComponent();
             SetUpDbPath();           
 
@@ -217,16 +219,16 @@ namespace YwRtdAp
 
             LoadManagePageSymbolsData();
 
-            this._updateEventQueue = new ConcurrentQueue<ChangeData>();
-            this._bufferEventQueue = new ConcurrentQueue<ChangeData>();
-            this._bufferRearResetEvent = new AutoResetEvent(false);
-            this._bufferFrontResetEvent = new AutoResetEvent(false);
-            this._updateEventThread = new Thread(DoUpdateWork);
-            this._bufferFrontThread = new Thread(DoFrontWork);
-            this._bufferRearThread = new Thread(DoRearWork);
-            this._updateEventThread.Start();
-            this._bufferRearThread.Start();
-            this._bufferFrontThread.Start();
+            //this._updateEventQueue = new ConcurrentQueue<ChangeData>();
+            //this._bufferEventQueue = new ConcurrentQueue<ChangeData>();
+            //this._bufferRearResetEvent = new AutoResetEvent(false);
+            //this._bufferFrontResetEvent = new AutoResetEvent(false);
+            //this._updateEventThread = new Thread(DoUpdateWork);
+            //this._bufferFrontThread = new Thread(DoFrontWork);
+            //this._bufferRearThread = new Thread(DoRearWork);
+            //this._updateEventThread.Start();
+            //this._bufferRearThread.Start();
+            //this._bufferFrontThread.Start();
         }
 
         private void SetUpDbPath()
@@ -244,7 +246,7 @@ namespace YwRtdAp
         {
             if (this._dayTradeGVSymbols.Exists(x=>dci.Symbols.Contains(x)))
             {
-                UpdateGridView(this._dayTradeStockGV);
+                //UpdateGridView(this._dayTradeStockGV);
                 
             }
             
@@ -743,19 +745,19 @@ namespace YwRtdAp
         }
 
         
-        private void UpdateGridView(DataGridView gv)
-        {
-            if (gv.InvokeRequired)
-            {
-                UpdateHandler handler = new UpdateHandler(UpdateGridView);
-                gv.Invoke(handler, gv);
-            }
-            else
-            {
-                //gv.DataSource = this._dayTradeQuoteDatas;
-                gv.Refresh();                
-            }
-        }
+        //private void UpdateGridView(DataGridView gv)
+        //{
+        //    if (gv.InvokeRequired)
+        //    {
+        //        UpdateHandler handler = new UpdateHandler(UpdateGridView);
+        //        gv.Invoke(handler, gv);
+        //    }
+        //    else
+        //    {
+        //        //gv.DataSource = this._dayTradeQuoteDatas;
+        //        gv.Refresh();                
+        //    }
+        //}
 
         private void _addSymbolBtn_Click(object sender, EventArgs e)
         {
@@ -771,9 +773,10 @@ namespace YwRtdAp
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             this._rtdCore.Terminate();
-            this._bufferRearThread.Abort();
-            this._bufferFrontThread.Abort();
-            this._updateEventThread.Abort();
+            this._dispatcher.Terminate();
+            //this._bufferRearThread.Abort();
+            //this._bufferFrontThread.Abort();
+            //this._updateEventThread.Abort();
         }
 
         private void _filterCeilPriceStockBtn_Click(object sender, EventArgs e)
@@ -996,11 +999,12 @@ namespace YwRtdAp
             {
                 YwCommodity c = filteredCommodities[i];
                 this._selectedIndustryQuote.Add(new IndustryQuote(ref c));
+                this._dispatcher.AddSymbolGridMap(c.Symbol, this._filteredIndustryGV);
             }
             
             this._filteredIndustryGV.DataSource = null;
-            this._filteredIndustryGV.DataSource = this._selectedIndustryQuote;
-            this._filteredIndustryGV.Refresh();
+            this._filteredIndustryGV.DataSource = this._selectedIndustryQuote;            
+            this._filteredIndustryGV.Refresh();            
         }
 
         private void _bizGroupSelectCmb_SelectedIndexChanged(object sender, EventArgs e)
@@ -1023,6 +1027,7 @@ namespace YwRtdAp
             {
                 YwCommodity c = filteredCommodities[i];
                 this._selectedBizGroupQuote.Add(new BizGroupQuote(ref c));
+                this._dispatcher.AddSymbolGridMap(c.Symbol, this._filteredBizGroupGV);
             }           
             
             this._filteredBizGroupGV.DataSource = null;
@@ -1050,6 +1055,7 @@ namespace YwRtdAp
             {
                 YwCommodity c = filteredCommodities[i];
                 this._selectedConceptQuote.Add(new ConceptQuote(ref c));
+                this._dispatcher.AddSymbolGridMap(c.Symbol, this._filteredConceptGV);
             }                  
 
             this._filteredConceptGV.DataSource = null;
@@ -1274,6 +1280,7 @@ namespace YwRtdAp
             {
                 YwCommodity c = filteredCommodities[i];
                 this._selectedPointerIndexQuote.Add(new PointerIndexQuote(ref c));
+                this._dispatcher.AddSymbolGridMap(c.Symbol, this._filteredPointerIndexGV);
             }
 
             this._filteredPointerIndexGV.DataSource = null;
@@ -1719,56 +1726,7 @@ namespace YwRtdAp
 
         private void _symbolCategoryCmb_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this._symbolCatClearRdoBtn.Checked)
-            {
-                this._categorySymbolLV.Items.Clear();
-                return;
-            }
-            IQueryable<Symbol> filterSymbols = null;
-            List<int> symbolIds = null;
-            if (this._symbolCatPIRdoBtn.Checked)
-            { 
-                PointerIndex obj = this._symbolCategoryCmb.SelectedItem as PointerIndex;
-                symbolIds =
-                    this._rep.Query<PointerIndexSymbol>(x => x.PointerIndexId == obj.Id).Select(x => x.SymbolId).ToList();                
-            }
-
-            if (this._symbolCatIndustryRdoBtn.Checked)
-            {
-                Industry obj = this._symbolCategoryCmb.SelectedItem as Industry;
-                symbolIds =
-                    this._rep.Query<IndustrySymbol>(x => x.IndustryId == obj.Id).Select(x => x.SymbolId).ToList();    
-            }
-
-            if (this._symbolCatBizGroupRdoBtn.Checked)
-            {
-                BizGroup obj = this._symbolCategoryCmb.SelectedItem as BizGroup;
-                symbolIds =
-                    this._rep.Query<BizGroupSymbol>(x => x.BizGroupId == obj.Id).Select(x => x.SymbolId).ToList();    
-            }
-
-            if (this._symbolCatConceptRdoBtn.Checked)
-            {
-                Concept obj = this._symbolCategoryCmb.SelectedItem as Concept;
-                symbolIds =
-                    this._rep.Query<ConceptSymbol>(x => x.ConceptId == obj.Id).Select(x => x.SymbolId).ToList();    
-            }
-
-            
-            filterSymbols = this._rep.Query<Symbol>(x => symbolIds.Contains(x.Id));
-            if (filterSymbols != null)
-            {
-                this._categorySymbolLV.Clear();
-                this._categorySymbolLV.Columns.Add("股票代碼");
-                this._categorySymbolLV.Columns.Add("名稱");
-                foreach (var s in filterSymbols)
-                {
-                    ListViewItem lvi = new ListViewItem(new string[] { s.Code, s.SymbolName });
-                    this._categorySymbolLV.Items.Add(lvi);
-                }
-                this._categorySymbolLV.Refresh(); 
-            }            
-                     
+            ReloadCategorySymbolData();                     
         }
 
         private void _categorySymbolAddBtn_Click(object sender, EventArgs e)
@@ -1857,6 +1815,130 @@ namespace YwRtdAp
                 }
             }
 
+            ReloadCategorySymbolData();
+
+        }
+
+        private void ReloadCategorySymbolData()
+        {
+            if (this._symbolCatClearRdoBtn.Checked)
+            {
+                this._categorySymbolLV.Items.Clear();
+                return;
+            }
+            IQueryable<Symbol> filterSymbols = null;
+            List<int> symbolIds = null;
+            if (this._symbolCatPIRdoBtn.Checked)
+            {
+                PointerIndex obj = this._symbolCategoryCmb.SelectedItem as PointerIndex;
+                symbolIds =
+                    this._rep.Query<PointerIndexSymbol>(x => x.PointerIndexId == obj.Id).Select(x => x.SymbolId).ToList();
+            }
+
+            if (this._symbolCatIndustryRdoBtn.Checked)
+            {
+                Industry obj = this._symbolCategoryCmb.SelectedItem as Industry;
+                symbolIds =
+                    this._rep.Query<IndustrySymbol>(x => x.IndustryId == obj.Id).Select(x => x.SymbolId).ToList();
+            }
+
+            if (this._symbolCatBizGroupRdoBtn.Checked)
+            {
+                BizGroup obj = this._symbolCategoryCmb.SelectedItem as BizGroup;
+                symbolIds =
+                    this._rep.Query<BizGroupSymbol>(x => x.BizGroupId == obj.Id).Select(x => x.SymbolId).ToList();
+            }
+
+            if (this._symbolCatConceptRdoBtn.Checked)
+            {
+                Concept obj = this._symbolCategoryCmb.SelectedItem as Concept;
+                symbolIds =
+                    this._rep.Query<ConceptSymbol>(x => x.ConceptId == obj.Id).Select(x => x.SymbolId).ToList();
+            }
+
+
+            filterSymbols = this._rep.Query<Symbol>(x => symbolIds.Contains(x.Id));
+            if (filterSymbols != null)
+            {
+                this._categorySymbolLV.Clear();
+                this._categorySymbolLV.Columns.Add("股票代碼");
+                this._categorySymbolLV.Columns.Add("名稱");
+                foreach (var s in filterSymbols)
+                {
+                    ListViewItem lvi = new ListViewItem(new string[] { s.Code, s.SymbolName });
+                    this._categorySymbolLV.Items.Add(lvi);
+                }
+                this._categorySymbolLV.Refresh();
+            }     
+        }
+
+        private void _categorySymbolDeleteBtn_Click(object sender, EventArgs e)
+        {
+            ListView.SelectedListViewItemCollection  items = this._categorySymbolLV.SelectedItems;
+
+            Symbol selectedSymbol = null;
+            string symbolCode = "";
+
+            if (items.Count > 0)
+            {
+                symbolCode = items[0].Text;                
+            }
+
+            if (string.IsNullOrEmpty(symbolCode))
+            { return; }
+
+            selectedSymbol = this._rep.DefaultOne<Symbol>(x => x.Code == symbolCode);
+
+            
+            if (this._symbolCatPIRdoBtn.Checked)
+            {
+                PointerIndex obj = this._symbolCategoryCmb.SelectedItem as PointerIndex;
+                PointerIndexSymbol relation=
+                    this._rep.DefaultOne<PointerIndexSymbol>(x => x.SymbolId == selectedSymbol.Id && x.PointerIndexId == obj.Id);
+                if (relation != null)
+                {
+                    this._rep.Delete<PointerIndexSymbol>(relation);
+                }
+                this._rep.Commit();                
+            }
+
+            if (this._symbolCatIndustryRdoBtn.Checked)
+            {
+                Industry obj = this._symbolCategoryCmb.SelectedItem as Industry;
+                IndustrySymbol relation =
+                    this._rep.DefaultOne<IndustrySymbol>(x => x.SymbolId == selectedSymbol.Id && x.IndustryId == obj.Id);
+                if (relation != null)
+                {
+                    this._rep.Delete<IndustrySymbol>(relation);
+                }
+                this._rep.Commit();
+            }
+
+            if (this._symbolCatBizGroupRdoBtn.Checked)
+            {
+                BizGroup obj = this._symbolCategoryCmb.SelectedItem as BizGroup;
+                BizGroupSymbol relation =
+                    this._rep.DefaultOne<BizGroupSymbol>(x => x.SymbolId == selectedSymbol.Id && x.BizGroupId == obj.Id);
+                if (relation != null)
+                {
+                    this._rep.Delete<BizGroupSymbol>(relation);
+                }
+                this._rep.Commit();
+            }
+
+            if (this._symbolCatConceptRdoBtn.Checked)
+            {
+                Concept obj = this._symbolCategoryCmb.SelectedItem as Concept;
+                ConceptSymbol relation =
+                    this._rep.DefaultOne<ConceptSymbol>(x => x.SymbolId == selectedSymbol.Id && x.ConceptId == obj.Id);
+                if (relation != null)
+                {
+                    this._rep.Delete<ConceptSymbol>(relation);
+                }
+                this._rep.Commit();
+            }
+
+            ReloadCategorySymbolData();
         }        
     }
 }

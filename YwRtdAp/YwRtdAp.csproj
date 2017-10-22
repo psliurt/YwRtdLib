@@ -123,6 +123,7 @@
     <Compile Include="Db\DbObject\Symbol.cs">
       <DependentUpon>RtdBaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Dispatcher.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

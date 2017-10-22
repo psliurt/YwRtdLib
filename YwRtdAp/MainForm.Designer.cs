@@ -944,6 +944,7 @@
             this._categorySymbolDeleteBtn.TabIndex = 26;
             this._categorySymbolDeleteBtn.Text = "將股票從該群組移出";
             this._categorySymbolDeleteBtn.UseVisualStyleBackColor = true;
+            this._categorySymbolDeleteBtn.Click += new System.EventHandler(this._categorySymbolDeleteBtn_Click);
             // 
             // _categorySymbolAddBtn
             // 
