@@ -349,16 +349,16 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this._filteredPointerIndexGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this._filteredPointerIndexGV.Location = new System.Drawing.Point(3, 115);
+            this._filteredPointerIndexGV.Location = new System.Drawing.Point(3, 38);
             this._filteredPointerIndexGV.Name = "_filteredPointerIndexGV";
             this._filteredPointerIndexGV.RowTemplate.Height = 24;
-            this._filteredPointerIndexGV.Size = new System.Drawing.Size(1172, 449);
+            this._filteredPointerIndexGV.Size = new System.Drawing.Size(1172, 526);
             this._filteredPointerIndexGV.TabIndex = 4;
             this._filteredPointerIndexGV.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this._filteredPointerIndexGV_CellFormatting);
             // 
             // _selectPointerIndexLbl
             // 
-            this._selectPointerIndexLbl.Location = new System.Drawing.Point(15, 12);
+            this._selectPointerIndexLbl.Location = new System.Drawing.Point(3, 9);
             this._selectPointerIndexLbl.Name = "_selectPointerIndexLbl";
             this._selectPointerIndexLbl.Size = new System.Drawing.Size(100, 25);
             this._selectPointerIndexLbl.TabIndex = 3;
@@ -370,7 +370,7 @@
             this._pointerIndexSelectCmb.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this._pointerIndexSelectCmb.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this._pointerIndexSelectCmb.FormattingEnabled = true;
-            this._pointerIndexSelectCmb.Location = new System.Drawing.Point(121, 17);
+            this._pointerIndexSelectCmb.Location = new System.Drawing.Point(109, 12);
             this._pointerIndexSelectCmb.Name = "_pointerIndexSelectCmb";
             this._pointerIndexSelectCmb.Size = new System.Drawing.Size(200, 20);
             this._pointerIndexSelectCmb.TabIndex = 2;
@@ -394,10 +394,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this._filteredIndustryGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this._filteredIndustryGV.Location = new System.Drawing.Point(5, 115);
+            this._filteredIndustryGV.Location = new System.Drawing.Point(5, 41);
             this._filteredIndustryGV.Name = "_filteredIndustryGV";
             this._filteredIndustryGV.RowTemplate.Height = 24;
-            this._filteredIndustryGV.Size = new System.Drawing.Size(1172, 449);
+            this._filteredIndustryGV.Size = new System.Drawing.Size(1172, 523);
             this._filteredIndustryGV.TabIndex = 2;
             this._filteredIndustryGV.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this._filteredIndustryGV_CellFormatting);
             // 
@@ -415,7 +415,7 @@
             this._industrySelectCmb.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this._industrySelectCmb.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this._industrySelectCmb.FormattingEnabled = true;
-            this._industrySelectCmb.Location = new System.Drawing.Point(109, 15);
+            this._industrySelectCmb.Location = new System.Drawing.Point(109, 13);
             this._industrySelectCmb.Name = "_industrySelectCmb";
             this._industrySelectCmb.Size = new System.Drawing.Size(200, 20);
             this._industrySelectCmb.TabIndex = 0;
@@ -439,16 +439,16 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this._filteredBizGroupGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this._filteredBizGroupGV.Location = new System.Drawing.Point(5, 115);
+            this._filteredBizGroupGV.Location = new System.Drawing.Point(5, 39);
             this._filteredBizGroupGV.Name = "_filteredBizGroupGV";
             this._filteredBizGroupGV.RowTemplate.Height = 24;
-            this._filteredBizGroupGV.Size = new System.Drawing.Size(1172, 449);
+            this._filteredBizGroupGV.Size = new System.Drawing.Size(1172, 525);
             this._filteredBizGroupGV.TabIndex = 4;
             this._filteredBizGroupGV.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this._filteredBizGroupGV_CellFormatting);
             // 
             // _bizGroupSelectLbl
             // 
-            this._bizGroupSelectLbl.Location = new System.Drawing.Point(3, 8);
+            this._bizGroupSelectLbl.Location = new System.Drawing.Point(3, 10);
             this._bizGroupSelectLbl.Name = "_bizGroupSelectLbl";
             this._bizGroupSelectLbl.Size = new System.Drawing.Size(100, 25);
             this._bizGroupSelectLbl.TabIndex = 3;
@@ -484,16 +484,16 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this._filteredConceptGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this._filteredConceptGV.Location = new System.Drawing.Point(3, 115);
+            this._filteredConceptGV.Location = new System.Drawing.Point(3, 39);
             this._filteredConceptGV.Name = "_filteredConceptGV";
             this._filteredConceptGV.RowTemplate.Height = 24;
-            this._filteredConceptGV.Size = new System.Drawing.Size(1172, 449);
+            this._filteredConceptGV.Size = new System.Drawing.Size(1172, 525);
             this._filteredConceptGV.TabIndex = 6;
             this._filteredConceptGV.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this._filteredConceptGV_CellFormatting);
             // 
             // _conceptSelectLbl
             // 
-            this._conceptSelectLbl.Location = new System.Drawing.Point(3, 8);
+            this._conceptSelectLbl.Location = new System.Drawing.Point(3, 10);
             this._conceptSelectLbl.Name = "_conceptSelectLbl";
             this._conceptSelectLbl.Size = new System.Drawing.Size(100, 25);
             this._conceptSelectLbl.TabIndex = 5;

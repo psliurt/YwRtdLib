@@ -20,13 +20,21 @@ namespace YwRtdLib
     public enum YwFieldGroup
     {
         NotSpecific = 0,
-        LastNightFix = 1,
-        OpenInitOnce = 2,
-        OpenSimulate = 4,
-        IntraChange = 8,
-        FoundSpec = 16,
-        OptionSpec = 32,
-        BestFive = 64,
-        All = 1024
+        Once = 1,
+        Frequently = 2
     }
+
+    //[Flags]
+    //public enum YwFieldGroup
+    //{
+    //    NotSpecific = 0,
+    //    LastNightFix = 1,
+    //    OpenInitOnce = 2,
+    //    OpenSimulate = 4,
+    //    IntraChange = 8,
+    //    FoundSpec = 16,
+    //    OptionSpec = 32,
+    //    BestFive = 64,
+    //    All = 1024
+    //}
 }

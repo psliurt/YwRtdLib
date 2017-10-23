@@ -888,8 +888,6 @@ namespace YwRtdLib
         public string Data { get; set; }
     }
 
-    
-
     /// <summary>
     /// 元大RTD所提供的所有欄位資訊
     /// </summary>
@@ -897,243 +895,490 @@ namespace YwRtdLib
     {
         [FieldCategory(YwFieldGroup.NotSpecific)]
         None,
-        [FieldCategory(YwFieldGroup.All)]
+        [FieldCategory(YwFieldGroup.Once)]
         Name,
-        [FieldCategory(YwFieldGroup.All)]
+        [FieldCategory(YwFieldGroup.Once)]
         Symbol,
-        [FieldCategory(YwFieldGroup.IntraChange)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         Price,
-        [FieldCategory(YwFieldGroup.IntraChange)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         Change,
-        [FieldCategory(YwFieldGroup.IntraChange)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         ChangeRange,
-        [FieldCategory(YwFieldGroup.IntraChange)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         ChangePercent,
-        [FieldCategory(YwFieldGroup.IntraChange)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         Reference,
-        [FieldCategory(YwFieldGroup.OpenInitOnce)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         Open,
-        [FieldCategory(YwFieldGroup.IntraChange)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         High,
-        [FieldCategory(YwFieldGroup.IntraChange)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         Low,
-        [FieldCategory(YwFieldGroup.OpenInitOnce)]
+        [FieldCategory(YwFieldGroup.Once)]
         Ceil,
-        [FieldCategory(YwFieldGroup.OpenInitOnce)]
+        [FieldCategory(YwFieldGroup.Once)]
         Floor,
-        [FieldCategory(YwFieldGroup.LastNightFix)]
+        [FieldCategory(YwFieldGroup.Once)]
         GroupName,
-        [FieldCategory(YwFieldGroup.LastNightFix)]
+        [FieldCategory(YwFieldGroup.Once)]
         Information,
-        [FieldCategory(YwFieldGroup.IntraChange)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         Volume,
-        [FieldCategory(YwFieldGroup.LastNightFix)]
+        [FieldCategory(YwFieldGroup.Once)]
         CumulativeVolume,
-        [FieldCategory(YwFieldGroup.IntraChange)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PredictVolume,
-        [FieldCategory(YwFieldGroup.IntraChange)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         VolumeStrength,
-        [FieldCategory(YwFieldGroup.IntraChange)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         BidPrice,
-        [FieldCategory(YwFieldGroup.IntraChange)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         AskPrice,
-        [FieldCategory(YwFieldGroup.IntraChange)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         BidVolume,
-        [FieldCategory(YwFieldGroup.IntraChange)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         AskVolume,
-        [FieldCategory(YwFieldGroup.LastNightFix)]
+        [FieldCategory(YwFieldGroup.Once)]
         PriorHigh,
-        [FieldCategory(YwFieldGroup.LastNightFix)]
+        [FieldCategory(YwFieldGroup.Once)]
         PriorLow,
-        [FieldCategory(YwFieldGroup.LastNightFix)]
+        [FieldCategory(YwFieldGroup.Once)]
         PriorPrice,
-        [FieldCategory(YwFieldGroup.LastNightFix)]
+        [FieldCategory(YwFieldGroup.Once)]
         PriorVolume,
-        [FieldCategory(YwFieldGroup.All)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         Time,
-        [FieldCategory(YwFieldGroup.IntraChange)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         Amount,
-        [FieldCategory(YwFieldGroup.LastNightFix)]
+        [FieldCategory(YwFieldGroup.Once)]
         MarketValue,
-        [FieldCategory(YwFieldGroup.LastNightFix)]
+        [FieldCategory(YwFieldGroup.Once)]
         Issue,
-        [FieldCategory(YwFieldGroup.IntraChange)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         StrengthMarket,
-        [FieldCategory(YwFieldGroup.IntraChange)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         StrengthGroup,
-        [FieldCategory(YwFieldGroup.IntraChange)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         VolumeRatio,
-        [FieldCategory(YwFieldGroup.BestFive)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         BestBidPrice1,
-        [FieldCategory(YwFieldGroup.BestFive)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         BestAskPrice1,
-        [FieldCategory(YwFieldGroup.BestFive)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         BestBidVolume1,
-        [FieldCategory(YwFieldGroup.BestFive)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         BestAskVolume1,
-        [FieldCategory(YwFieldGroup.BestFive)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         BestBidPrice2,
-        [FieldCategory(YwFieldGroup.BestFive)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         BestAskPrice2,
-        [FieldCategory(YwFieldGroup.BestFive)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         BestBidVolume2,
-        [FieldCategory(YwFieldGroup.BestFive)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         BestAskVolume2,
-        [FieldCategory(YwFieldGroup.BestFive)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         BestBidPrice3,
-        [FieldCategory(YwFieldGroup.BestFive)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         BestAskPrice3,
-        [FieldCategory(YwFieldGroup.BestFive)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         BestBidVolume3,
-        [FieldCategory(YwFieldGroup.BestFive)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         BestAskVolume3,
-        [FieldCategory(YwFieldGroup.BestFive)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         BestBidPrice4,
-        [FieldCategory(YwFieldGroup.BestFive)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         BestAskPrice4,
-        [FieldCategory(YwFieldGroup.BestFive)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         BestBidVolume4,
-        [FieldCategory(YwFieldGroup.BestFive)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         BestAskVolume4,
-        [FieldCategory(YwFieldGroup.BestFive)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         BestBidPrice5,
-        [FieldCategory(YwFieldGroup.BestFive)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         BestAskPrice5,
-        [FieldCategory(YwFieldGroup.BestFive)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         BestBidVolume5,
-        [FieldCategory(YwFieldGroup.BestFive)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         BestAskVolume5,
-        [FieldCategory(YwFieldGroup.BestFive)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         BestBidVolumes,
-        [FieldCategory(YwFieldGroup.BestFive)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         BestAskVolumes,
-        [FieldCategory(YwFieldGroup.IntraChange)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         AveragePrice,
-        [FieldCategory(YwFieldGroup.LastNightFix)]
+        [FieldCategory(YwFieldGroup.Once)]
         Capital,
-        [FieldCategory(YwFieldGroup.OpenInitOnce)]
+        [FieldCategory(YwFieldGroup.Once)]
         Basis,
-        [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+        [FieldCategory(YwFieldGroup.Once )]
         Bear,
-        [FieldCategory(YwFieldGroup.LastNightFix)]
+        [FieldCategory(YwFieldGroup.Once)]
         Underlying,
-        [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+        [FieldCategory(YwFieldGroup.Once )]
         SpotPrice,
-        [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+        [FieldCategory(YwFieldGroup.Once )]
         Delta,
-        [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+        [FieldCategory(YwFieldGroup.Once )]
         Gamma,
-        [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+        [FieldCategory(YwFieldGroup.Once )]
         Theta,
-        [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+        [FieldCategory(YwFieldGroup.Once )]
         Vega,
-        [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+        [FieldCategory(YwFieldGroup.Once )]
         Rho,
-        [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+        [FieldCategory(YwFieldGroup.Once )]
         TimeValue,
-        [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+        [FieldCategory(YwFieldGroup.Once )]
         Implicit,
-        [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+        [FieldCategory(YwFieldGroup.Once )]
         Implied,
-        [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+        [FieldCategory(YwFieldGroup.Once )]
         Moneyness,
-        [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+        [FieldCategory(YwFieldGroup.Once )]
         ParityPrice,
-        [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+        [FieldCategory(YwFieldGroup.Once )]
         SpotSigma,
-        [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+        [FieldCategory(YwFieldGroup.Once )]
         TheoryPrice,
-        [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+        [FieldCategory(YwFieldGroup.Once )]
         StrikePrice,
-        [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+        [FieldCategory(YwFieldGroup.Once )]
         Expire,
-        [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+        [FieldCategory(YwFieldGroup.Once )]
         Due,
-        [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+        [FieldCategory(YwFieldGroup.Once )]
         BarrierPrice,
-        [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+        [FieldCategory(YwFieldGroup.Once )]
         Issuer,
-        [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+        [FieldCategory(YwFieldGroup.Once )]
         Method,
-        [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+        [FieldCategory(YwFieldGroup.Once )]
         Ratio,
-        [FieldCategory(YwFieldGroup.IntraChange)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         CumulativeBidVolume,
-        [FieldCategory(YwFieldGroup.IntraChange)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         CumulativeBidOrder,
-        [FieldCategory(YwFieldGroup.IntraChange)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         CumulativeAskVolume,
-        [FieldCategory(YwFieldGroup.IntraChange)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         CumulativeAskOrder,
-        [FieldCategory(YwFieldGroup.LastNightFix | YwFieldGroup.FoundSpec)]
+        [FieldCategory(YwFieldGroup.Once )]
         NAVReference,
-        [FieldCategory(YwFieldGroup.LastNightFix | YwFieldGroup.FoundSpec)]
+        [FieldCategory(YwFieldGroup.Once )]
         NAVPrice,
-        [FieldCategory(YwFieldGroup.LastNightFix | YwFieldGroup.FoundSpec)]
+        [FieldCategory(YwFieldGroup.Once )]
         NAVChange,
-        [FieldCategory(YwFieldGroup.LastNightFix | YwFieldGroup.FoundSpec)]
+        [FieldCategory(YwFieldGroup.Once )]
         NAVChangePercent,
-        [FieldCategory(YwFieldGroup.LastNightFix | YwFieldGroup.FoundSpec)]
+        [FieldCategory(YwFieldGroup.Once )]
         PremiumDiscount,
-        [FieldCategory(YwFieldGroup.LastNightFix | YwFieldGroup.FoundSpec)]
+        [FieldCategory(YwFieldGroup.Once )]
         PremiumDiscountPercent,
-        [FieldCategory(YwFieldGroup.OpenSimulate)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PreOpenAskPrice,
-        [FieldCategory(YwFieldGroup.OpenSimulate)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PreOpenAskVolume,
-        [FieldCategory(YwFieldGroup.OpenSimulate)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PreOpenBidPrice,
-        [FieldCategory(YwFieldGroup.OpenSimulate)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PreOpenBidVolume,
-        [FieldCategory(YwFieldGroup.OpenSimulate)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PreOpenPrice,
-        [FieldCategory(YwFieldGroup.OpenSimulate)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PreOpenVolume,
-        [FieldCategory(YwFieldGroup.OpenSimulate)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PreOpenBestBidPrice1,
-        [FieldCategory(YwFieldGroup.OpenSimulate)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PreOpenBestAskPrice1,
-        [FieldCategory(YwFieldGroup.OpenSimulate)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PreOpenBestBidVolume1,
-        [FieldCategory(YwFieldGroup.OpenSimulate)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PreOpenBestAskVolume1,
-        [FieldCategory(YwFieldGroup.OpenSimulate)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PreOpenBestBidPrice2,
-        [FieldCategory(YwFieldGroup.OpenSimulate)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PreOpenBestAskPrice2,
-        [FieldCategory(YwFieldGroup.OpenSimulate)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PreOpenBestBidVolume2,
-        [FieldCategory(YwFieldGroup.OpenSimulate)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PreOpenBestAskVolume2,
-        [FieldCategory(YwFieldGroup.OpenSimulate)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PreOpenBestBidPrice3,
-        [FieldCategory(YwFieldGroup.OpenSimulate)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PreOpenBestAskPrice3,
-        [FieldCategory(YwFieldGroup.OpenSimulate)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PreOpenBestBidVolume3,
-        [FieldCategory(YwFieldGroup.OpenSimulate)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PreOpenBestAskVolume3,
-        [FieldCategory(YwFieldGroup.OpenSimulate)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PreOpenBestBidPrice4,
-        [FieldCategory(YwFieldGroup.OpenSimulate)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PreOpenBestAskPrice4,
-        [FieldCategory(YwFieldGroup.OpenSimulate)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PreOpenBestBidVolume4,
-        [FieldCategory(YwFieldGroup.OpenSimulate)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PreOpenBestAskVolume4,
-        [FieldCategory(YwFieldGroup.OpenSimulate)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PreOpenBestBidPrice5,
-        [FieldCategory(YwFieldGroup.OpenSimulate)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PreOpenBestAskPrice5,
-        [FieldCategory(YwFieldGroup.OpenSimulate)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PreOpenBestBidVolume5,
-        [FieldCategory(YwFieldGroup.OpenSimulate)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PreOpenBestAskVolume5,
-        [FieldCategory(YwFieldGroup.OpenSimulate)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PreOpenBestBidVolumes,
-        [FieldCategory(YwFieldGroup.OpenSimulate)]
+        [FieldCategory(YwFieldGroup.Frequently)]
         PreOpenBestAskVolumes
     }
+
+    ///// <summary>
+    ///// 元大RTD所提供的所有欄位資訊
+    ///// </summary>
+    //public enum YwField
+    //{
+    //    [FieldCategory(YwFieldGroup.NotSpecific)]
+    //    None,
+    //    [FieldCategory(YwFieldGroup.All)]
+    //    Name,
+    //    [FieldCategory(YwFieldGroup.All)]
+    //    Symbol,
+    //    [FieldCategory(YwFieldGroup.IntraChange)]
+    //    Price,
+    //    [FieldCategory(YwFieldGroup.IntraChange)]
+    //    Change,
+    //    [FieldCategory(YwFieldGroup.IntraChange)]
+    //    ChangeRange,
+    //    [FieldCategory(YwFieldGroup.IntraChange)]
+    //    ChangePercent,
+    //    [FieldCategory(YwFieldGroup.IntraChange)]
+    //    Reference,
+    //    [FieldCategory(YwFieldGroup.OpenInitOnce)]
+    //    Open,
+    //    [FieldCategory(YwFieldGroup.IntraChange)]
+    //    High,
+    //    [FieldCategory(YwFieldGroup.IntraChange)]
+    //    Low,
+    //    [FieldCategory(YwFieldGroup.OpenInitOnce)]
+    //    Ceil,
+    //    [FieldCategory(YwFieldGroup.OpenInitOnce)]
+    //    Floor,
+    //    [FieldCategory(YwFieldGroup.LastNightFix)]
+    //    GroupName,
+    //    [FieldCategory(YwFieldGroup.LastNightFix)]
+    //    Information,
+    //    [FieldCategory(YwFieldGroup.IntraChange)]
+    //    Volume,
+    //    [FieldCategory(YwFieldGroup.LastNightFix)]
+    //    CumulativeVolume,
+    //    [FieldCategory(YwFieldGroup.IntraChange)]
+    //    PredictVolume,
+    //    [FieldCategory(YwFieldGroup.IntraChange)]
+    //    VolumeStrength,
+    //    [FieldCategory(YwFieldGroup.IntraChange)]
+    //    BidPrice,
+    //    [FieldCategory(YwFieldGroup.IntraChange)]
+    //    AskPrice,
+    //    [FieldCategory(YwFieldGroup.IntraChange)]
+    //    BidVolume,
+    //    [FieldCategory(YwFieldGroup.IntraChange)]
+    //    AskVolume,
+    //    [FieldCategory(YwFieldGroup.LastNightFix)]
+    //    PriorHigh,
+    //    [FieldCategory(YwFieldGroup.LastNightFix)]
+    //    PriorLow,
+    //    [FieldCategory(YwFieldGroup.LastNightFix)]
+    //    PriorPrice,
+    //    [FieldCategory(YwFieldGroup.LastNightFix)]
+    //    PriorVolume,
+    //    [FieldCategory(YwFieldGroup.All)]
+    //    Time,
+    //    [FieldCategory(YwFieldGroup.IntraChange)]
+    //    Amount,
+    //    [FieldCategory(YwFieldGroup.LastNightFix)]
+    //    MarketValue,
+    //    [FieldCategory(YwFieldGroup.LastNightFix)]
+    //    Issue,
+    //    [FieldCategory(YwFieldGroup.IntraChange)]
+    //    StrengthMarket,
+    //    [FieldCategory(YwFieldGroup.IntraChange)]
+    //    StrengthGroup,
+    //    [FieldCategory(YwFieldGroup.IntraChange)]
+    //    VolumeRatio,
+    //    [FieldCategory(YwFieldGroup.BestFive)]
+    //    BestBidPrice1,
+    //    [FieldCategory(YwFieldGroup.BestFive)]
+    //    BestAskPrice1,
+    //    [FieldCategory(YwFieldGroup.BestFive)]
+    //    BestBidVolume1,
+    //    [FieldCategory(YwFieldGroup.BestFive)]
+    //    BestAskVolume1,
+    //    [FieldCategory(YwFieldGroup.BestFive)]
+    //    BestBidPrice2,
+    //    [FieldCategory(YwFieldGroup.BestFive)]
+    //    BestAskPrice2,
+    //    [FieldCategory(YwFieldGroup.BestFive)]
+    //    BestBidVolume2,
+    //    [FieldCategory(YwFieldGroup.BestFive)]
+    //    BestAskVolume2,
+    //    [FieldCategory(YwFieldGroup.BestFive)]
+    //    BestBidPrice3,
+    //    [FieldCategory(YwFieldGroup.BestFive)]
+    //    BestAskPrice3,
+    //    [FieldCategory(YwFieldGroup.BestFive)]
+    //    BestBidVolume3,
+    //    [FieldCategory(YwFieldGroup.BestFive)]
+    //    BestAskVolume3,
+    //    [FieldCategory(YwFieldGroup.BestFive)]
+    //    BestBidPrice4,
+    //    [FieldCategory(YwFieldGroup.BestFive)]
+    //    BestAskPrice4,
+    //    [FieldCategory(YwFieldGroup.BestFive)]
+    //    BestBidVolume4,
+    //    [FieldCategory(YwFieldGroup.BestFive)]
+    //    BestAskVolume4,
+    //    [FieldCategory(YwFieldGroup.BestFive)]
+    //    BestBidPrice5,
+    //    [FieldCategory(YwFieldGroup.BestFive)]
+    //    BestAskPrice5,
+    //    [FieldCategory(YwFieldGroup.BestFive)]
+    //    BestBidVolume5,
+    //    [FieldCategory(YwFieldGroup.BestFive)]
+    //    BestAskVolume5,
+    //    [FieldCategory(YwFieldGroup.BestFive)]
+    //    BestBidVolumes,
+    //    [FieldCategory(YwFieldGroup.BestFive)]
+    //    BestAskVolumes,
+    //    [FieldCategory(YwFieldGroup.IntraChange)]
+    //    AveragePrice,
+    //    [FieldCategory(YwFieldGroup.LastNightFix)]
+    //    Capital,
+    //    [FieldCategory(YwFieldGroup.OpenInitOnce)]
+    //    Basis,
+    //    [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+    //    Bear,
+    //    [FieldCategory(YwFieldGroup.LastNightFix)]
+    //    Underlying,
+    //    [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+    //    SpotPrice,
+    //    [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+    //    Delta,
+    //    [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+    //    Gamma,
+    //    [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+    //    Theta,
+    //    [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+    //    Vega,
+    //    [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+    //    Rho,
+    //    [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+    //    TimeValue,
+    //    [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+    //    Implicit,
+    //    [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+    //    Implied,
+    //    [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+    //    Moneyness,
+    //    [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+    //    ParityPrice,
+    //    [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+    //    SpotSigma,
+    //    [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+    //    TheoryPrice,
+    //    [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+    //    StrikePrice,
+    //    [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+    //    Expire,
+    //    [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+    //    Due,
+    //    [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+    //    BarrierPrice,
+    //    [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+    //    Issuer,
+    //    [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+    //    Method,
+    //    [FieldCategory(YwFieldGroup.OpenInitOnce | YwFieldGroup.OptionSpec)]
+    //    Ratio,
+    //    [FieldCategory(YwFieldGroup.IntraChange)]
+    //    CumulativeBidVolume,
+    //    [FieldCategory(YwFieldGroup.IntraChange)]
+    //    CumulativeBidOrder,
+    //    [FieldCategory(YwFieldGroup.IntraChange)]
+    //    CumulativeAskVolume,
+    //    [FieldCategory(YwFieldGroup.IntraChange)]
+    //    CumulativeAskOrder,
+    //    [FieldCategory(YwFieldGroup.LastNightFix | YwFieldGroup.FoundSpec)]
+    //    NAVReference,
+    //    [FieldCategory(YwFieldGroup.LastNightFix | YwFieldGroup.FoundSpec)]
+    //    NAVPrice,
+    //    [FieldCategory(YwFieldGroup.LastNightFix | YwFieldGroup.FoundSpec)]
+    //    NAVChange,
+    //    [FieldCategory(YwFieldGroup.LastNightFix | YwFieldGroup.FoundSpec)]
+    //    NAVChangePercent,
+    //    [FieldCategory(YwFieldGroup.LastNightFix | YwFieldGroup.FoundSpec)]
+    //    PremiumDiscount,
+    //    [FieldCategory(YwFieldGroup.LastNightFix | YwFieldGroup.FoundSpec)]
+    //    PremiumDiscountPercent,
+    //    [FieldCategory(YwFieldGroup.OpenSimulate)]
+    //    PreOpenAskPrice,
+    //    [FieldCategory(YwFieldGroup.OpenSimulate)]
+    //    PreOpenAskVolume,
+    //    [FieldCategory(YwFieldGroup.OpenSimulate)]
+    //    PreOpenBidPrice,
+    //    [FieldCategory(YwFieldGroup.OpenSimulate)]
+    //    PreOpenBidVolume,
+    //    [FieldCategory(YwFieldGroup.OpenSimulate)]
+    //    PreOpenPrice,
+    //    [FieldCategory(YwFieldGroup.OpenSimulate)]
+    //    PreOpenVolume,
+    //    [FieldCategory(YwFieldGroup.OpenSimulate)]
+    //    PreOpenBestBidPrice1,
+    //    [FieldCategory(YwFieldGroup.OpenSimulate)]
+    //    PreOpenBestAskPrice1,
+    //    [FieldCategory(YwFieldGroup.OpenSimulate)]
+    //    PreOpenBestBidVolume1,
+    //    [FieldCategory(YwFieldGroup.OpenSimulate)]
+    //    PreOpenBestAskVolume1,
+    //    [FieldCategory(YwFieldGroup.OpenSimulate)]
+    //    PreOpenBestBidPrice2,
+    //    [FieldCategory(YwFieldGroup.OpenSimulate)]
+    //    PreOpenBestAskPrice2,
+    //    [FieldCategory(YwFieldGroup.OpenSimulate)]
+    //    PreOpenBestBidVolume2,
+    //    [FieldCategory(YwFieldGroup.OpenSimulate)]
+    //    PreOpenBestAskVolume2,
+    //    [FieldCategory(YwFieldGroup.OpenSimulate)]
+    //    PreOpenBestBidPrice3,
+    //    [FieldCategory(YwFieldGroup.OpenSimulate)]
+    //    PreOpenBestAskPrice3,
+    //    [FieldCategory(YwFieldGroup.OpenSimulate)]
+    //    PreOpenBestBidVolume3,
+    //    [FieldCategory(YwFieldGroup.OpenSimulate)]
+    //    PreOpenBestAskVolume3,
+    //    [FieldCategory(YwFieldGroup.OpenSimulate)]
+    //    PreOpenBestBidPrice4,
+    //    [FieldCategory(YwFieldGroup.OpenSimulate)]
+    //    PreOpenBestAskPrice4,
+    //    [FieldCategory(YwFieldGroup.OpenSimulate)]
+    //    PreOpenBestBidVolume4,
+    //    [FieldCategory(YwFieldGroup.OpenSimulate)]
+    //    PreOpenBestAskVolume4,
+    //    [FieldCategory(YwFieldGroup.OpenSimulate)]
+    //    PreOpenBestBidPrice5,
+    //    [FieldCategory(YwFieldGroup.OpenSimulate)]
+    //    PreOpenBestAskPrice5,
+    //    [FieldCategory(YwFieldGroup.OpenSimulate)]
+    //    PreOpenBestBidVolume5,
+    //    [FieldCategory(YwFieldGroup.OpenSimulate)]
+    //    PreOpenBestAskVolume5,
+    //    [FieldCategory(YwFieldGroup.OpenSimulate)]
+    //    PreOpenBestBidVolumes,
+    //    [FieldCategory(YwFieldGroup.OpenSimulate)]
+    //    PreOpenBestAskVolumes
+    //}
+
+
 
     
 }

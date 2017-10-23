@@ -159,7 +159,8 @@ namespace YwRtdAp
 
         public MainForm()
         {
-            this._dispatcher = Dispatcher.Instance(this._rtdCore);
+            this._commodities = new ConcurrentDictionary<string, YwCommodity>();
+            this._dispatcher = Dispatcher.Instance(this._rtdCore, this._commodities);
             InitializeComponent();
             SetUpDbPath();           
 
@@ -171,7 +172,7 @@ namespace YwRtdAp
             this._rtdCore.FoundQuoteHandler += _rtdCore_FoundQuoteHandler;
             this._rtdCore.OpenSimulateQuoteHandler += _rtdCore_OpenSimulateQuoteHandler;
             this._rtdCore.DataChangeHandler += _rtdCore_DataChangeHandler;
-            this._commodities = new ConcurrentDictionary<string, YwCommodity>();
+            
             this._subscribeBasicQuote = new ConcurrentDictionary<string, YwBasicQuote>();
             this._subscribeBest5 = new ConcurrentDictionary<string, YwBest5>();
             this._subscribeFOQuote = new ConcurrentDictionary<string, YwFOQuote>();
@@ -196,10 +197,19 @@ namespace YwRtdAp
             this._dayTradeGVSymbols = new List<string>();
             this._symbolGV.AutoGenerateColumns = true;
             this.DoubleBuffered = true;
-            Type dgvType = _symbolGV.GetType();
-            PropertyInfo pi = dgvType.GetProperty("DoubleBuffered",
-                  BindingFlags.Instance | BindingFlags.NonPublic);
-            pi.SetValue(_symbolGV, true, null);
+
+            SetUpGridViewDoubleBuffered(this._symbolGV);
+            SetUpGridViewDoubleBuffered(this._filteredPointerIndexGV);
+            SetUpGridViewDoubleBuffered(this._filteredIndustryGV);
+            SetUpGridViewDoubleBuffered(this._filteredBizGroupGV);
+            SetUpGridViewDoubleBuffered(this._filteredConceptGV);
+            //Type dgvType = _symbolGV.GetType();
+            //PropertyInfo pi = dgvType.GetProperty("DoubleBuffered",
+            //      BindingFlags.Instance | BindingFlags.NonPublic);
+            //pi.SetValue(_symbolGV, true, null);
+
+
+
             LoadAllSymbol();
 
             //LoadAllConcept();
@@ -229,6 +239,14 @@ namespace YwRtdAp
             //this._updateEventThread.Start();
             //this._bufferRearThread.Start();
             //this._bufferFrontThread.Start();
+        }
+
+        private void SetUpGridViewDoubleBuffered(DataGridView gv)
+        {
+            Type dgvType = gv.GetType();
+            PropertyInfo pi = dgvType.GetProperty("DoubleBuffered",
+                  BindingFlags.Instance | BindingFlags.NonPublic);
+            pi.SetValue(gv, true, null);
         }
 
         private void SetUpDbPath()
@@ -999,7 +1017,7 @@ namespace YwRtdAp
             {
                 YwCommodity c = filteredCommodities[i];
                 this._selectedIndustryQuote.Add(new IndustryQuote(ref c));
-                this._dispatcher.AddSymbolGridMap(c.Symbol, this._filteredIndustryGV);
+                this._dispatcher.AddSymbolGridMap(c.Symbol, this._filteredIndustryGV, typeof(IndustryQuote));
             }
             
             this._filteredIndustryGV.DataSource = null;
@@ -1027,7 +1045,7 @@ namespace YwRtdAp
             {
                 YwCommodity c = filteredCommodities[i];
                 this._selectedBizGroupQuote.Add(new BizGroupQuote(ref c));
-                this._dispatcher.AddSymbolGridMap(c.Symbol, this._filteredBizGroupGV);
+                this._dispatcher.AddSymbolGridMap(c.Symbol, this._filteredBizGroupGV, typeof(BizGroupQuote));
             }           
             
             this._filteredBizGroupGV.DataSource = null;
@@ -1055,7 +1073,7 @@ namespace YwRtdAp
             {
                 YwCommodity c = filteredCommodities[i];
                 this._selectedConceptQuote.Add(new ConceptQuote(ref c));
-                this._dispatcher.AddSymbolGridMap(c.Symbol, this._filteredConceptGV);
+                this._dispatcher.AddSymbolGridMap(c.Symbol, this._filteredConceptGV, typeof(ConceptQuote));
             }                  
 
             this._filteredConceptGV.DataSource = null;
@@ -1280,7 +1298,7 @@ namespace YwRtdAp
             {
                 YwCommodity c = filteredCommodities[i];
                 this._selectedPointerIndexQuote.Add(new PointerIndexQuote(ref c));
-                this._dispatcher.AddSymbolGridMap(c.Symbol, this._filteredPointerIndexGV);
+                this._dispatcher.AddSymbolGridMap(c.Symbol, this._filteredPointerIndexGV, typeof(PointerIndexQuote));
             }
 
             this._filteredPointerIndexGV.DataSource = null;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
+using System.Reflection;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -16,23 +17,30 @@ namespace YwRtdAp
     public class Dispatcher
     {
         private Dictionary<string, Dictionary<string,DataGridView>> _symbolToGrids { get; set; }
+        private Dictionary<string, Type> _gridNameToType { get; set; }
+        private Dictionary<string, List<string>> _symbolOnceFields { get; set; }
         private RtCore _rtdCore { get; set; }
+        private ConcurrentDictionary<string, YwCommodity> _commodities { get; set; }
 
         private static Dispatcher _instance { get; set; }
 
-        public static Dispatcher Instance(RtCore rtdCore)
+        public static Dispatcher Instance(RtCore rtdCore, ConcurrentDictionary<string, YwCommodity> commodities)
         {
             if (_instance == null)
             {
-                _instance = new Dispatcher(rtdCore);
+                _instance = new Dispatcher(rtdCore, commodities);
             }
             return _instance;
         }
 
-        private Dispatcher(RtCore rtdCore)
+        private Dispatcher(RtCore rtdCore, ConcurrentDictionary<string, YwCommodity> commodities)
         {
             this._rtdCore = rtdCore;
+            this._commodities = commodities;
             this._symbolToGrids = new Dictionary<string, Dictionary<string, DataGridView>>();
+            this._gridNameToType = new Dictionary<string, Type>();
+            this._symbolOnceFields = new Dictionary<string, List<string>>();
+
             this._updateEventQueue = new ConcurrentQueue<ChangeData>();
             this._bufferEventQueue = new ConcurrentQueue<ChangeData>();
             this._bufferRearResetEvent = new AutoResetEvent(false);
@@ -60,7 +68,7 @@ namespace YwRtdAp
         private Thread _bufferFrontThread { get; set; }
         private Thread _bufferRearThread { get; set; }
 
-        public void AddSymbolGridMap(string symbol, DataGridView gv)
+        public void AddSymbolGridMap(string symbol, DataGridView gv, Type dsType)
         {
             Dictionary<string, DataGridView> gridViewMap = null;
             if (this._symbolToGrids.TryGetValue(symbol, out gridViewMap))
@@ -69,15 +77,45 @@ namespace YwRtdAp
                 if (gridViewMap.TryGetValue(gv.Name, out existGV) == false)
                 {
                     gridViewMap.Add(gv.Name, gv);
+                    AddGridDataSourceType(gv.Name, dsType);
                 }
             }
             else
             {
                 gridViewMap = new Dictionary<string, DataGridView>();
                 gridViewMap.Add(gv.Name, gv);
-                this._symbolToGrids.Add(symbol, gridViewMap);
+                AddGridDataSourceType(gv.Name, dsType);
+                this._symbolToGrids.Add(symbol, gridViewMap);                
             }
-            
+            if (this._symbolOnceFields.ContainsKey(symbol) == false)
+            {
+                AddSymbolOnceField(symbol);
+            }
+        }
+
+        private void AddGridDataSourceType(string gvName, Type dsType)
+        {
+            Type dst = null;
+            if (this._gridNameToType.TryGetValue(gvName, out dst) == false)
+            {
+                this._gridNameToType.Add(gvName, dsType);
+            }
+        }
+
+        private void AddSymbolOnceField(string symbol)
+        {
+            List<string> onceFields = new List<string>();
+            Type typeOfYwField = typeof(YwField);
+            string[] enumNames = Enum.GetNames(typeof(YwField));
+            foreach (var n in enumNames)
+            {
+                YwFieldGroup group = GetAttributeEnumOfYwField(n);
+                if ((group & YwFieldGroup.Once) == YwFieldGroup.Once)
+                {
+                    onceFields.Add(n);
+                }
+            }
+            this._symbolOnceFields.Add(symbol, onceFields);
         }
 
         public void Terminate()
@@ -200,9 +238,65 @@ namespace YwRtdAp
             {
                 foreach (DataGridView gv in gridMap.Values)
                 {
-                    UpdateGridView(gv);
+                    Type dsType = null;
+                    if (this._gridNameToType.TryGetValue(gv.Name, out dsType))
+                    {
+                        if (IsRefreshRequire(notify))
+                        {
+                            if (IsTypeContainProp(dsType, notify.Topic.FieldName))
+                            {
+                                UpdateGridView(gv);
+                            }                        
+                        }                        
+                    }                   
                 }
             }
+        }
+
+        private bool IsTypeContainProp(Type t, string propName)
+        {
+            PropertyInfo pi = t.GetProperty(propName);
+            if (pi == null)
+            { return false; }
+            return true;
+        }
+
+        private YwFieldGroup GetAttributeEnumOfYwField(YwField field)
+        {
+            var enumMember = field.GetType().GetMember(field.ToString()).FirstOrDefault();
+            if (enumMember == null)
+            { return YwFieldGroup.NotSpecific; }
+            var categoryAttr =
+                enumMember == null
+                    ? default(FieldCategoryAttribute)
+                    : enumMember.GetCustomAttribute(typeof(FieldCategoryAttribute)) as FieldCategoryAttribute;
+            return categoryAttr.Group;
+        }
+
+        private YwFieldGroup GetAttributeEnumOfYwField(string field)
+        {
+            var enumMember = field.GetType().GetMember(field).FirstOrDefault();
+            if (enumMember == null)
+            { return YwFieldGroup.NotSpecific; }
+            var categoryAttr =
+                enumMember == null
+                    ? default(FieldCategoryAttribute)
+                    : enumMember.GetCustomAttribute(typeof(FieldCategoryAttribute)) as FieldCategoryAttribute;
+            return categoryAttr.Group;
+        }
+
+        private bool IsRefreshRequire(ChangeData notify)
+        {
+            List<string> fields =null;
+            if (this._symbolOnceFields.TryGetValue(notify.Topic.Symbol, out fields) == false)
+            {
+                return false;
+            }
+
+            if (fields.Count == 0)
+            { return false; }            
+
+            return fields.Remove(notify.Topic.FieldName);            
         }
     }
 }
