@@ -287,16 +287,22 @@ namespace YwRtdAp
 
         private bool IsRefreshRequire(ChangeData notify)
         {
-            List<string> fields =null;
-            if (this._symbolOnceFields.TryGetValue(notify.Topic.Symbol, out fields) == false)
+            YwFieldGroup fg = GetAttributeEnumOfYwField(notify.Topic.FieldName);
+            if ((fg & YwFieldGroup.Once) == YwFieldGroup.Once)
             {
-                return false;
+                List<string> fields = null;
+                if (this._symbolOnceFields.TryGetValue(notify.Topic.Symbol, out fields) == false)
+                {
+                    return false;
+                }
+
+                if (fields.Count == 0)
+                { return false; }
+
+                return fields.Remove(notify.Topic.FieldName);            
             }
-
-            if (fields.Count == 0)
-            { return false; }            
-
-            return fields.Remove(notify.Topic.FieldName);            
+            return true;
+            
         }
     }
 }

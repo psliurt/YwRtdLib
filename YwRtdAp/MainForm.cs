@@ -49,6 +49,9 @@ namespace YwRtdAp
         private List<string> _selectedPointerIndexSymbols { get; set; }
         private List<PointerIndexQuote> _selectedPointerIndexQuote { get; set; }
 
+        private List<string> _queryOneSymbols { get; set; }
+        private List<OneSymbolQuote> _queryOneSymbolQuote { get; set; }
+
         private RtdRepository _rep { get; set; }
 
 
@@ -193,6 +196,9 @@ namespace YwRtdAp
 
             this._selectedPointerIndexSymbols = new List<string>();
             this._selectedPointerIndexQuote = new List<PointerIndexQuote>();
+
+            this._queryOneSymbols = new List<string>();
+            this._queryOneSymbolQuote = new List<OneSymbolQuote>();
 
             this._dayTradeGVSymbols = new List<string>();
             this._symbolGV.AutoGenerateColumns = true;
@@ -1957,6 +1963,108 @@ namespace YwRtdAp
             }
 
             ReloadCategorySymbolData();
+        }
+
+        private void _oneSymbolQueryBtn_Click(object sender, EventArgs e)
+        {
+            string codeOrName = this._oneSymbolQueryTxt.Text.Trim();
+            Symbol symbolObj =
+                this._rep.DefaultOne<Symbol>(x => x.Code == codeOrName || x.SymbolName == codeOrName);
+
+            if (symbolObj == null)
+            { return; }
+
+            this._queryOneSymbols.Clear();
+            this._queryOneSymbols.Add(symbolObj.Code);            
+
+            List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.Symbol == symbolObj.Code).ToList();
+            this._queryOneSymbolQuote.Clear();
+            for (int i = 0; i < filteredCommodities.Count; i++)
+            {
+                YwCommodity c = filteredCommodities[i];
+                this._queryOneSymbolQuote.Add(new OneSymbolQuote(ref c));
+                this._dispatcher.AddSymbolGridMap(c.Symbol, this._oneSymbolQueryGV, typeof(OneSymbolQuote));
+            }
+
+            this._oneSymbolQueryGV.DataSource = null;
+            this._oneSymbolQueryGV.DataSource = this._queryOneSymbolQuote;
+            this._oneSymbolQueryGV.Refresh();
+
+            this._oneSymbolPICmb.DataSource = null;
+            var allPointerIndex = from sym in this._rep.Query<PointerIndexSymbol>(x => x.SymbolId == symbolObj.Id)
+                                      join pi in this._rep.FetchAll<PointerIndex>()
+                                      on sym.PointerIndexId equals pi.Id
+                                      select pi;            
+
+            this._oneSymbolPICmb.ValueMember = "Code";
+            this._oneSymbolPICmb.DisplayMember = "PointerName";
+            this._oneSymbolPICmb.DataSource = allPointerIndex.ToList();            
+
+            this._oneSymbolIndustryCmb.DataSource = null;
+            var allIndustry = from sym in this._rep.Query<IndustrySymbol>(x => x.SymbolId == symbolObj.Id)
+                                  join ind in this._rep.FetchAll<Industry>()
+                                  on sym.IndustryId equals ind.Id
+                                  select ind;
+
+            this._oneSymbolIndustryCmb.ValueMember = "Code";
+            this._oneSymbolIndustryCmb.DisplayMember = "IndustryName";
+            this._oneSymbolIndustryCmb.DataSource = allIndustry.ToList();
+            
+
+
+            this._oneSymbolBizGroupCmb.DataSource = null;
+            var allBizGroup = from sym in this._rep.Query<BizGroupSymbol>(x => x.SymbolId == symbolObj.Id)
+                                  join biz in this._rep.FetchAll<BizGroup>()
+                                  on sym.BizGroupId equals biz.Id
+                                  select biz;
+
+            this._oneSymbolBizGroupCmb.ValueMember = "Code";
+            this._oneSymbolBizGroupCmb.DisplayMember = "GroupName";
+            this._oneSymbolBizGroupCmb.DataSource = allBizGroup.ToList();
+            
+
+
+            this._oneSymbolConceptCmb.DataSource = null;
+            var allConcept = from sym in this._rep.Query<ConceptSymbol>(x => x.SymbolId == symbolObj.Id)
+                                 join con in this._rep.FetchAll<Concept>()
+                                 on sym.ConceptId equals con.Id
+                                 select con.ConceptName;
+
+            this._oneSymbolConceptCmb.ValueMember = "Code";
+            this._oneSymbolConceptCmb.DisplayMember = "ConceptName";
+            this._oneSymbolConceptCmb.DataSource = allConcept.ToList();
+            
+
+
+        }
+
+        private void _oneSymbolQueryGV_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (this._oneSymbolQueryGV.DataSource == null)
+            {
+                e.FormattingApplied = true;
+                return;
+            }
+            if (this._oneSymbolQueryGV.Columns[e.ColumnIndex].Name == "Change")
+            {
+                decimal upOrDown = Convert.ToDecimal(this._oneSymbolQueryGV.Rows[e.RowIndex].Cells[8].Value);
+                if (upOrDown > 0)
+                {
+                    this._oneSymbolQueryGV.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
+                    e.FormattingApplied = true;
+                    return;
+                }
+                if (upOrDown < 0)
+                {
+                    this._oneSymbolQueryGV.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Green;
+                    e.FormattingApplied = true;
+                    return;
+                }
+                else
+                {
+                    return;
+                }
+            }
         }        
     }
 }

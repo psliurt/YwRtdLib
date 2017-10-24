@@ -79,6 +79,7 @@
     <Compile Include="CombineObject\ConceptQuote.cs" />
     <Compile Include="CombineObject\DayTradeQuote.cs" />
     <Compile Include="CombineObject\IndustryQuote.cs" />
+    <Compile Include="CombineObject\OneSymbolQuote.cs" />
     <Compile Include="CombineObject\PointerIndexQuote.cs" />
     <Compile Include="Db\Dal\RtdRepository.cs" />
     <Compile Include="Db\DbObject\BizGroup.cs">
