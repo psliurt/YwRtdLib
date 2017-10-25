@@ -16,7 +16,7 @@ namespace YwRtdAp
     delegate void UpdateHandler(DataGridView gv);
     public class Dispatcher
     {
-        private Dictionary<string, Dictionary<string,DataGridView>> _symbolToGrids { get; set; }
+        private Dictionary<string, ConcurrentDictionary<string,DataGridView>> _symbolToGrids { get; set; }
         private Dictionary<string, Type> _gridNameToType { get; set; }
         private Dictionary<string, List<string>> _symbolOnceFields { get; set; }
         private RtCore _rtdCore { get; set; }
@@ -37,7 +37,7 @@ namespace YwRtdAp
         {
             this._rtdCore = rtdCore;
             this._commodities = commodities;
-            this._symbolToGrids = new Dictionary<string, Dictionary<string, DataGridView>>();
+            this._symbolToGrids = new Dictionary<string, ConcurrentDictionary<string, DataGridView>>();
             this._gridNameToType = new Dictionary<string, Type>();
             this._symbolOnceFields = new Dictionary<string, List<string>>();
 
@@ -70,26 +70,40 @@ namespace YwRtdAp
 
         public void AddSymbolGridMap(string symbol, DataGridView gv, Type dsType)
         {
-            Dictionary<string, DataGridView> gridViewMap = null;
+            ConcurrentDictionary<string, DataGridView> gridViewMap = null;
             if (this._symbolToGrids.TryGetValue(symbol, out gridViewMap))
             {
                 DataGridView existGV = null;
                 if (gridViewMap.TryGetValue(gv.Name, out existGV) == false)
                 {
-                    gridViewMap.Add(gv.Name, gv);
+                    gridViewMap.TryAdd(gv.Name, gv);
                     AddGridDataSourceType(gv.Name, dsType);
                 }
             }
             else
             {
-                gridViewMap = new Dictionary<string, DataGridView>();
-                gridViewMap.Add(gv.Name, gv);
+                gridViewMap = new ConcurrentDictionary<string, DataGridView>();
+                gridViewMap.TryAdd(gv.Name, gv);
                 AddGridDataSourceType(gv.Name, dsType);
                 this._symbolToGrids.Add(symbol, gridViewMap);                
             }
             if (this._symbolOnceFields.ContainsKey(symbol) == false)
             {
                 AddSymbolOnceField(symbol);
+            }
+        }
+
+        public void RemoveSymbolGridMap(List<string> symbols, DataGridView gv)
+        {
+            int symbolCount = symbols.Count;
+            for (int i = 0; i < symbolCount; i++)
+            {
+                ConcurrentDictionary<string, DataGridView> gridViewMap = null;
+                if (this._symbolToGrids.TryGetValue(symbols[i], out gridViewMap))
+                {
+                    DataGridView ogv;
+                    gridViewMap.TryRemove(gv.Name, out ogv);                    
+                }
             }
         }
 
@@ -233,7 +247,7 @@ namespace YwRtdAp
         private void DispatchNotify(ChangeData notify)
         {
             string symbol = notify.Topic.Symbol;
-            Dictionary<string, DataGridView> gridMap =null;
+            ConcurrentDictionary<string, DataGridView> gridMap = null;
             if (this._symbolToGrids.TryGetValue(symbol, out gridMap))
             {
                 foreach (DataGridView gv in gridMap.Values)
