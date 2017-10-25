@@ -43,6 +43,20 @@
             this._filterUpMostBtn = new System.Windows.Forms.Button();
             this._filterCeilPriceStockBtn = new System.Windows.Forms.Button();
             this._stockInfoPage = new System.Windows.Forms.TabPage();
+            this._oneSymbolRelateGV = new System.Windows.Forms.DataGridView();
+            this._oneSymbolConceptLbl = new System.Windows.Forms.Label();
+            this._oneSymbolConceptCmb = new System.Windows.Forms.ComboBox();
+            this._oneSymbolBizGroupLbl = new System.Windows.Forms.Label();
+            this._oneSymbolBizGroupCmb = new System.Windows.Forms.ComboBox();
+            this._oneSymbolIndustryLbl = new System.Windows.Forms.Label();
+            this._oneSymbolIndustryCmb = new System.Windows.Forms.ComboBox();
+            this._oneSymbolPILbl = new System.Windows.Forms.Label();
+            this._oneSymbolPICmb = new System.Windows.Forms.ComboBox();
+            this._oneSymbolQueryGV = new System.Windows.Forms.DataGridView();
+            this._oneSymbolQueryClearBtn = new System.Windows.Forms.Button();
+            this._oneSymbolQueryBtn = new System.Windows.Forms.Button();
+            this._oneSymbolQueryLbl = new System.Windows.Forms.Label();
+            this._oneSymbolQueryTxt = new System.Windows.Forms.TextBox();
             this._stockQueryPage = new System.Windows.Forms.TabPage();
             this._pointerIndexQueryPage = new System.Windows.Forms.TabPage();
             this._filteredPointerIndexGV = new System.Windows.Forms.DataGridView();
@@ -130,25 +144,13 @@
             this._symbolCatPICmb = new System.Windows.Forms.ComboBox();
             this._symbolCatQueryLbl = new System.Windows.Forms.Label();
             this._symbolCatQueryTxt = new System.Windows.Forms.TextBox();
-            this._oneSymbolQueryClearBtn = new System.Windows.Forms.Button();
-            this._oneSymbolQueryBtn = new System.Windows.Forms.Button();
-            this._oneSymbolQueryLbl = new System.Windows.Forms.Label();
-            this._oneSymbolQueryTxt = new System.Windows.Forms.TextBox();
-            this._oneSymbolQueryGV = new System.Windows.Forms.DataGridView();
-            this._oneSymbolConceptLbl = new System.Windows.Forms.Label();
-            this._oneSymbolConceptCmb = new System.Windows.Forms.ComboBox();
-            this._oneSymbolBizGroupLbl = new System.Windows.Forms.Label();
-            this._oneSymbolBizGroupCmb = new System.Windows.Forms.ComboBox();
-            this._oneSymbolIndustryLbl = new System.Windows.Forms.Label();
-            this._oneSymbolIndustryCmb = new System.Windows.Forms.ComboBox();
-            this._oneSymbolPILbl = new System.Windows.Forms.Label();
-            this._oneSymbolPICmb = new System.Windows.Forms.ComboBox();
-            this._oneSymbolRelateGV = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this._symbolGV)).BeginInit();
             this._switchTabCtrl.SuspendLayout();
             this._dayTradePage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dayTradeStockGV)).BeginInit();
             this._stockInfoPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._oneSymbolRelateGV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._oneSymbolQueryGV)).BeginInit();
             this._pointerIndexQueryPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._filteredPointerIndexGV)).BeginInit();
             this._industryQueryPage.SuspendLayout();
@@ -161,8 +163,6 @@
             this._symbolManagePage.SuspendLayout();
             this._symbolCategoryPage.SuspendLayout();
             this._symbolCatGrpBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._oneSymbolQueryGV)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._oneSymbolRelateGV)).BeginInit();
             this.SuspendLayout();
             // 
             // _symbolGV
@@ -171,10 +171,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this._symbolGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this._symbolGV.Location = new System.Drawing.Point(6, 34);
+            this._symbolGV.Location = new System.Drawing.Point(6, 309);
             this._symbolGV.Name = "_symbolGV";
             this._symbolGV.RowTemplate.Height = 24;
-            this._symbolGV.Size = new System.Drawing.Size(1168, 527);
+            this._symbolGV.Size = new System.Drawing.Size(1168, 252);
             this._symbolGV.TabIndex = 0;
             // 
             // _symbolTxt
@@ -190,7 +190,7 @@
             this._addSymbolBtn.Name = "_addSymbolBtn";
             this._addSymbolBtn.Size = new System.Drawing.Size(75, 23);
             this._addSymbolBtn.TabIndex = 2;
-            this._addSymbolBtn.Text = "Add";
+            this._addSymbolBtn.Text = "TEST";
             this._addSymbolBtn.UseVisualStyleBackColor = true;
             this._addSymbolBtn.Click += new System.EventHandler(this._addSymbolBtn_Click);
             // 
@@ -351,6 +351,129 @@
             this._stockInfoPage.TabIndex = 1;
             this._stockInfoPage.Text = "個股資訊查詢";
             this._stockInfoPage.UseVisualStyleBackColor = true;
+            // 
+            // _oneSymbolRelateGV
+            // 
+            this._oneSymbolRelateGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this._oneSymbolRelateGV.Location = new System.Drawing.Point(8, 268);
+            this._oneSymbolRelateGV.Name = "_oneSymbolRelateGV";
+            this._oneSymbolRelateGV.RowTemplate.Height = 24;
+            this._oneSymbolRelateGV.Size = new System.Drawing.Size(1166, 293);
+            this._oneSymbolRelateGV.TabIndex = 51;
+            // 
+            // _oneSymbolConceptLbl
+            // 
+            this._oneSymbolConceptLbl.Location = new System.Drawing.Point(771, 85);
+            this._oneSymbolConceptLbl.Name = "_oneSymbolConceptLbl";
+            this._oneSymbolConceptLbl.Size = new System.Drawing.Size(250, 25);
+            this._oneSymbolConceptLbl.TabIndex = 50;
+            this._oneSymbolConceptLbl.Text = "概念股";
+            this._oneSymbolConceptLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // _oneSymbolConceptCmb
+            // 
+            this._oneSymbolConceptCmb.FormattingEnabled = true;
+            this._oneSymbolConceptCmb.Location = new System.Drawing.Point(773, 113);
+            this._oneSymbolConceptCmb.Name = "_oneSymbolConceptCmb";
+            this._oneSymbolConceptCmb.Size = new System.Drawing.Size(248, 20);
+            this._oneSymbolConceptCmb.TabIndex = 49;
+            // 
+            // _oneSymbolBizGroupLbl
+            // 
+            this._oneSymbolBizGroupLbl.Location = new System.Drawing.Point(6, 85);
+            this._oneSymbolBizGroupLbl.Name = "_oneSymbolBizGroupLbl";
+            this._oneSymbolBizGroupLbl.Size = new System.Drawing.Size(250, 25);
+            this._oneSymbolBizGroupLbl.TabIndex = 48;
+            this._oneSymbolBizGroupLbl.Text = "集團股";
+            this._oneSymbolBizGroupLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // _oneSymbolBizGroupCmb
+            // 
+            this._oneSymbolBizGroupCmb.FormattingEnabled = true;
+            this._oneSymbolBizGroupCmb.Location = new System.Drawing.Point(8, 113);
+            this._oneSymbolBizGroupCmb.Name = "_oneSymbolBizGroupCmb";
+            this._oneSymbolBizGroupCmb.Size = new System.Drawing.Size(248, 20);
+            this._oneSymbolBizGroupCmb.TabIndex = 47;
+            // 
+            // _oneSymbolIndustryLbl
+            // 
+            this._oneSymbolIndustryLbl.Location = new System.Drawing.Point(515, 85);
+            this._oneSymbolIndustryLbl.Name = "_oneSymbolIndustryLbl";
+            this._oneSymbolIndustryLbl.Size = new System.Drawing.Size(250, 25);
+            this._oneSymbolIndustryLbl.TabIndex = 46;
+            this._oneSymbolIndustryLbl.Text = "產業股";
+            this._oneSymbolIndustryLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // _oneSymbolIndustryCmb
+            // 
+            this._oneSymbolIndustryCmb.FormattingEnabled = true;
+            this._oneSymbolIndustryCmb.Location = new System.Drawing.Point(517, 113);
+            this._oneSymbolIndustryCmb.Name = "_oneSymbolIndustryCmb";
+            this._oneSymbolIndustryCmb.Size = new System.Drawing.Size(248, 20);
+            this._oneSymbolIndustryCmb.TabIndex = 45;
+            // 
+            // _oneSymbolPILbl
+            // 
+            this._oneSymbolPILbl.Location = new System.Drawing.Point(259, 85);
+            this._oneSymbolPILbl.Name = "_oneSymbolPILbl";
+            this._oneSymbolPILbl.Size = new System.Drawing.Size(250, 25);
+            this._oneSymbolPILbl.TabIndex = 44;
+            this._oneSymbolPILbl.Text = "指標股";
+            this._oneSymbolPILbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // _oneSymbolPICmb
+            // 
+            this._oneSymbolPICmb.FormattingEnabled = true;
+            this._oneSymbolPICmb.Location = new System.Drawing.Point(261, 113);
+            this._oneSymbolPICmb.Name = "_oneSymbolPICmb";
+            this._oneSymbolPICmb.Size = new System.Drawing.Size(248, 20);
+            this._oneSymbolPICmb.TabIndex = 43;
+            // 
+            // _oneSymbolQueryGV
+            // 
+            this._oneSymbolQueryGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this._oneSymbolQueryGV.Location = new System.Drawing.Point(261, 6);
+            this._oneSymbolQueryGV.Name = "_oneSymbolQueryGV";
+            this._oneSymbolQueryGV.RowHeadersVisible = false;
+            this._oneSymbolQueryGV.RowTemplate.Height = 24;
+            this._oneSymbolQueryGV.Size = new System.Drawing.Size(913, 76);
+            this._oneSymbolQueryGV.TabIndex = 42;
+            this._oneSymbolQueryGV.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this._oneSymbolQueryGV_CellFormatting);
+            // 
+            // _oneSymbolQueryClearBtn
+            // 
+            this._oneSymbolQueryClearBtn.Location = new System.Drawing.Point(7, 33);
+            this._oneSymbolQueryClearBtn.Name = "_oneSymbolQueryClearBtn";
+            this._oneSymbolQueryClearBtn.Size = new System.Drawing.Size(100, 25);
+            this._oneSymbolQueryClearBtn.TabIndex = 41;
+            this._oneSymbolQueryClearBtn.Text = "清除";
+            this._oneSymbolQueryClearBtn.UseVisualStyleBackColor = true;
+            // 
+            // _oneSymbolQueryBtn
+            // 
+            this._oneSymbolQueryBtn.Location = new System.Drawing.Point(155, 34);
+            this._oneSymbolQueryBtn.Name = "_oneSymbolQueryBtn";
+            this._oneSymbolQueryBtn.Size = new System.Drawing.Size(100, 25);
+            this._oneSymbolQueryBtn.TabIndex = 39;
+            this._oneSymbolQueryBtn.Text = "查詢";
+            this._oneSymbolQueryBtn.UseVisualStyleBackColor = true;
+            this._oneSymbolQueryBtn.Click += new System.EventHandler(this._oneSymbolQueryBtn_Click);
+            // 
+            // _oneSymbolQueryLbl
+            // 
+            this._oneSymbolQueryLbl.Location = new System.Drawing.Point(5, 5);
+            this._oneSymbolQueryLbl.Name = "_oneSymbolQueryLbl";
+            this._oneSymbolQueryLbl.Size = new System.Drawing.Size(100, 25);
+            this._oneSymbolQueryLbl.TabIndex = 38;
+            this._oneSymbolQueryLbl.Text = "股票名稱、代碼";
+            this._oneSymbolQueryLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // _oneSymbolQueryTxt
+            // 
+            this._oneSymbolQueryTxt.Location = new System.Drawing.Point(111, 6);
+            this._oneSymbolQueryTxt.Name = "_oneSymbolQueryTxt";
+            this._oneSymbolQueryTxt.Size = new System.Drawing.Size(144, 22);
+            this._oneSymbolQueryTxt.TabIndex = 37;
             // 
             // _stockQueryPage
             // 
@@ -1245,129 +1368,6 @@
             this._symbolCatQueryTxt.Size = new System.Drawing.Size(144, 22);
             this._symbolCatQueryTxt.TabIndex = 0;
             // 
-            // _oneSymbolQueryClearBtn
-            // 
-            this._oneSymbolQueryClearBtn.Location = new System.Drawing.Point(7, 33);
-            this._oneSymbolQueryClearBtn.Name = "_oneSymbolQueryClearBtn";
-            this._oneSymbolQueryClearBtn.Size = new System.Drawing.Size(100, 25);
-            this._oneSymbolQueryClearBtn.TabIndex = 41;
-            this._oneSymbolQueryClearBtn.Text = "清除";
-            this._oneSymbolQueryClearBtn.UseVisualStyleBackColor = true;
-            // 
-            // _oneSymbolQueryBtn
-            // 
-            this._oneSymbolQueryBtn.Location = new System.Drawing.Point(155, 34);
-            this._oneSymbolQueryBtn.Name = "_oneSymbolQueryBtn";
-            this._oneSymbolQueryBtn.Size = new System.Drawing.Size(100, 25);
-            this._oneSymbolQueryBtn.TabIndex = 39;
-            this._oneSymbolQueryBtn.Text = "查詢";
-            this._oneSymbolQueryBtn.UseVisualStyleBackColor = true;
-            this._oneSymbolQueryBtn.Click += new System.EventHandler(this._oneSymbolQueryBtn_Click);
-            // 
-            // _oneSymbolQueryLbl
-            // 
-            this._oneSymbolQueryLbl.Location = new System.Drawing.Point(5, 5);
-            this._oneSymbolQueryLbl.Name = "_oneSymbolQueryLbl";
-            this._oneSymbolQueryLbl.Size = new System.Drawing.Size(100, 25);
-            this._oneSymbolQueryLbl.TabIndex = 38;
-            this._oneSymbolQueryLbl.Text = "股票名稱、代碼";
-            this._oneSymbolQueryLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // _oneSymbolQueryTxt
-            // 
-            this._oneSymbolQueryTxt.Location = new System.Drawing.Point(111, 6);
-            this._oneSymbolQueryTxt.Name = "_oneSymbolQueryTxt";
-            this._oneSymbolQueryTxt.Size = new System.Drawing.Size(144, 22);
-            this._oneSymbolQueryTxt.TabIndex = 37;
-            // 
-            // _oneSymbolQueryGV
-            // 
-            this._oneSymbolQueryGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this._oneSymbolQueryGV.Location = new System.Drawing.Point(261, 6);
-            this._oneSymbolQueryGV.Name = "_oneSymbolQueryGV";
-            this._oneSymbolQueryGV.RowHeadersVisible = false;
-            this._oneSymbolQueryGV.RowTemplate.Height = 24;
-            this._oneSymbolQueryGV.Size = new System.Drawing.Size(913, 76);
-            this._oneSymbolQueryGV.TabIndex = 42;
-            this._oneSymbolQueryGV.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this._oneSymbolQueryGV_CellFormatting);
-            // 
-            // _oneSymbolConceptLbl
-            // 
-            this._oneSymbolConceptLbl.Location = new System.Drawing.Point(771, 85);
-            this._oneSymbolConceptLbl.Name = "_oneSymbolConceptLbl";
-            this._oneSymbolConceptLbl.Size = new System.Drawing.Size(250, 25);
-            this._oneSymbolConceptLbl.TabIndex = 50;
-            this._oneSymbolConceptLbl.Text = "概念股";
-            this._oneSymbolConceptLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // _oneSymbolConceptCmb
-            // 
-            this._oneSymbolConceptCmb.FormattingEnabled = true;
-            this._oneSymbolConceptCmb.Location = new System.Drawing.Point(773, 113);
-            this._oneSymbolConceptCmb.Name = "_oneSymbolConceptCmb";
-            this._oneSymbolConceptCmb.Size = new System.Drawing.Size(248, 20);
-            this._oneSymbolConceptCmb.TabIndex = 49;
-            // 
-            // _oneSymbolBizGroupLbl
-            // 
-            this._oneSymbolBizGroupLbl.Location = new System.Drawing.Point(6, 85);
-            this._oneSymbolBizGroupLbl.Name = "_oneSymbolBizGroupLbl";
-            this._oneSymbolBizGroupLbl.Size = new System.Drawing.Size(250, 25);
-            this._oneSymbolBizGroupLbl.TabIndex = 48;
-            this._oneSymbolBizGroupLbl.Text = "集團股";
-            this._oneSymbolBizGroupLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // _oneSymbolBizGroupCmb
-            // 
-            this._oneSymbolBizGroupCmb.FormattingEnabled = true;
-            this._oneSymbolBizGroupCmb.Location = new System.Drawing.Point(8, 113);
-            this._oneSymbolBizGroupCmb.Name = "_oneSymbolBizGroupCmb";
-            this._oneSymbolBizGroupCmb.Size = new System.Drawing.Size(248, 20);
-            this._oneSymbolBizGroupCmb.TabIndex = 47;
-            // 
-            // _oneSymbolIndustryLbl
-            // 
-            this._oneSymbolIndustryLbl.Location = new System.Drawing.Point(515, 85);
-            this._oneSymbolIndustryLbl.Name = "_oneSymbolIndustryLbl";
-            this._oneSymbolIndustryLbl.Size = new System.Drawing.Size(250, 25);
-            this._oneSymbolIndustryLbl.TabIndex = 46;
-            this._oneSymbolIndustryLbl.Text = "產業股";
-            this._oneSymbolIndustryLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // _oneSymbolIndustryCmb
-            // 
-            this._oneSymbolIndustryCmb.FormattingEnabled = true;
-            this._oneSymbolIndustryCmb.Location = new System.Drawing.Point(517, 113);
-            this._oneSymbolIndustryCmb.Name = "_oneSymbolIndustryCmb";
-            this._oneSymbolIndustryCmb.Size = new System.Drawing.Size(248, 20);
-            this._oneSymbolIndustryCmb.TabIndex = 45;
-            // 
-            // _oneSymbolPILbl
-            // 
-            this._oneSymbolPILbl.Location = new System.Drawing.Point(259, 85);
-            this._oneSymbolPILbl.Name = "_oneSymbolPILbl";
-            this._oneSymbolPILbl.Size = new System.Drawing.Size(250, 25);
-            this._oneSymbolPILbl.TabIndex = 44;
-            this._oneSymbolPILbl.Text = "指標股";
-            this._oneSymbolPILbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // _oneSymbolPICmb
-            // 
-            this._oneSymbolPICmb.FormattingEnabled = true;
-            this._oneSymbolPICmb.Location = new System.Drawing.Point(261, 113);
-            this._oneSymbolPICmb.Name = "_oneSymbolPICmb";
-            this._oneSymbolPICmb.Size = new System.Drawing.Size(248, 20);
-            this._oneSymbolPICmb.TabIndex = 43;
-            // 
-            // _oneSymbolRelateGV
-            // 
-            this._oneSymbolRelateGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this._oneSymbolRelateGV.Location = new System.Drawing.Point(8, 268);
-            this._oneSymbolRelateGV.Name = "_oneSymbolRelateGV";
-            this._oneSymbolRelateGV.RowTemplate.Height = 24;
-            this._oneSymbolRelateGV.Size = new System.Drawing.Size(1166, 293);
-            this._oneSymbolRelateGV.TabIndex = 51;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1383,6 +1383,8 @@
             ((System.ComponentModel.ISupportInitialize)(this._dayTradeStockGV)).EndInit();
             this._stockInfoPage.ResumeLayout(false);
             this._stockInfoPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._oneSymbolRelateGV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._oneSymbolQueryGV)).EndInit();
             this._pointerIndexQueryPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._filteredPointerIndexGV)).EndInit();
             this._industryQueryPage.ResumeLayout(false);
@@ -1399,8 +1401,6 @@
             this._symbolCategoryPage.PerformLayout();
             this._symbolCatGrpBox.ResumeLayout(false);
             this._symbolCatGrpBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._oneSymbolQueryGV)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._oneSymbolRelateGV)).EndInit();
             this.ResumeLayout(false);
 
         }

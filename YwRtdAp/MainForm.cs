@@ -26,15 +26,15 @@ namespace YwRtdAp
 
         private ConcurrentDictionary<string, YwCommodity> _commodities { get; set; }
 
-        private ConcurrentDictionary<string, YwBasicQuote> _subscribeBasicQuote { get; set; }
-        private ConcurrentDictionary<string, YwBest5> _subscribeBest5 { get; set; }
-        private ConcurrentDictionary<string, YwFOQuote> _subscribeFOQuote { get; set; }
-        private ConcurrentDictionary<string, YwFoundQuote> _subscribeFoundQuote { get; set; }
-        private ConcurrentDictionary<string, YwOpenSimulateQuote> _subscribeOpenSimulateQuote { get; set; }
+        //private ConcurrentDictionary<string, YwBasicQuote> _subscribeBasicQuote { get; set; }
+        //private ConcurrentDictionary<string, YwBest5> _subscribeBest5 { get; set; }
+        //private ConcurrentDictionary<string, YwFOQuote> _subscribeFOQuote { get; set; }
+        //private ConcurrentDictionary<string, YwFoundQuote> _subscribeFoundQuote { get; set; }
+        //private ConcurrentDictionary<string, YwOpenSimulateQuote> _subscribeOpenSimulateQuote { get; set; }
         
-        private ConcurrentBag<DayTradeQuote> _dayTradeQuoteDatas { get; set; }
+        //private ConcurrentBag<DayTradeQuote> _dayTradeQuoteDatas { get; set; }
 
-        private ConcurrentBag<DayTradeQuote> _unfilterRawDatas { get; set; }
+        //private ConcurrentBag<DayTradeQuote> _unfilterRawDatas { get; set; }
 
         private List<string> _dayTradeGVSymbols { get; set; }
 
@@ -56,116 +56,15 @@ namespace YwRtdAp
         private List<string> _dayTradeSymbols { get; set; }
         private List<DayTradeQuote> _dayTradeSymbolQuote { get; set; }
 
-        private RtdRepository _rep { get; set; }
-
-
-        //private ConcurrentQueue<ChangeData> _updateEventQueue { get; set; }
-        //private ConcurrentQueue<ChangeData> _bufferEventQueue { get; set; }
-        //private volatile bool _runUpdateWork = true;
-        //private AutoResetEvent _bufferRearResetEvent { get; set; }
-
-        //private volatile bool _runRearWork = true;
-        //private AutoResetEvent _bufferFrontResetEvent { get; set; }
-
-        //private volatile bool _runFrontWork = true;
-
-        //private Thread _updateEventThread { get; set; }
-        //private Thread _bufferFrontThread { get; set; }
-        //private Thread _bufferRearThread { get; set; }
-        
-
-        //private void DoFrontWork()
-        //{
-        //    int c = 0;
-        //    while (this._runFrontWork)
-        //    {
-        //        this._bufferFrontResetEvent.WaitOne();
-        //        if (this._rtdCore == null)
-        //        {
-        //            continue;
-        //        }
-        //        c = this._rtdCore.ChangeDataQueue.Count;
-        //        if (c > 0)
-        //        {
-        //            Console.WriteLine("A ---> [[[ {0}  ]]] ---> B ", c);
-        //        }
-
-
-        //        while (c > 0)
-        //        {
-        //            ChangeData newIncome = null;
-        //            if (this._rtdCore.ChangeDataQueue.TryDequeue(out newIncome))
-        //            {
-        //                this._bufferEventQueue.Enqueue(newIncome);
-        //            }
-        //            c--;
-        //        }
-        //    }
-        //}
-
-
-        //private void DoRearWork()
-        //{
-        //    int c = 0;
-
-        //    while (this._runRearWork)
-        //    {
-        //        this._bufferRearResetEvent.WaitOne();
-        //        c = this._bufferEventQueue.Count;
-        //        if (c > 0)
-        //        {
-        //            Console.WriteLine("                         #B ---> [[[ {0}  ]]] ---> C ", c);
-        //        }
-
-
-        //        while (c > 0)
-        //        {
-        //            ChangeData buffered = null;
-        //            if (this._bufferEventQueue.TryDequeue(out buffered))
-        //            {
-        //                this._updateEventQueue.Enqueue(buffered);
-        //            }
-        //            c--;
-        //        }
-
-        //        this._bufferFrontResetEvent.Set();
-
-        //    }
-        //}
-
-        //private void DoUpdateWork()
-        //{
-        //    int c = 0;
-        //    while (this._runUpdateWork)
-        //    {
-        //        c = this._updateEventQueue.Count;
-
-        //        if (c <= 0)
-        //        {
-        //            this._bufferRearResetEvent.WaitOne(1);//利用這個waitone來讓CPU的使用率不要爆高
-        //        }
-        //        else
-        //        {
-        //            Console.WriteLine("                                                   #C ---> [[[ {0}  ]]] ---> Update ", c);
-        //        }
-
-        //        while (c > 0)
-        //        {
-        //            ChangeData newOutcome = null;
-        //            if (this._updateEventQueue.TryDequeue(out newOutcome))
-        //            {
-        //                UpdateGridView(this._symbolGV);
-        //                //Console.WriteLine("Data Change: [ {0}  => {1} ]", newOutcome.Topic.YwFieldType.ToString(), newOutcome.Data);
-        //            }
-        //            c--;
-        //        }
-        //        this._bufferRearResetEvent.Set();
-
-        //    }
-        //}
+        private RtdRepository _rep { get; set; }        
 
         public MainForm()
         {
+            this.SetStyle(
+                ControlStyles.AllPaintingInWmPaint |
+                ControlStyles.UserPaint |
+                ControlStyles.DoubleBuffer, true);
+
             this._commodities = new ConcurrentDictionary<string, YwCommodity>();
             this._dispatcher = Dispatcher.Instance(this._rtdCore, this._commodities);
             InitializeComponent();
@@ -173,21 +72,21 @@ namespace YwRtdAp
 
             this._rep = new RtdRepository();
             this._rtdCore.CommodityChangeHandler += _rtdCore_CommodityChangeHandler;
-            this._rtdCore.BasicQuoteHandler += _rtdCore_BasicQuoteHandler;
-            this._rtdCore.Best5Handler += _rtdCore_Best5Handler;
-            this._rtdCore.FOQuoteHandler += _rtdCore_FOQuoteHandler;
-            this._rtdCore.FoundQuoteHandler += _rtdCore_FoundQuoteHandler;
-            this._rtdCore.OpenSimulateQuoteHandler += _rtdCore_OpenSimulateQuoteHandler;
-            this._rtdCore.DataChangeHandler += _rtdCore_DataChangeHandler;
+            //this._rtdCore.BasicQuoteHandler += _rtdCore_BasicQuoteHandler;
+            //this._rtdCore.Best5Handler += _rtdCore_Best5Handler;
+            //this._rtdCore.FOQuoteHandler += _rtdCore_FOQuoteHandler;
+            //this._rtdCore.FoundQuoteHandler += _rtdCore_FoundQuoteHandler;
+            //this._rtdCore.OpenSimulateQuoteHandler += _rtdCore_OpenSimulateQuoteHandler;
+            //this._rtdCore.DataChangeHandler += _rtdCore_DataChangeHandler;
             
-            this._subscribeBasicQuote = new ConcurrentDictionary<string, YwBasicQuote>();
-            this._subscribeBest5 = new ConcurrentDictionary<string, YwBest5>();
-            this._subscribeFOQuote = new ConcurrentDictionary<string, YwFOQuote>();
-            this._subscribeFoundQuote = new ConcurrentDictionary<string, YwFoundQuote>();
-            this._subscribeOpenSimulateQuote = new ConcurrentDictionary<string, YwOpenSimulateQuote>();
-            this._dayTradeQuoteDatas = new ConcurrentBag<DayTradeQuote>();
+            //this._subscribeBasicQuote = new ConcurrentDictionary<string, YwBasicQuote>();
+            //this._subscribeBest5 = new ConcurrentDictionary<string, YwBest5>();
+            //this._subscribeFOQuote = new ConcurrentDictionary<string, YwFOQuote>();
+            //this._subscribeFoundQuote = new ConcurrentDictionary<string, YwFoundQuote>();
+            //this._subscribeOpenSimulateQuote = new ConcurrentDictionary<string, YwOpenSimulateQuote>();
+            //this._dayTradeQuoteDatas = new ConcurrentBag<DayTradeQuote>();
 
-            this._unfilterRawDatas = new ConcurrentBag<DayTradeQuote>();
+            //this._unfilterRawDatas = new ConcurrentBag<DayTradeQuote>();
 
             this._selectedIndustrySymbols = new List<string>();
             this._selectedIndustryQuote = new List<IndustryQuote>();
@@ -216,10 +115,7 @@ namespace YwRtdAp
             SetUpGridViewDoubleBuffered(this._filteredIndustryGV);
             SetUpGridViewDoubleBuffered(this._filteredBizGroupGV);
             SetUpGridViewDoubleBuffered(this._filteredConceptGV);
-            //Type dgvType = _symbolGV.GetType();
-            //PropertyInfo pi = dgvType.GetProperty("DoubleBuffered",
-            //      BindingFlags.Instance | BindingFlags.NonPublic);
-            //pi.SetValue(_symbolGV, true, null);
+            
 
 
 
@@ -240,18 +136,7 @@ namespace YwRtdAp
             LoadConceptDropListData();
             LoadPointerIndexDropListData();
 
-            LoadManagePageSymbolsData();
-
-            //this._updateEventQueue = new ConcurrentQueue<ChangeData>();
-            //this._bufferEventQueue = new ConcurrentQueue<ChangeData>();
-            //this._bufferRearResetEvent = new AutoResetEvent(false);
-            //this._bufferFrontResetEvent = new AutoResetEvent(false);
-            //this._updateEventThread = new Thread(DoUpdateWork);
-            //this._bufferFrontThread = new Thread(DoFrontWork);
-            //this._bufferRearThread = new Thread(DoRearWork);
-            //this._updateEventThread.Start();
-            //this._bufferRearThread.Start();
-            //this._bufferFrontThread.Start();
+            LoadManagePageSymbolsData();            
         }
 
         private void SetUpGridViewDoubleBuffered(DataGridView gv)
@@ -273,15 +158,15 @@ namespace YwRtdAp
         }
         
 
-        void _rtdCore_DataChangeHandler(DataChangeInfo dci)
-        {
-            if (this._dayTradeGVSymbols.Exists(x=>dci.Symbols.Contains(x)))
-            {
-                //UpdateGridView(this._dayTradeStockGV);
+        //void _rtdCore_DataChangeHandler(DataChangeInfo dci)
+        //{
+        //    if (this._dayTradeGVSymbols.Exists(x=>dci.Symbols.Contains(x)))
+        //    {
+        //        //UpdateGridView(this._dayTradeStockGV);
                 
-            }
+        //    }
             
-        }
+        //}
 
         private void LoadPointerIndexDropListData()
         {
@@ -696,75 +581,75 @@ namespace YwRtdAp
             }
         }
 
-        void _rtdCore_OpenSimulateQuoteHandler(YwOpenSimulateQuote openSimulateQuote)
-        {
-            if (_subscribeOpenSimulateQuote.ContainsKey(openSimulateQuote.Symbol) == false)
-            {
+        //void _rtdCore_OpenSimulateQuoteHandler(YwOpenSimulateQuote openSimulateQuote)
+        //{
+        //    if (_subscribeOpenSimulateQuote.ContainsKey(openSimulateQuote.Symbol) == false)
+        //    {
                 
-                _subscribeOpenSimulateQuote.TryAdd(openSimulateQuote.Symbol, openSimulateQuote);
-            }
-            //UpdateGridView(this._symbolGV);
-        }
+        //        _subscribeOpenSimulateQuote.TryAdd(openSimulateQuote.Symbol, openSimulateQuote);
+        //    }
+        //    //UpdateGridView(this._symbolGV);
+        //}
 
-        void _rtdCore_FoundQuoteHandler(YwFoundQuote foundQuote)
-        {
-            if (_subscribeFoundQuote.ContainsKey(foundQuote.Symbol) == false)
-            {
-                _subscribeFoundQuote.TryAdd(foundQuote.Symbol, foundQuote);
-            }
-            //UpdateGridView(this._symbolGV);
-        }
+        //void _rtdCore_FoundQuoteHandler(YwFoundQuote foundQuote)
+        //{
+        //    if (_subscribeFoundQuote.ContainsKey(foundQuote.Symbol) == false)
+        //    {
+        //        _subscribeFoundQuote.TryAdd(foundQuote.Symbol, foundQuote);
+        //    }
+        //    //UpdateGridView(this._symbolGV);
+        //}
 
-        void _rtdCore_FOQuoteHandler(YwFOQuote foQuote)
-        {
-            if (_subscribeFOQuote.ContainsKey(foQuote.Symbol) == false)
-            {
-                _subscribeFOQuote.TryAdd(foQuote.Symbol, foQuote);
-            }
-            //UpdateGridView(this._symbolGV);
-        }
+        //void _rtdCore_FOQuoteHandler(YwFOQuote foQuote)
+        //{
+        //    if (_subscribeFOQuote.ContainsKey(foQuote.Symbol) == false)
+        //    {
+        //        _subscribeFOQuote.TryAdd(foQuote.Symbol, foQuote);
+        //    }
+        //    //UpdateGridView(this._symbolGV);
+        //}
 
-        void _rtdCore_Best5Handler(YwBest5 best5)
-        {
-            if (_subscribeBest5.ContainsKey(best5.Symbol) == false)
-            {
-                _subscribeBest5.TryAdd(best5.Symbol, best5);
-            }
-            //UpdateGridView(this._symbolGV);
-        }
+        //void _rtdCore_Best5Handler(YwBest5 best5)
+        //{
+        //    if (_subscribeBest5.ContainsKey(best5.Symbol) == false)
+        //    {
+        //        _subscribeBest5.TryAdd(best5.Symbol, best5);
+        //    }
+        //    //UpdateGridView(this._symbolGV);
+        //}
 
-        object _lockObj = new object();
-        void _rtdCore_BasicQuoteHandler(YwBasicQuote basicQuote)
-        {
-            if (_subscribeBasicQuote.ContainsKey(basicQuote.Symbol) == false)
-            {
-                _subscribeBasicQuote.TryAdd(basicQuote.Symbol, basicQuote);
-                //this._dayTradeQuoteDatas.Add(new DayTradeQuote(ref basicQuote));
-                //this._unfilterRawDatas.Add(new DayTradeQuote(ref basicQuote));                               
-            }
+        //object _lockObj = new object();
+        //void _rtdCore_BasicQuoteHandler(YwBasicQuote basicQuote)
+        //{
+        //    if (_subscribeBasicQuote.ContainsKey(basicQuote.Symbol) == false)
+        //    {
+        //        _subscribeBasicQuote.TryAdd(basicQuote.Symbol, basicQuote);
+        //        //this._dayTradeQuoteDatas.Add(new DayTradeQuote(ref basicQuote));
+        //        //this._unfilterRawDatas.Add(new DayTradeQuote(ref basicQuote));                               
+        //    }
             
-            //UpdateGridView(this._symbolGV);
-            lock (_lockObj)
-            {
-                RtdRepository repo = new RtdRepository();
-                var symbolList = repo.Query<Symbol>(x => x.Code == basicQuote.Symbol);
-                foreach (var symbol in symbolList)
-                {
-                    YwBasicQuote commodity = null;
-                    if (this._subscribeBasicQuote.TryGetValue(symbol.Code, out commodity))
-                    {
-                        if (commodity != null &&
-                            string.IsNullOrEmpty(commodity.Name) == false &&
-                            string.IsNullOrEmpty(symbol.SymbolName) == true)
-                        {
-                            symbol.SymbolName = commodity.Name;
-                            repo.Update<Symbol>(symbol);                            
-                        }
-                    }
-                }
-                repo.Commit();
-            }
-        }
+        //    //UpdateGridView(this._symbolGV);
+        //    lock (_lockObj)
+        //    {
+        //        RtdRepository repo = new RtdRepository();
+        //        var symbolList = repo.Query<Symbol>(x => x.Code == basicQuote.Symbol);
+        //        foreach (var symbol in symbolList)
+        //        {
+        //            YwBasicQuote commodity = null;
+        //            if (this._subscribeBasicQuote.TryGetValue(symbol.Code, out commodity))
+        //            {
+        //                if (commodity != null &&
+        //                    string.IsNullOrEmpty(commodity.Name) == false &&
+        //                    string.IsNullOrEmpty(symbol.SymbolName) == true)
+        //                {
+        //                    symbol.SymbolName = commodity.Name;
+        //                    repo.Update<Symbol>(symbol);                            
+        //                }
+        //            }
+        //        }
+        //        repo.Commit();
+        //    }
+        //}
         
         void _rtdCore_CommodityChangeHandler(YwCommodity commodity)
         {
@@ -796,9 +681,30 @@ namespace YwRtdAp
             //{
             //    this._rtdCore.AddSymbol(this._symbolTxt.Text.Trim());
             //}                 
-            this._symbolGV.DataSource = this._commodities.Values.ToList();
-            this._symbolGV.Refresh();
-            this._symbolTxt.Text = "";
+            //this._symbolGV.DataSource = this._commodities.Values.ToList();
+            //this._symbolGV.Refresh();
+            //this._symbolTxt.Text = "";
+
+
+            this._dispatcher.RemoveSymbolGridMap(this._dayTradeSymbols, this._symbolGV);
+            this._dayTradeSymbols.Clear();
+            List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.ChangePercent.HasValue &&
+                x.ChangePercent.Value > 5.01M && x.ChangePercent.Value <= 7.50M &&
+                x.Volume != "" && x.Volume != "無資料").OrderByDescending(x => x.Volume).ToList();
+
+            this._dayTradeSymbolQuote.Clear();
+
+            for (int i = 0; i < filteredCommodities.Count; i++)
+            {
+                YwCommodity c = filteredCommodities[i];
+                this._dayTradeSymbolQuote.Add(new DayTradeQuote(ref c));
+                this._dispatcher.AddSymbolGridMap(c.Symbol, this._symbolGV, typeof(DayTradeQuote));
+                this._dayTradeSymbols.Add(c.Symbol);
+            }
+
+            this._symbolGV.DataSource = null;
+            this._symbolGV.DataSource = this._dayTradeSymbolQuote;
+            this._symbolGV.Refresh(); 
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)

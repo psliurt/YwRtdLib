@@ -13,23 +13,23 @@ using System.Diagnostics;
 namespace YwRtdLib
 {
     public delegate void CommodityUpdater(YwCommodity commodity);
-    public delegate void BasicQuoteUpdater(YwBasicQuote basicQuote);
-    public delegate void Best5Updater(YwBest5 best5);
-    public delegate void FOQuoteUpdater(YwFOQuote foQuote);
-    public delegate void FoundQuoteUpdater(YwFoundQuote foundQuote);
-    public delegate void OpenSimulateQuoteUpdater(YwOpenSimulateQuote openSimulateQuote);
-    public delegate void DataChangeNotifier(DataChangeInfo dci);
+    //public delegate void BasicQuoteUpdater(YwBasicQuote basicQuote);
+    //public delegate void Best5Updater(YwBest5 best5);
+    //public delegate void FOQuoteUpdater(YwFOQuote foQuote);
+    //public delegate void FoundQuoteUpdater(YwFoundQuote foundQuote);
+    //public delegate void OpenSimulateQuoteUpdater(YwOpenSimulateQuote openSimulateQuote);
+    //public delegate void DataChangeNotifier(DataChangeInfo dci);
 
     public class RtCore
     {
         public event CommodityUpdater CommodityChangeHandler;
 
-        public event BasicQuoteUpdater BasicQuoteHandler;
-        public event Best5Updater Best5Handler;
-        public event FOQuoteUpdater FOQuoteHandler;
-        public event FoundQuoteUpdater FoundQuoteHandler;
-        public event OpenSimulateQuoteUpdater OpenSimulateQuoteHandler;
-        public event DataChangeNotifier DataChangeHandler;
+        //public event BasicQuoteUpdater BasicQuoteHandler;
+        //public event Best5Updater Best5Handler;
+        //public event FOQuoteUpdater FOQuoteHandler;
+        //public event FoundQuoteUpdater FoundQuoteHandler;
+        //public event OpenSimulateQuoteUpdater OpenSimulateQuoteHandler;
+        //public event DataChangeNotifier DataChangeHandler;
 
         private object _lockObj = new object();
 
@@ -49,15 +49,15 @@ namespace YwRtdLib
 
         private int _currentTopicId { get; set; }
 
-        private Dictionary<string, YwBasicQuote> _subscribeBasicQuote { get; set; }
+        //private Dictionary<string, YwBasicQuote> _subscribeBasicQuote { get; set; }
 
-        private Dictionary<string, YwBest5> _subscribeBest5 { get; set; }
+        //private Dictionary<string, YwBest5> _subscribeBest5 { get; set; }
 
-        private Dictionary<string, YwFOQuote> _subscribeFOQuote { get; set; }
+        //private Dictionary<string, YwFOQuote> _subscribeFOQuote { get; set; }
 
-        private Dictionary<string, YwFoundQuote> _subscribeFoundQuote { get; set; }
+        //private Dictionary<string, YwFoundQuote> _subscribeFoundQuote { get; set; }
 
-        private Dictionary<string, YwOpenSimulateQuote> _subscribeOpenSimulateQuote { get; set; }
+        //private Dictionary<string, YwOpenSimulateQuote> _subscribeOpenSimulateQuote { get; set; }
 
         public  ConcurrentQueue<ChangeData> ChangeDataQueue { get; set; }
 
@@ -72,11 +72,11 @@ namespace YwRtdLib
             this._ywRtdCom.ServerStart(_rtdEventHandler);
 
             this._subscribeCommodities = new Dictionary<string, YwCommodity>();
-            this._subscribeBasicQuote = new Dictionary<string, YwBasicQuote>();
-            this._subscribeBest5 = new Dictionary<string, YwBest5>();
-            this._subscribeFOQuote = new Dictionary<string, YwFOQuote>();
-            this._subscribeFoundQuote = new Dictionary<string, YwFoundQuote>();
-            this._subscribeOpenSimulateQuote = new Dictionary<string, YwOpenSimulateQuote>();
+            //this._subscribeBasicQuote = new Dictionary<string, YwBasicQuote>();
+            //this._subscribeBest5 = new Dictionary<string, YwBest5>();
+            //this._subscribeFOQuote = new Dictionary<string, YwFOQuote>();
+            //this._subscribeFoundQuote = new Dictionary<string, YwFoundQuote>();
+            //this._subscribeOpenSimulateQuote = new Dictionary<string, YwOpenSimulateQuote>();
             this._subscribeSymbols = new List<string>();
             this._subscribeSymbolsForRemove = new List<string>();
 
@@ -393,8 +393,10 @@ namespace YwRtdLib
                     if (this._rtdCore._topicMap.TryGetValue(Convert.ToInt32(newData.GetValue(0, topicCount - 1)), out info) == true)
                     {                        
                         string data = newData.GetValue(1, topicCount - 1).ToString();
-                        if (data.Trim() != "無資料")
+                        if (data.Trim() != "無資料" &&
+                            data.Trim() != "不是一個數字")
                         {
+                            
                             this._rtdCoreQueue.Enqueue(new ChangeData
                             {
                                 Data = data,

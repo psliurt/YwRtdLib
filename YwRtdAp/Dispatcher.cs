@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
+using System.Diagnostics;
 using System.Reflection;
 using System.Linq;
 using System.Text;
@@ -123,11 +124,15 @@ namespace YwRtdAp
             string[] enumNames = Enum.GetNames(typeof(YwField));
             foreach (var n in enumNames)
             {
-                YwFieldGroup group = GetAttributeEnumOfYwField(n);
-                if ((group & YwFieldGroup.Once) == YwFieldGroup.Once)
+                YwField ft;
+                if (Enum.TryParse<YwField>(n, out ft))
                 {
-                    onceFields.Add(n);
-                }
+                    YwFieldGroup group = GetAttributeEnumOfYwField(ft);
+                    if ((group & YwFieldGroup.Once) == YwFieldGroup.Once)
+                    {
+                        onceFields.Add(n);
+                    }
+                }                
             }
             this._symbolOnceFields.Add(symbol, onceFields);
         }
@@ -166,7 +171,7 @@ namespace YwRtdAp
                 c = this._rtdCore.ChangeDataQueue.Count;
                 if (c > 0)
                 {
-                    Console.WriteLine("A ---> [[[ {0}  ]]] ---> B ", c);
+                    //Console.WriteLine("A ---> [[[ {0}  ]]] ---> B ", c);
                 }
 
 
@@ -193,7 +198,7 @@ namespace YwRtdAp
                 c = this._bufferEventQueue.Count;
                 if (c > 0)
                 {
-                    Console.WriteLine("                         #B ---> [[[ {0}  ]]] ---> C ", c);
+                    //Console.WriteLine("                         #B ---> [[[ {0}  ]]] ---> C ", c);
                 }
 
 
@@ -225,7 +230,7 @@ namespace YwRtdAp
                 }
                 else
                 {
-                    Console.WriteLine("                                                   #C ---> [[[ {0}  ]]] ---> Update ", c);
+                    //Console.WriteLine("                                                   #C ---> [[[ {0}  ]]] ---> Update ", c);
                 }
 
                 while (c > 0)
@@ -259,7 +264,11 @@ namespace YwRtdAp
                         {
                             if (IsTypeContainProp(dsType, notify.Topic.FieldName))
                             {
+                                //Stopwatch st = Stopwatch.StartNew();
                                 UpdateGridView(gv);
+                                //Console.WriteLine("{0} : {1} = {2}", notify.Topic.Symbol, notify.Topic.FieldName, notify.Data);
+                                //st.Stop();
+                                //Console.WriteLine("t->{0} , m->{1}", st.ElapsedTicks, st.ElapsedMilliseconds);
                             }                        
                         }                        
                     }                   
@@ -287,21 +296,21 @@ namespace YwRtdAp
             return categoryAttr.Group;
         }
 
-        private YwFieldGroup GetAttributeEnumOfYwField(string field)
-        {
-            var enumMember = field.GetType().GetMember(field).FirstOrDefault();
-            if (enumMember == null)
-            { return YwFieldGroup.NotSpecific; }
-            var categoryAttr =
-                enumMember == null
-                    ? default(FieldCategoryAttribute)
-                    : enumMember.GetCustomAttribute(typeof(FieldCategoryAttribute)) as FieldCategoryAttribute;
-            return categoryAttr.Group;
-        }
+        //private YwFieldGroup GetAttributeEnumOfYwField(string field)
+        //{
+        //    var enumMember = field.GetType().GetMember(field).FirstOrDefault();
+        //    if (enumMember == null)
+        //    { return YwFieldGroup.NotSpecific; }
+        //    var categoryAttr =
+        //        enumMember == null
+        //            ? default(FieldCategoryAttribute)
+        //            : enumMember.GetCustomAttribute(typeof(FieldCategoryAttribute)) as FieldCategoryAttribute;
+        //    return categoryAttr.Group;
+        //}
 
         private bool IsRefreshRequire(ChangeData notify)
-        {
-            YwFieldGroup fg = GetAttributeEnumOfYwField(notify.Topic.FieldName);
+        {            
+            YwFieldGroup fg = GetAttributeEnumOfYwField(notify.Topic.YwFieldType);
             if ((fg & YwFieldGroup.Once) == YwFieldGroup.Once)
             {
                 List<string> fields = null;
@@ -313,7 +322,9 @@ namespace YwRtdAp
                 if (fields.Count == 0)
                 { return false; }
 
-                return fields.Remove(notify.Topic.FieldName);            
+                bool removed = fields.Remove(notify.Topic.FieldName);
+                //Console.WriteLine("{0} removed {1} = {2}", notify.Topic.Symbol, fields, removed);
+                return removed;
             }
             return true;
             
