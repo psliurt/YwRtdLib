@@ -144,6 +144,12 @@
             this._symbolCatPICmb = new System.Windows.Forms.ComboBox();
             this._symbolCatQueryLbl = new System.Windows.Forms.Label();
             this._symbolCatQueryTxt = new System.Windows.Forms.TextBox();
+            this._filterUpVolMostBtn = new System.Windows.Forms.Button();
+            this._filterUpVolMidBtn = new System.Windows.Forms.Button();
+            this._filterUpVolMinBtn = new System.Windows.Forms.Button();
+            this._filterDownVolMostBtn = new System.Windows.Forms.Button();
+            this._filterDownVolMidBtn = new System.Windows.Forms.Button();
+            this._filterDownVolMinBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this._symbolGV)).BeginInit();
             this._switchTabCtrl.SuspendLayout();
             this._dayTradePage.SuspendLayout();
@@ -218,6 +224,12 @@
             // _dayTradePage
             // 
             this._dayTradePage.AutoScroll = true;
+            this._dayTradePage.Controls.Add(this._filterDownVolMinBtn);
+            this._dayTradePage.Controls.Add(this._filterDownVolMidBtn);
+            this._dayTradePage.Controls.Add(this._filterDownVolMostBtn);
+            this._dayTradePage.Controls.Add(this._filterUpVolMinBtn);
+            this._dayTradePage.Controls.Add(this._filterUpVolMidBtn);
+            this._dayTradePage.Controls.Add(this._filterUpVolMostBtn);
             this._dayTradePage.Controls.Add(this._dayTradeStockGV);
             this._dayTradePage.Controls.Add(this._filterUpLowBtn);
             this._dayTradePage.Controls.Add(this._filterUpMidBtn);
@@ -244,7 +256,9 @@
             this._dayTradeStockGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this._dayTradeStockGV.Location = new System.Drawing.Point(6, 93);
             this._dayTradeStockGV.Name = "_dayTradeStockGV";
+            this._dayTradeStockGV.RowHeadersVisible = false;
             this._dayTradeStockGV.RowTemplate.Height = 24;
+            this._dayTradeStockGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this._dayTradeStockGV.Size = new System.Drawing.Size(1168, 468);
             this._dayTradeStockGV.TabIndex = 8;
             // 
@@ -505,7 +519,9 @@
             this._filteredPointerIndexGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this._filteredPointerIndexGV.Location = new System.Drawing.Point(3, 38);
             this._filteredPointerIndexGV.Name = "_filteredPointerIndexGV";
+            this._filteredPointerIndexGV.RowHeadersVisible = false;
             this._filteredPointerIndexGV.RowTemplate.Height = 24;
+            this._filteredPointerIndexGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this._filteredPointerIndexGV.Size = new System.Drawing.Size(1172, 526);
             this._filteredPointerIndexGV.TabIndex = 4;
             this._filteredPointerIndexGV.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this._filteredPointerIndexGV_CellFormatting);
@@ -550,7 +566,9 @@
             this._filteredIndustryGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this._filteredIndustryGV.Location = new System.Drawing.Point(5, 41);
             this._filteredIndustryGV.Name = "_filteredIndustryGV";
+            this._filteredIndustryGV.RowHeadersVisible = false;
             this._filteredIndustryGV.RowTemplate.Height = 24;
+            this._filteredIndustryGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this._filteredIndustryGV.Size = new System.Drawing.Size(1172, 523);
             this._filteredIndustryGV.TabIndex = 2;
             this._filteredIndustryGV.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this._filteredIndustryGV_CellFormatting);
@@ -595,7 +613,9 @@
             this._filteredBizGroupGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this._filteredBizGroupGV.Location = new System.Drawing.Point(5, 39);
             this._filteredBizGroupGV.Name = "_filteredBizGroupGV";
+            this._filteredBizGroupGV.RowHeadersVisible = false;
             this._filteredBizGroupGV.RowTemplate.Height = 24;
+            this._filteredBizGroupGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this._filteredBizGroupGV.Size = new System.Drawing.Size(1172, 525);
             this._filteredBizGroupGV.TabIndex = 4;
             this._filteredBizGroupGV.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this._filteredBizGroupGV_CellFormatting);
@@ -640,7 +660,9 @@
             this._filteredConceptGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this._filteredConceptGV.Location = new System.Drawing.Point(3, 39);
             this._filteredConceptGV.Name = "_filteredConceptGV";
+            this._filteredConceptGV.RowHeadersVisible = false;
             this._filteredConceptGV.RowTemplate.Height = 24;
+            this._filteredConceptGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this._filteredConceptGV.Size = new System.Drawing.Size(1172, 525);
             this._filteredConceptGV.TabIndex = 6;
             this._filteredConceptGV.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this._filteredConceptGV_CellFormatting);
@@ -1368,6 +1390,66 @@
             this._symbolCatQueryTxt.Size = new System.Drawing.Size(144, 22);
             this._symbolCatQueryTxt.TabIndex = 0;
             // 
+            // _filterUpVolMostBtn
+            // 
+            this._filterUpVolMostBtn.Location = new System.Drawing.Point(228, 6);
+            this._filterUpVolMostBtn.Name = "_filterUpVolMostBtn";
+            this._filterUpVolMostBtn.Size = new System.Drawing.Size(135, 23);
+            this._filterUpVolMostBtn.TabIndex = 9;
+            this._filterUpVolMostBtn.Text = "上漲 量增 7倍";
+            this._filterUpVolMostBtn.UseVisualStyleBackColor = true;
+            this._filterUpVolMostBtn.Click += new System.EventHandler(this._filterUpVolMostBtn_Click);
+            // 
+            // _filterUpVolMidBtn
+            // 
+            this._filterUpVolMidBtn.Location = new System.Drawing.Point(228, 35);
+            this._filterUpVolMidBtn.Name = "_filterUpVolMidBtn";
+            this._filterUpVolMidBtn.Size = new System.Drawing.Size(135, 23);
+            this._filterUpVolMidBtn.TabIndex = 10;
+            this._filterUpVolMidBtn.Text = "上漲 量增 5倍";
+            this._filterUpVolMidBtn.UseVisualStyleBackColor = true;
+            this._filterUpVolMidBtn.Click += new System.EventHandler(this._filterUpVolMidBtn_Click);
+            // 
+            // _filterUpVolMinBtn
+            // 
+            this._filterUpVolMinBtn.Location = new System.Drawing.Point(228, 64);
+            this._filterUpVolMinBtn.Name = "_filterUpVolMinBtn";
+            this._filterUpVolMinBtn.Size = new System.Drawing.Size(135, 23);
+            this._filterUpVolMinBtn.TabIndex = 11;
+            this._filterUpVolMinBtn.Text = "上漲 量增 1倍";
+            this._filterUpVolMinBtn.UseVisualStyleBackColor = true;
+            this._filterUpVolMinBtn.Click += new System.EventHandler(this._filterUpVolMinBtn_Click);
+            // 
+            // _filterDownVolMostBtn
+            // 
+            this._filterDownVolMostBtn.Location = new System.Drawing.Point(818, 6);
+            this._filterDownVolMostBtn.Name = "_filterDownVolMostBtn";
+            this._filterDownVolMostBtn.Size = new System.Drawing.Size(133, 23);
+            this._filterDownVolMostBtn.TabIndex = 12;
+            this._filterDownVolMostBtn.Text = "下跌 量增 7倍";
+            this._filterDownVolMostBtn.UseVisualStyleBackColor = true;
+            this._filterDownVolMostBtn.Click += new System.EventHandler(this._filterDownVolMostBtn_Click);
+            // 
+            // _filterDownVolMidBtn
+            // 
+            this._filterDownVolMidBtn.Location = new System.Drawing.Point(818, 35);
+            this._filterDownVolMidBtn.Name = "_filterDownVolMidBtn";
+            this._filterDownVolMidBtn.Size = new System.Drawing.Size(133, 23);
+            this._filterDownVolMidBtn.TabIndex = 13;
+            this._filterDownVolMidBtn.Text = "下跌 量增 5倍";
+            this._filterDownVolMidBtn.UseVisualStyleBackColor = true;
+            this._filterDownVolMidBtn.Click += new System.EventHandler(this._filterDownVolMidBtn_Click);
+            // 
+            // _filterDownVolMinBtn
+            // 
+            this._filterDownVolMinBtn.Location = new System.Drawing.Point(818, 64);
+            this._filterDownVolMinBtn.Name = "_filterDownVolMinBtn";
+            this._filterDownVolMinBtn.Size = new System.Drawing.Size(133, 23);
+            this._filterDownVolMinBtn.TabIndex = 14;
+            this._filterDownVolMinBtn.Text = "下跌 量增 1倍";
+            this._filterDownVolMinBtn.UseVisualStyleBackColor = true;
+            this._filterDownVolMinBtn.Click += new System.EventHandler(this._filterDownVolMinBtn_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1523,6 +1605,12 @@
         private System.Windows.Forms.Label _oneSymbolPILbl;
         private System.Windows.Forms.ComboBox _oneSymbolPICmb;
         private System.Windows.Forms.DataGridView _oneSymbolRelateGV;
+        private System.Windows.Forms.Button _filterDownVolMinBtn;
+        private System.Windows.Forms.Button _filterDownVolMidBtn;
+        private System.Windows.Forms.Button _filterDownVolMostBtn;
+        private System.Windows.Forms.Button _filterUpVolMinBtn;
+        private System.Windows.Forms.Button _filterUpVolMidBtn;
+        private System.Windows.Forms.Button _filterUpVolMostBtn;
     }
 }
 

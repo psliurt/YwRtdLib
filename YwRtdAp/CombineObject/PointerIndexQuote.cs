@@ -37,12 +37,12 @@ namespace YwRtdAp.CombineObject
         /// 預估量
         /// </summary>
         [DisplayName("預估量")]
-        public string PredictVolume { get { return this._core.PredictVolume; } }
+        public decimal? PredictVolume { get { return this._core.PredictVolume; } }
         /// <summary>
         /// 成交量
         /// </summary>
         [DisplayName("成交量")]
-        public string CumulativeVolume { get { return this._core.CumulativeVolume; } }
+        public decimal? CumulativeVolume { get { return this._core.CumulativeVolume; } }
         /// <summary>
         /// 昨量
         /// </summary>
@@ -52,7 +52,7 @@ namespace YwRtdAp.CombineObject
         /// 量增減
         /// </summary>
         [DisplayName("量增減")]
-        public string VolumeStrength { get { return this._core.VolumeStrength; } }
+        public decimal? VolumeStrength { get { return this._core.VolumeStrength; } }
         /// <summary>
         /// 成交/淨值
         /// </summary>

@@ -759,7 +759,11 @@ namespace YwRtdLib
                     info.YwFieldType == YwField.PreOpenBidPrice ||
                     info.YwFieldType == YwField.PreOpenBidVolume ||
                     info.YwFieldType == YwField.PreOpenPrice ||
-                    info.YwFieldType == YwField.PreOpenVolume)
+                    info.YwFieldType == YwField.PreOpenVolume ||
+                    info.YwFieldType == YwField.Volume ||
+                    info.YwFieldType == YwField.CumulativeVolume ||
+                    info.YwFieldType == YwField.PredictVolume ||
+                    info.YwFieldType == YwField.VolumeStrength)
                 {
                     p.SetValue(o, UtilKit.RoundToDecimal(data));
                     return;

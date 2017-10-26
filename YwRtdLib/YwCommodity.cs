@@ -27,7 +27,7 @@ namespace YwRtdLib
         }
 
         /// <summary>
-        /// 商品符號
+        /// 商品符號代號
         /// </summary>
         private string _symbol;
         public bool SymbolSet = false;
@@ -42,7 +42,7 @@ namespace YwRtdLib
         }
 
         /// <summary>
-        /// 當前價格
+        /// 當前價格, 成交/淨值
         /// </summary>
         private string _price;
         public bool IsPriceUpdate = false;
@@ -63,6 +63,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 漲跌
+        /// </summary>
         private string _change;
         public bool IsChangeUpdate = false;
         public string Change
@@ -82,6 +85,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 振幅
+        /// </summary>
         private decimal? _changeRange;
         public bool IsChangeRangeUpdate = false;
         public decimal? ChangeRange
@@ -101,6 +107,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 漲跌幅 %
+        /// </summary>
         private decimal? _changePercent;
         public bool IsChangePercentUpdate = false;
         public decimal? ChangePercent
@@ -120,6 +129,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 參考價
+        /// </summary>
         private string _reference;
         public bool IsReferenceUpdate = false;
         public string Reference
@@ -139,6 +151,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 開盤價
+        /// </summary>
         private string _open;
         public bool IsOpenUpdate = false;
         public string Open
@@ -158,6 +173,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 當日最高價
+        /// </summary>
         private string _high;
         public bool IsHighUpdate = false;
         public string High
@@ -177,7 +195,9 @@ namespace YwRtdLib
             }
         }
 
-
+        /// <summary>
+        /// 當日最低價
+        /// </summary>
         private string _low;
         public bool IsLowUpdate = false;
         public string Low
@@ -197,6 +217,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 漲停價
+        /// </summary>
         private string _ceil;
         public bool IsCeilUpdate = false;
         public string Ceil
@@ -216,6 +239,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 跌停價
+        /// </summary>
         private string _floor;
         public bool IsFloorUpdate = false;
         public string Floor
@@ -235,7 +261,9 @@ namespace YwRtdLib
             }
         }
 
-
+        /// <summary>
+        /// 類別
+        /// </summary>
         private string _groupName;
         public bool GroupNameSet = false;
         public string GroupName
@@ -251,6 +279,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 資訊
+        /// </summary>
         private string _information;
         public bool InformationSet = false;
         public string Information
@@ -263,9 +294,12 @@ namespace YwRtdLib
             }
         }
 
-        private string _volume;
+        /// <summary>
+        /// 單量
+        /// </summary>
+        private decimal? _volume;
         public bool IsVolumeUpdate = false;
-        public string Volume
+        public decimal? Volume
         {
             get { return _volume; }
             set
@@ -282,9 +316,12 @@ namespace YwRtdLib
             }
         }
 
-        private string _cumulativeVolume;
+        /// <summary>
+        /// 成交量
+        /// </summary>
+        private decimal? _cumulativeVolume;
         public bool IsCumulativeVolumeUpdate = false;
-        public string CumulativeVolume
+        public decimal? CumulativeVolume
         {
             get { return _cumulativeVolume; }
             set
@@ -301,9 +338,12 @@ namespace YwRtdLib
             }
         }
 
-        private string _predictVolume;
+        /// <summary>
+        /// 預估量
+        /// </summary>
+        private decimal? _predictVolume;
         public bool IsPredictVolumeUpdate = false;
-        public string PredictVolume
+        public decimal? PredictVolume
         {
             get { return _predictVolume; }
             set
@@ -320,9 +360,12 @@ namespace YwRtdLib
             }
         }
 
-        private string _volumeStrength;
+        /// <summary>
+        /// 量增減
+        /// </summary>
+        private decimal? _volumeStrength;
         public bool IsVolumeStrengthUpdate = false;
-        public string VolumeStrength
+        public decimal? VolumeStrength
         {
             get { return _volumeStrength; }
             set
@@ -339,6 +382,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 委買價
+        /// </summary>
         private string _bidPrice;
         public bool IsBidPriceUpdate = false;
         public string BidPrice
@@ -358,6 +404,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 委賣價
+        /// </summary>
         private string _askPrice;
         public bool IsAskPriceUpdate = false;
         public string AskPrice
@@ -377,6 +426,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 買量
+        /// </summary>
         private string _bidVolume;
         public bool IsBidVolumeUpdate = false;
         public string BidVolume
@@ -396,6 +448,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 賣量
+        /// </summary>
         private string _askVolume;
         public bool IsAskVolumeUpdate = false;
         public string AskVolume
@@ -415,6 +470,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 昨日最高價
+        /// </summary>
         private string _priorHigh;
         public bool IsPriorHighUpdate = false;
         public string PriorHigh
@@ -434,6 +492,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 昨日最低價
+        /// </summary>
         private string _priorLow;
         public bool IsPriorLowUpdate = false;
         public string PriorLow
@@ -453,6 +514,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 昨天收盤價
+        /// </summary>
         private string _priorPrice;
         public bool IsPriorPriceUpdate = false;
         public string PriorPrice
@@ -472,6 +536,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 昨量
+        /// </summary>
         private string _priorVolume;
         public bool IsPriorVolumeUpdate = false;
         public string PriorVolume
@@ -491,6 +558,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 資料時間
+        /// </summary>
         private string _time;
         public bool IsTimeUpdate = false;
         public string Time
@@ -510,6 +580,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 成交金額
+        /// </summary>
         private string _amount;
         public bool IsAmountUpdate = false;
         public string Amount
@@ -529,6 +602,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 市值
+        /// </summary>
         private string _marketValue;
         public bool IsMarketValueUpdate = false;
         public string MarketValue
@@ -548,6 +624,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 發行量
+        /// </summary>
         private string _issue;
         public bool IsIssueUpdate = false;
         public string Issue
@@ -567,6 +646,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 相對市場%
+        /// </summary>
         private decimal? _strengthMarket;
         public bool IsStrengthMarketUpdate = false;
         public decimal? StrengthMarket
@@ -586,6 +668,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 相對類股%
+        /// </summary>
         private decimal? _strengthGroup;
         public bool IsStrengthGroupUpdate = false;
         public decimal? StrengthGroup
@@ -605,6 +690,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 成交量相對市場%
+        /// </summary>
         private decimal? _volumeRatio;
         public bool IsVolumeRatioUpdate = false;
         public decimal? VolumeRatio

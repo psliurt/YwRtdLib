@@ -690,7 +690,7 @@ namespace YwRtdAp
             this._dayTradeSymbols.Clear();
             List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.ChangePercent.HasValue &&
                 x.ChangePercent.Value > 5.01M && x.ChangePercent.Value <= 7.50M &&
-                x.Volume != "" && x.Volume != "無資料").OrderByDescending(x => x.Volume).ToList();
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.Volume).ToList();
 
             this._dayTradeSymbolQuote.Clear();
 
@@ -726,6 +726,15 @@ namespace YwRtdAp
             this._filterDownLowBtn.BackColor = Button.DefaultBackColor;
             this._filterDownMidBtn.BackColor = Button.DefaultBackColor;
             this._filterDownMostBtn.BackColor = Button.DefaultBackColor;
+            this._filterUpVolMostBtn.BackColor = Button.DefaultBackColor;
+            this._filterUpVolMidBtn.BackColor = Button.DefaultBackColor;
+            this._filterUpVolMinBtn.BackColor = Button.DefaultBackColor;
+            this._filterDownVolMostBtn.BackColor = Button.DefaultBackColor;
+            this._filterDownVolMidBtn.BackColor = Button.DefaultBackColor;
+            this._filterDownVolMinBtn.BackColor = Button.DefaultBackColor;
+            
+
+
             clickedBtn.BackColor = Color.LightYellow;
 
         }
@@ -738,7 +747,7 @@ namespace YwRtdAp
             List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.Ceil == x.Price &&
                 x.Ceil != "" && x.Ceil != "無資料" &&
                 x.Price != "" && x.Price != "無資料" &&
-                x.Volume != "" && x.Volume != "無資料").OrderByDescending(x => x.Volume).ToList();
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.CumulativeVolume).ToList();
 
             this._dayTradeSymbolQuote.Clear();
             
@@ -764,7 +773,7 @@ namespace YwRtdAp
             List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.Floor == x.Price &&
                 x.Floor != "" && x.Floor != "無資料" &&
                 x.Price != "" && x.Price != "無資料" &&
-                x.Volume != "" && x.Volume != "無資料").OrderByDescending(x => x.Volume).ToList();
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.CumulativeVolume).ToList();
 
             this._dayTradeSymbolQuote.Clear();
 
@@ -787,8 +796,8 @@ namespace YwRtdAp
             this._dispatcher.RemoveSymbolGridMap(this._dayTradeSymbols, this._dayTradeStockGV);
             this._dayTradeSymbols.Clear();
             List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.ChangePercent.HasValue &&
-                x.ChangePercent.Value > 7.50M && x.ChangePercent.Value <= 9.69M &&                
-                x.Volume != "" && x.Volume != "無資料").OrderByDescending(x => x.Volume).ToList();
+                x.ChangePercent.Value > 7.50M && x.ChangePercent.Value <= 9.69M &&
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.CumulativeVolume).ToList();
 
             this._dayTradeSymbolQuote.Clear();
 
@@ -815,7 +824,7 @@ namespace YwRtdAp
             this._dayTradeSymbols.Clear();
             List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.ChangePercent.HasValue &&
                 x.ChangePercent.Value > 5.01M && x.ChangePercent.Value <= 7.50M &&
-                x.Volume != "" && x.Volume != "無資料").OrderByDescending(x => x.Volume).ToList();
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.CumulativeVolume).ToList();
 
             this._dayTradeSymbolQuote.Clear();
 
@@ -846,7 +855,7 @@ namespace YwRtdAp
             this._dayTradeSymbols.Clear();
             List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.ChangePercent.HasValue &&
                 x.ChangePercent.Value > 2.50M && x.ChangePercent.Value <= 5.01M &&
-                x.Volume != "" && x.Volume != "無資料").OrderByDescending(x => x.Volume).ToList();
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.CumulativeVolume).ToList();
 
             this._dayTradeSymbolQuote.Clear();
 
@@ -874,7 +883,7 @@ namespace YwRtdAp
             this._dayTradeSymbols.Clear();
             List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.ChangePercent.HasValue &&
                 x.ChangePercent.Value >= -9.69M && x.ChangePercent.Value < -7.51M &&
-                x.Volume != "" && x.Volume != "無資料").OrderByDescending(x => x.Volume).ToList();
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.CumulativeVolume).ToList();
 
             this._dayTradeSymbolQuote.Clear();
 
@@ -901,7 +910,7 @@ namespace YwRtdAp
             this._dayTradeSymbols.Clear();
             List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.ChangePercent.HasValue &&
                 x.ChangePercent.Value >= -7.50M && x.ChangePercent.Value < -5.01M &&
-                x.Volume != "" && x.Volume != "無資料").OrderByDescending(x => x.Volume).ToList();
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.CumulativeVolume).ToList();
 
             this._dayTradeSymbolQuote.Clear();
 
@@ -928,7 +937,7 @@ namespace YwRtdAp
             this._dayTradeSymbols.Clear();
             List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.ChangePercent.HasValue &&
                 x.ChangePercent.Value >= -5.00M && x.ChangePercent.Value < -2.50M &&
-                x.Volume != "" && x.Volume != "無資料").OrderByDescending(x => x.Volume).ToList();
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.CumulativeVolume).ToList();
 
             this._dayTradeSymbolQuote.Clear();
 
@@ -2153,6 +2162,156 @@ namespace YwRtdAp
                     return;
                 }
             }
+        }
+
+        private void _filterUpVolMostBtn_Click(object sender, EventArgs e)
+        {
+            DisplayDayTradeBtnColor(this._filterUpVolMostBtn);
+            this._dispatcher.RemoveSymbolGridMap(this._dayTradeSymbols, this._dayTradeStockGV);
+            this._dayTradeSymbols.Clear();
+            List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.ChangePercent.HasValue &&
+                x.ChangePercent.Value > 0M && 
+                x.VolumeStrength >= 700M &&
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.CumulativeVolume).ToList();
+
+            this._dayTradeSymbolQuote.Clear();
+
+            for (int i = 0; i < filteredCommodities.Count; i++)
+            {
+                YwCommodity c = filteredCommodities[i];
+                this._dayTradeSymbolQuote.Add(new DayTradeQuote(ref c));
+                this._dispatcher.AddSymbolGridMap(c.Symbol, this._dayTradeStockGV, typeof(DayTradeQuote));
+                this._dayTradeSymbols.Add(c.Symbol);
+            }
+
+            this._dayTradeStockGV.DataSource = null;
+            this._dayTradeStockGV.DataSource = this._dayTradeSymbolQuote;
+            this._dayTradeStockGV.Refresh(); 
+        }
+
+        private void _filterUpVolMidBtn_Click(object sender, EventArgs e)
+        {
+            DisplayDayTradeBtnColor(this._filterUpVolMidBtn);
+            this._dispatcher.RemoveSymbolGridMap(this._dayTradeSymbols, this._dayTradeStockGV);
+            this._dayTradeSymbols.Clear();
+            List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.ChangePercent.HasValue &&
+                x.ChangePercent.Value > 0M &&
+                x.VolumeStrength >= 500M &&
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.CumulativeVolume).ToList();
+
+            this._dayTradeSymbolQuote.Clear();
+
+            for (int i = 0; i < filteredCommodities.Count; i++)
+            {
+                YwCommodity c = filteredCommodities[i];
+                this._dayTradeSymbolQuote.Add(new DayTradeQuote(ref c));
+                this._dispatcher.AddSymbolGridMap(c.Symbol, this._dayTradeStockGV, typeof(DayTradeQuote));
+                this._dayTradeSymbols.Add(c.Symbol);
+            }
+
+            this._dayTradeStockGV.DataSource = null;
+            this._dayTradeStockGV.DataSource = this._dayTradeSymbolQuote;
+            this._dayTradeStockGV.Refresh(); 
+        }
+
+        private void _filterUpVolMinBtn_Click(object sender, EventArgs e)
+        {
+            DisplayDayTradeBtnColor(this._filterUpVolMinBtn);
+            this._dispatcher.RemoveSymbolGridMap(this._dayTradeSymbols, this._dayTradeStockGV);
+            this._dayTradeSymbols.Clear();
+            List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.ChangePercent.HasValue &&
+                x.ChangePercent.Value > 0M &&
+                x.VolumeStrength >= 100M &&
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.CumulativeVolume).ToList();
+
+            this._dayTradeSymbolQuote.Clear();
+
+            for (int i = 0; i < filteredCommodities.Count; i++)
+            {
+                YwCommodity c = filteredCommodities[i];
+                this._dayTradeSymbolQuote.Add(new DayTradeQuote(ref c));
+                this._dispatcher.AddSymbolGridMap(c.Symbol, this._dayTradeStockGV, typeof(DayTradeQuote));
+                this._dayTradeSymbols.Add(c.Symbol);
+            }
+
+            this._dayTradeStockGV.DataSource = null;
+            this._dayTradeStockGV.DataSource = this._dayTradeSymbolQuote;
+            this._dayTradeStockGV.Refresh(); 
+        }
+
+        private void _filterDownVolMostBtn_Click(object sender, EventArgs e)
+        {
+            DisplayDayTradeBtnColor(this._filterDownVolMostBtn);
+            this._dispatcher.RemoveSymbolGridMap(this._dayTradeSymbols, this._dayTradeStockGV);
+            this._dayTradeSymbols.Clear();
+            List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.ChangePercent.HasValue &&
+                x.ChangePercent.Value < 0M &&
+                x.VolumeStrength >= 700M &&
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.CumulativeVolume).ToList();
+
+            this._dayTradeSymbolQuote.Clear();
+
+            for (int i = 0; i < filteredCommodities.Count; i++)
+            {
+                YwCommodity c = filteredCommodities[i];
+                this._dayTradeSymbolQuote.Add(new DayTradeQuote(ref c));
+                this._dispatcher.AddSymbolGridMap(c.Symbol, this._dayTradeStockGV, typeof(DayTradeQuote));
+                this._dayTradeSymbols.Add(c.Symbol);
+            }
+
+            this._dayTradeStockGV.DataSource = null;
+            this._dayTradeStockGV.DataSource = this._dayTradeSymbolQuote;
+            this._dayTradeStockGV.Refresh(); 
+        }
+
+        private void _filterDownVolMidBtn_Click(object sender, EventArgs e)
+        {
+            DisplayDayTradeBtnColor(this._filterDownVolMidBtn);
+            this._dispatcher.RemoveSymbolGridMap(this._dayTradeSymbols, this._dayTradeStockGV);
+            this._dayTradeSymbols.Clear();
+            List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.ChangePercent.HasValue &&
+                x.ChangePercent.Value < 0M &&
+                x.VolumeStrength >= 500M &&
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.CumulativeVolume).ToList();
+
+            this._dayTradeSymbolQuote.Clear();
+
+            for (int i = 0; i < filteredCommodities.Count; i++)
+            {
+                YwCommodity c = filteredCommodities[i];
+                this._dayTradeSymbolQuote.Add(new DayTradeQuote(ref c));
+                this._dispatcher.AddSymbolGridMap(c.Symbol, this._dayTradeStockGV, typeof(DayTradeQuote));
+                this._dayTradeSymbols.Add(c.Symbol);
+            }
+
+            this._dayTradeStockGV.DataSource = null;
+            this._dayTradeStockGV.DataSource = this._dayTradeSymbolQuote;
+            this._dayTradeStockGV.Refresh(); 
+        }
+
+        private void _filterDownVolMinBtn_Click(object sender, EventArgs e)
+        {
+            DisplayDayTradeBtnColor(this._filterDownVolMinBtn);
+            this._dispatcher.RemoveSymbolGridMap(this._dayTradeSymbols, this._dayTradeStockGV);
+            this._dayTradeSymbols.Clear();
+            List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.ChangePercent.HasValue &&
+                x.ChangePercent.Value < 0M &&
+                x.VolumeStrength >= 100M &&
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.CumulativeVolume).ToList();
+
+            this._dayTradeSymbolQuote.Clear();
+
+            for (int i = 0; i < filteredCommodities.Count; i++)
+            {
+                YwCommodity c = filteredCommodities[i];
+                this._dayTradeSymbolQuote.Add(new DayTradeQuote(ref c));
+                this._dispatcher.AddSymbolGridMap(c.Symbol, this._dayTradeStockGV, typeof(DayTradeQuote));
+                this._dayTradeSymbols.Add(c.Symbol);
+            }
+
+            this._dayTradeStockGV.DataSource = null;
+            this._dayTradeStockGV.DataSource = this._dayTradeSymbolQuote;
+            this._dayTradeStockGV.Refresh(); 
         }        
     }
 }
