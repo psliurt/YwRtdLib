@@ -28,11 +28,11 @@ namespace YwRtdAp.CombineObject
         [DisplayName("名稱")]
         public string Name { get { return this._core.Name; } }
 
-        /// <summary>
-        /// 股本
-        /// </summary>
-        [DisplayName("股本")]
-        public string Capital { get { return this._core.Capital; } }
+        ///// <summary>
+        ///// 股本
+        ///// </summary>
+        //[DisplayName("股本")]
+        //public string Capital { get { return this._core.Capital; } }
         /// <summary>
         /// 預估量
         /// </summary>
@@ -54,21 +54,6 @@ namespace YwRtdAp.CombineObject
         [DisplayName("量增減")]
         public decimal? VolumeStrength { get { return this._core.VolumeStrength; } }
         /// <summary>
-        /// 成交/淨值
-        /// </summary>
-        [DisplayName("成交/淨值")]
-        public string Price { get { return this._core.Price; } }
-        /// <summary>
-        /// 漲跌
-        /// </summary>
-        [DisplayName("漲跌")]
-        public string Change { get { return this._core.Change; } }
-        /// <summary>
-        /// 漲跌幅
-        /// </summary>
-        [DisplayName("漲跌幅")]
-        public decimal? ChangePercent { get { return this._core.ChangePercent; } }
-        /// <summary>
         /// 開盤價
         /// </summary>
         [DisplayName("開盤價")]
@@ -79,20 +64,43 @@ namespace YwRtdAp.CombineObject
         [DisplayName("最高價")]
         public string High { get { return this._core.High; } }
         /// <summary>
+        /// 成交/淨值
+        /// </summary>
+        [DisplayName("成交價")]
+        public string Price { get { return this._core.Price; } }
+        /// <summary>
         /// 最低價
         /// </summary>
         [DisplayName("最低價")]
         public string Low { get { return this._core.Low; } }
+
         /// <summary>
-        /// 漲停價
+        /// 單量
         /// </summary>
-        [DisplayName("漲停價")]
-        public string Ceil { get { return this._core.Ceil; } }
+        [DisplayName("單量")]
+        public decimal? Volume { get { return this._core.Volume; } }
+
         /// <summary>
-        /// 跌停價
+        /// 漲跌
         /// </summary>
-        [DisplayName("跌停價")]
-        public string Floor { get { return this._core.Floor; } }
+        [DisplayName("漲跌")]
+        public string Change { get { return this._core.Change; } }
+        /// <summary>
+        /// 漲跌幅
+        /// </summary>
+        [DisplayName("漲跌幅")]
+        public decimal? ChangePercent { get { return this._core.ChangePercent; } }
+        
+        ///// <summary>
+        ///// 漲停價
+        ///// </summary>
+        //[DisplayName("漲停價")]
+        //public string Ceil { get { return this._core.Ceil; } }
+        ///// <summary>
+        ///// 跌停價
+        ///// </summary>
+        //[DisplayName("跌停價")]
+        //public string Floor { get { return this._core.Floor; } }
         /// <summary>
         /// 昨高
         /// </summary>
@@ -108,11 +116,11 @@ namespace YwRtdAp.CombineObject
         /// </summary>
         [DisplayName("昨價")]
         public string PriorPrice { get { return this._core.PriorPrice; } }
-        /// <summary>
-        /// 資訊
-        /// </summary>
-        [DisplayName("資訊")]
-        public string Information { get { return this._core.Information; } }
+        ///// <summary>
+        ///// 資訊
+        ///// </summary>
+        //[DisplayName("資訊")]
+        //public string Information { get { return this._core.Information; } }
 
         
     }
