@@ -2312,6 +2312,35 @@ namespace YwRtdAp
             this._dayTradeStockGV.DataSource = null;
             this._dayTradeStockGV.DataSource = this._dayTradeSymbolQuote;
             this._dayTradeStockGV.Refresh(); 
-        }        
+        }
+
+        private void _dayTradeStockGV_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (this._dayTradeStockGV.DataSource == null)
+            {
+                e.FormattingApplied = true;
+                return;
+            }
+            if (this._dayTradeStockGV.Columns[e.ColumnIndex].Name == "VolumeStrength")
+            {
+                decimal upOrDown = Convert.ToDecimal(this._dayTradeStockGV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
+                if (upOrDown > 0)
+                {
+                    this._dayTradeStockGV.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.Red;                    
+                    return;
+                }
+                if (upOrDown < 0)
+                {
+                    this._dayTradeStockGV.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.Green;                 
+                    return;
+                }
+                else
+                {                    
+                    return;
+                }
+            }
+        }
+
+        
     }
 }

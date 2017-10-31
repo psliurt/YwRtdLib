@@ -33,6 +33,12 @@
             this._addSymbolBtn = new System.Windows.Forms.Button();
             this._switchTabCtrl = new System.Windows.Forms.TabControl();
             this._dayTradePage = new System.Windows.Forms.TabPage();
+            this._filterDownVolMinBtn = new System.Windows.Forms.Button();
+            this._filterDownVolMidBtn = new System.Windows.Forms.Button();
+            this._filterDownVolMostBtn = new System.Windows.Forms.Button();
+            this._filterUpVolMinBtn = new System.Windows.Forms.Button();
+            this._filterUpVolMidBtn = new System.Windows.Forms.Button();
+            this._filterUpVolMostBtn = new System.Windows.Forms.Button();
             this._dayTradeStockGV = new System.Windows.Forms.DataGridView();
             this._filterUpLowBtn = new System.Windows.Forms.Button();
             this._filterUpMidBtn = new System.Windows.Forms.Button();
@@ -144,12 +150,6 @@
             this._symbolCatPICmb = new System.Windows.Forms.ComboBox();
             this._symbolCatQueryLbl = new System.Windows.Forms.Label();
             this._symbolCatQueryTxt = new System.Windows.Forms.TextBox();
-            this._filterUpVolMostBtn = new System.Windows.Forms.Button();
-            this._filterUpVolMidBtn = new System.Windows.Forms.Button();
-            this._filterUpVolMinBtn = new System.Windows.Forms.Button();
-            this._filterDownVolMostBtn = new System.Windows.Forms.Button();
-            this._filterDownVolMidBtn = new System.Windows.Forms.Button();
-            this._filterDownVolMinBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this._symbolGV)).BeginInit();
             this._switchTabCtrl.SuspendLayout();
             this._dayTradePage.SuspendLayout();
@@ -247,6 +247,66 @@
             this._dayTradePage.Text = "當沖選股區";
             this._dayTradePage.UseVisualStyleBackColor = true;
             // 
+            // _filterDownVolMinBtn
+            // 
+            this._filterDownVolMinBtn.Location = new System.Drawing.Point(818, 64);
+            this._filterDownVolMinBtn.Name = "_filterDownVolMinBtn";
+            this._filterDownVolMinBtn.Size = new System.Drawing.Size(133, 23);
+            this._filterDownVolMinBtn.TabIndex = 14;
+            this._filterDownVolMinBtn.Text = "下跌 量增 1倍";
+            this._filterDownVolMinBtn.UseVisualStyleBackColor = true;
+            this._filterDownVolMinBtn.Click += new System.EventHandler(this._filterDownVolMinBtn_Click);
+            // 
+            // _filterDownVolMidBtn
+            // 
+            this._filterDownVolMidBtn.Location = new System.Drawing.Point(818, 35);
+            this._filterDownVolMidBtn.Name = "_filterDownVolMidBtn";
+            this._filterDownVolMidBtn.Size = new System.Drawing.Size(133, 23);
+            this._filterDownVolMidBtn.TabIndex = 13;
+            this._filterDownVolMidBtn.Text = "下跌 量增 5倍";
+            this._filterDownVolMidBtn.UseVisualStyleBackColor = true;
+            this._filterDownVolMidBtn.Click += new System.EventHandler(this._filterDownVolMidBtn_Click);
+            // 
+            // _filterDownVolMostBtn
+            // 
+            this._filterDownVolMostBtn.Location = new System.Drawing.Point(818, 6);
+            this._filterDownVolMostBtn.Name = "_filterDownVolMostBtn";
+            this._filterDownVolMostBtn.Size = new System.Drawing.Size(133, 23);
+            this._filterDownVolMostBtn.TabIndex = 12;
+            this._filterDownVolMostBtn.Text = "下跌 量增 7倍";
+            this._filterDownVolMostBtn.UseVisualStyleBackColor = true;
+            this._filterDownVolMostBtn.Click += new System.EventHandler(this._filterDownVolMostBtn_Click);
+            // 
+            // _filterUpVolMinBtn
+            // 
+            this._filterUpVolMinBtn.Location = new System.Drawing.Point(228, 64);
+            this._filterUpVolMinBtn.Name = "_filterUpVolMinBtn";
+            this._filterUpVolMinBtn.Size = new System.Drawing.Size(135, 23);
+            this._filterUpVolMinBtn.TabIndex = 11;
+            this._filterUpVolMinBtn.Text = "上漲 量增 1倍";
+            this._filterUpVolMinBtn.UseVisualStyleBackColor = true;
+            this._filterUpVolMinBtn.Click += new System.EventHandler(this._filterUpVolMinBtn_Click);
+            // 
+            // _filterUpVolMidBtn
+            // 
+            this._filterUpVolMidBtn.Location = new System.Drawing.Point(228, 35);
+            this._filterUpVolMidBtn.Name = "_filterUpVolMidBtn";
+            this._filterUpVolMidBtn.Size = new System.Drawing.Size(135, 23);
+            this._filterUpVolMidBtn.TabIndex = 10;
+            this._filterUpVolMidBtn.Text = "上漲 量增 5倍";
+            this._filterUpVolMidBtn.UseVisualStyleBackColor = true;
+            this._filterUpVolMidBtn.Click += new System.EventHandler(this._filterUpVolMidBtn_Click);
+            // 
+            // _filterUpVolMostBtn
+            // 
+            this._filterUpVolMostBtn.Location = new System.Drawing.Point(228, 6);
+            this._filterUpVolMostBtn.Name = "_filterUpVolMostBtn";
+            this._filterUpVolMostBtn.Size = new System.Drawing.Size(135, 23);
+            this._filterUpVolMostBtn.TabIndex = 9;
+            this._filterUpVolMostBtn.Text = "上漲 量增 7倍";
+            this._filterUpVolMostBtn.UseVisualStyleBackColor = true;
+            this._filterUpVolMostBtn.Click += new System.EventHandler(this._filterUpVolMostBtn_Click);
+            // 
             // _dayTradeStockGV
             // 
             this._dayTradeStockGV.AllowUserToOrderColumns = true;
@@ -261,6 +321,7 @@
             this._dayTradeStockGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this._dayTradeStockGV.Size = new System.Drawing.Size(1168, 468);
             this._dayTradeStockGV.TabIndex = 8;
+            this._dayTradeStockGV.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this._dayTradeStockGV_CellFormatting);
             // 
             // _filterUpLowBtn
             // 
@@ -368,6 +429,8 @@
             // 
             // _oneSymbolRelateGV
             // 
+            this._oneSymbolRelateGV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this._oneSymbolRelateGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this._oneSymbolRelateGV.Location = new System.Drawing.Point(8, 268);
             this._oneSymbolRelateGV.Name = "_oneSymbolRelateGV";
@@ -445,6 +508,8 @@
             // 
             // _oneSymbolQueryGV
             // 
+            this._oneSymbolQueryGV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this._oneSymbolQueryGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this._oneSymbolQueryGV.Location = new System.Drawing.Point(261, 6);
             this._oneSymbolQueryGV.Name = "_oneSymbolQueryGV";
@@ -1389,66 +1454,6 @@
             this._symbolCatQueryTxt.Name = "_symbolCatQueryTxt";
             this._symbolCatQueryTxt.Size = new System.Drawing.Size(144, 22);
             this._symbolCatQueryTxt.TabIndex = 0;
-            // 
-            // _filterUpVolMostBtn
-            // 
-            this._filterUpVolMostBtn.Location = new System.Drawing.Point(228, 6);
-            this._filterUpVolMostBtn.Name = "_filterUpVolMostBtn";
-            this._filterUpVolMostBtn.Size = new System.Drawing.Size(135, 23);
-            this._filterUpVolMostBtn.TabIndex = 9;
-            this._filterUpVolMostBtn.Text = "上漲 量增 7倍";
-            this._filterUpVolMostBtn.UseVisualStyleBackColor = true;
-            this._filterUpVolMostBtn.Click += new System.EventHandler(this._filterUpVolMostBtn_Click);
-            // 
-            // _filterUpVolMidBtn
-            // 
-            this._filterUpVolMidBtn.Location = new System.Drawing.Point(228, 35);
-            this._filterUpVolMidBtn.Name = "_filterUpVolMidBtn";
-            this._filterUpVolMidBtn.Size = new System.Drawing.Size(135, 23);
-            this._filterUpVolMidBtn.TabIndex = 10;
-            this._filterUpVolMidBtn.Text = "上漲 量增 5倍";
-            this._filterUpVolMidBtn.UseVisualStyleBackColor = true;
-            this._filterUpVolMidBtn.Click += new System.EventHandler(this._filterUpVolMidBtn_Click);
-            // 
-            // _filterUpVolMinBtn
-            // 
-            this._filterUpVolMinBtn.Location = new System.Drawing.Point(228, 64);
-            this._filterUpVolMinBtn.Name = "_filterUpVolMinBtn";
-            this._filterUpVolMinBtn.Size = new System.Drawing.Size(135, 23);
-            this._filterUpVolMinBtn.TabIndex = 11;
-            this._filterUpVolMinBtn.Text = "上漲 量增 1倍";
-            this._filterUpVolMinBtn.UseVisualStyleBackColor = true;
-            this._filterUpVolMinBtn.Click += new System.EventHandler(this._filterUpVolMinBtn_Click);
-            // 
-            // _filterDownVolMostBtn
-            // 
-            this._filterDownVolMostBtn.Location = new System.Drawing.Point(818, 6);
-            this._filterDownVolMostBtn.Name = "_filterDownVolMostBtn";
-            this._filterDownVolMostBtn.Size = new System.Drawing.Size(133, 23);
-            this._filterDownVolMostBtn.TabIndex = 12;
-            this._filterDownVolMostBtn.Text = "下跌 量增 7倍";
-            this._filterDownVolMostBtn.UseVisualStyleBackColor = true;
-            this._filterDownVolMostBtn.Click += new System.EventHandler(this._filterDownVolMostBtn_Click);
-            // 
-            // _filterDownVolMidBtn
-            // 
-            this._filterDownVolMidBtn.Location = new System.Drawing.Point(818, 35);
-            this._filterDownVolMidBtn.Name = "_filterDownVolMidBtn";
-            this._filterDownVolMidBtn.Size = new System.Drawing.Size(133, 23);
-            this._filterDownVolMidBtn.TabIndex = 13;
-            this._filterDownVolMidBtn.Text = "下跌 量增 5倍";
-            this._filterDownVolMidBtn.UseVisualStyleBackColor = true;
-            this._filterDownVolMidBtn.Click += new System.EventHandler(this._filterDownVolMidBtn_Click);
-            // 
-            // _filterDownVolMinBtn
-            // 
-            this._filterDownVolMinBtn.Location = new System.Drawing.Point(818, 64);
-            this._filterDownVolMinBtn.Name = "_filterDownVolMinBtn";
-            this._filterDownVolMinBtn.Size = new System.Drawing.Size(133, 23);
-            this._filterDownVolMinBtn.TabIndex = 14;
-            this._filterDownVolMinBtn.Text = "下跌 量增 1倍";
-            this._filterDownVolMinBtn.UseVisualStyleBackColor = true;
-            this._filterDownVolMinBtn.Click += new System.EventHandler(this._filterDownVolMinBtn_Click);
             // 
             // MainForm
             // 
