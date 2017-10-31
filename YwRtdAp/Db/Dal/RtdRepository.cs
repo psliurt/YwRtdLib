@@ -9,7 +9,7 @@ using YwRtdAp.Db.DbObject;
 
 namespace YwRtdAp.Db.Dal
 {
-    class RtdRepository
+    public class RtdRepository
     {
         private string _requestId { get; set; }
 

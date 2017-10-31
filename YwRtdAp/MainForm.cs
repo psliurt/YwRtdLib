@@ -15,6 +15,7 @@ using YwRtdAp.Db.DbObject;
 using YwRtdAp.Db.Dal;
 using YwRtdAp.CombineObject;
 using YwRtdLib;
+using YwRtdAp.Web;
 
 namespace YwRtdAp
 {
@@ -23,8 +24,11 @@ namespace YwRtdAp
     {
         private RtCore _rtdCore = RtCore.Instance();
         private Dispatcher _dispatcher { get; set; }
+        private DailyMarketUpdater _marketUpdater { get; set; }
 
         private ConcurrentDictionary<string, YwCommodity> _commodities { get; set; }
+
+        private ConcurrentDictionary<string, PriorAfterMarketStatistic> _afterMarketData { get; set; }
 
         //private ConcurrentDictionary<string, YwBasicQuote> _subscribeBasicQuote { get; set; }
         //private ConcurrentDictionary<string, YwBest5> _subscribeBest5 { get; set; }
@@ -66,11 +70,13 @@ namespace YwRtdAp
                 ControlStyles.DoubleBuffer, true);
 
             this._commodities = new ConcurrentDictionary<string, YwCommodity>();
+            this._afterMarketData = new ConcurrentDictionary<string, PriorAfterMarketStatistic>();
             this._dispatcher = Dispatcher.Instance(this._rtdCore, this._commodities);
             InitializeComponent();
             SetUpDbPath();           
 
             this._rep = new RtdRepository();
+            this._marketUpdater = DailyMarketUpdater.Initialize(this._afterMarketData, this._rep);
             this._rtdCore.CommodityChangeHandler += _rtdCore_CommodityChangeHandler;
             //this._rtdCore.BasicQuoteHandler += _rtdCore_BasicQuoteHandler;
             //this._rtdCore.Best5Handler += _rtdCore_Best5Handler;
