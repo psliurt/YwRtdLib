@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CombineObject\BizGroupQuote.cs" />
+    <Compile Include="CombineObject\CategoryRelatedQuote.cs" />
     <Compile Include="CombineObject\CombineQuote.cs" />
     <Compile Include="CombineObject\ConceptQuote.cs" />
     <Compile Include="CombineObject\DayTradeQuote.cs" />

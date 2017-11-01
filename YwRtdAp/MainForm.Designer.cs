@@ -51,13 +51,9 @@
             this._stockInfoPage = new System.Windows.Forms.TabPage();
             this._oneSymbolRelateGV = new System.Windows.Forms.DataGridView();
             this._oneSymbolConceptLbl = new System.Windows.Forms.Label();
-            this._oneSymbolConceptCmb = new System.Windows.Forms.ComboBox();
             this._oneSymbolBizGroupLbl = new System.Windows.Forms.Label();
-            this._oneSymbolBizGroupCmb = new System.Windows.Forms.ComboBox();
             this._oneSymbolIndustryLbl = new System.Windows.Forms.Label();
-            this._oneSymbolIndustryCmb = new System.Windows.Forms.ComboBox();
             this._oneSymbolPILbl = new System.Windows.Forms.Label();
-            this._oneSymbolPICmb = new System.Windows.Forms.ComboBox();
             this._oneSymbolQueryGV = new System.Windows.Forms.DataGridView();
             this._oneSymbolQueryClearBtn = new System.Windows.Forms.Button();
             this._oneSymbolQueryBtn = new System.Windows.Forms.Button();
@@ -150,6 +146,10 @@
             this._symbolCatPICmb = new System.Windows.Forms.ComboBox();
             this._symbolCatQueryLbl = new System.Windows.Forms.Label();
             this._symbolCatQueryTxt = new System.Windows.Forms.TextBox();
+            this._oneSymbolBizGroupLB = new System.Windows.Forms.ListBox();
+            this._oneSymbolPILB = new System.Windows.Forms.ListBox();
+            this._oneSymbolIndustryLB = new System.Windows.Forms.ListBox();
+            this._oneSymbolConceptLB = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this._symbolGV)).BeginInit();
             this._switchTabCtrl.SuspendLayout();
             this._dayTradePage.SuspendLayout();
@@ -313,6 +313,7 @@
             this._dayTradeStockGV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this._dayTradeStockGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this._dayTradeStockGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this._dayTradeStockGV.Location = new System.Drawing.Point(6, 93);
             this._dayTradeStockGV.Name = "_dayTradeStockGV";
@@ -405,15 +406,15 @@
             // 
             // _stockInfoPage
             // 
+            this._stockInfoPage.Controls.Add(this._oneSymbolConceptLB);
+            this._stockInfoPage.Controls.Add(this._oneSymbolIndustryLB);
+            this._stockInfoPage.Controls.Add(this._oneSymbolPILB);
+            this._stockInfoPage.Controls.Add(this._oneSymbolBizGroupLB);
             this._stockInfoPage.Controls.Add(this._oneSymbolRelateGV);
             this._stockInfoPage.Controls.Add(this._oneSymbolConceptLbl);
-            this._stockInfoPage.Controls.Add(this._oneSymbolConceptCmb);
             this._stockInfoPage.Controls.Add(this._oneSymbolBizGroupLbl);
-            this._stockInfoPage.Controls.Add(this._oneSymbolBizGroupCmb);
             this._stockInfoPage.Controls.Add(this._oneSymbolIndustryLbl);
-            this._stockInfoPage.Controls.Add(this._oneSymbolIndustryCmb);
             this._stockInfoPage.Controls.Add(this._oneSymbolPILbl);
-            this._stockInfoPage.Controls.Add(this._oneSymbolPICmb);
             this._stockInfoPage.Controls.Add(this._oneSymbolQueryGV);
             this._stockInfoPage.Controls.Add(this._oneSymbolQueryClearBtn);
             this._stockInfoPage.Controls.Add(this._oneSymbolQueryBtn);
@@ -429,12 +430,16 @@
             // 
             // _oneSymbolRelateGV
             // 
-            this._oneSymbolRelateGV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this._oneSymbolRelateGV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this._oneSymbolRelateGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this._oneSymbolRelateGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this._oneSymbolRelateGV.Location = new System.Drawing.Point(8, 268);
             this._oneSymbolRelateGV.Name = "_oneSymbolRelateGV";
+            this._oneSymbolRelateGV.RowHeadersVisible = false;
             this._oneSymbolRelateGV.RowTemplate.Height = 24;
+            this._oneSymbolRelateGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this._oneSymbolRelateGV.Size = new System.Drawing.Size(1166, 293);
             this._oneSymbolRelateGV.TabIndex = 51;
             // 
@@ -447,14 +452,6 @@
             this._oneSymbolConceptLbl.Text = "概念股";
             this._oneSymbolConceptLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // _oneSymbolConceptCmb
-            // 
-            this._oneSymbolConceptCmb.FormattingEnabled = true;
-            this._oneSymbolConceptCmb.Location = new System.Drawing.Point(773, 113);
-            this._oneSymbolConceptCmb.Name = "_oneSymbolConceptCmb";
-            this._oneSymbolConceptCmb.Size = new System.Drawing.Size(248, 20);
-            this._oneSymbolConceptCmb.TabIndex = 49;
-            // 
             // _oneSymbolBizGroupLbl
             // 
             this._oneSymbolBizGroupLbl.Location = new System.Drawing.Point(6, 85);
@@ -463,14 +460,6 @@
             this._oneSymbolBizGroupLbl.TabIndex = 48;
             this._oneSymbolBizGroupLbl.Text = "集團股";
             this._oneSymbolBizGroupLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // _oneSymbolBizGroupCmb
-            // 
-            this._oneSymbolBizGroupCmb.FormattingEnabled = true;
-            this._oneSymbolBizGroupCmb.Location = new System.Drawing.Point(8, 113);
-            this._oneSymbolBizGroupCmb.Name = "_oneSymbolBizGroupCmb";
-            this._oneSymbolBizGroupCmb.Size = new System.Drawing.Size(248, 20);
-            this._oneSymbolBizGroupCmb.TabIndex = 47;
             // 
             // _oneSymbolIndustryLbl
             // 
@@ -481,14 +470,6 @@
             this._oneSymbolIndustryLbl.Text = "產業股";
             this._oneSymbolIndustryLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // _oneSymbolIndustryCmb
-            // 
-            this._oneSymbolIndustryCmb.FormattingEnabled = true;
-            this._oneSymbolIndustryCmb.Location = new System.Drawing.Point(517, 113);
-            this._oneSymbolIndustryCmb.Name = "_oneSymbolIndustryCmb";
-            this._oneSymbolIndustryCmb.Size = new System.Drawing.Size(248, 20);
-            this._oneSymbolIndustryCmb.TabIndex = 45;
-            // 
             // _oneSymbolPILbl
             // 
             this._oneSymbolPILbl.Location = new System.Drawing.Point(259, 85);
@@ -498,18 +479,11 @@
             this._oneSymbolPILbl.Text = "指標股";
             this._oneSymbolPILbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // _oneSymbolPICmb
-            // 
-            this._oneSymbolPICmb.FormattingEnabled = true;
-            this._oneSymbolPICmb.Location = new System.Drawing.Point(261, 113);
-            this._oneSymbolPICmb.Name = "_oneSymbolPICmb";
-            this._oneSymbolPICmb.Size = new System.Drawing.Size(248, 20);
-            this._oneSymbolPICmb.TabIndex = 43;
-            // 
             // _oneSymbolQueryGV
             // 
             this._oneSymbolQueryGV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this._oneSymbolQueryGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this._oneSymbolQueryGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this._oneSymbolQueryGV.Location = new System.Drawing.Point(261, 6);
             this._oneSymbolQueryGV.Name = "_oneSymbolQueryGV";
@@ -581,6 +555,7 @@
             this._filteredPointerIndexGV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this._filteredPointerIndexGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this._filteredPointerIndexGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this._filteredPointerIndexGV.Location = new System.Drawing.Point(3, 38);
             this._filteredPointerIndexGV.Name = "_filteredPointerIndexGV";
@@ -628,6 +603,7 @@
             this._filteredIndustryGV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this._filteredIndustryGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this._filteredIndustryGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this._filteredIndustryGV.Location = new System.Drawing.Point(5, 41);
             this._filteredIndustryGV.Name = "_filteredIndustryGV";
@@ -675,6 +651,7 @@
             this._filteredBizGroupGV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this._filteredBizGroupGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this._filteredBizGroupGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this._filteredBizGroupGV.Location = new System.Drawing.Point(5, 39);
             this._filteredBizGroupGV.Name = "_filteredBizGroupGV";
@@ -722,6 +699,7 @@
             this._filteredConceptGV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this._filteredConceptGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this._filteredConceptGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this._filteredConceptGV.Location = new System.Drawing.Point(3, 39);
             this._filteredConceptGV.Name = "_filteredConceptGV";
@@ -1455,6 +1433,46 @@
             this._symbolCatQueryTxt.Size = new System.Drawing.Size(144, 22);
             this._symbolCatQueryTxt.TabIndex = 0;
             // 
+            // _oneSymbolBizGroupLB
+            // 
+            this._oneSymbolBizGroupLB.FormattingEnabled = true;
+            this._oneSymbolBizGroupLB.ItemHeight = 12;
+            this._oneSymbolBizGroupLB.Location = new System.Drawing.Point(8, 115);
+            this._oneSymbolBizGroupLB.Name = "_oneSymbolBizGroupLB";
+            this._oneSymbolBizGroupLB.Size = new System.Drawing.Size(247, 148);
+            this._oneSymbolBizGroupLB.TabIndex = 52;
+            this._oneSymbolBizGroupLB.SelectedIndexChanged += new System.EventHandler(this._oneSymbolBizGroupLB_SelectedIndexChanged);
+            // 
+            // _oneSymbolPILB
+            // 
+            this._oneSymbolPILB.FormattingEnabled = true;
+            this._oneSymbolPILB.ItemHeight = 12;
+            this._oneSymbolPILB.Location = new System.Drawing.Point(261, 115);
+            this._oneSymbolPILB.Name = "_oneSymbolPILB";
+            this._oneSymbolPILB.Size = new System.Drawing.Size(248, 148);
+            this._oneSymbolPILB.TabIndex = 53;
+            this._oneSymbolPILB.SelectedIndexChanged += new System.EventHandler(this._oneSymbolPILB_SelectedIndexChanged);
+            // 
+            // _oneSymbolIndustryLB
+            // 
+            this._oneSymbolIndustryLB.FormattingEnabled = true;
+            this._oneSymbolIndustryLB.ItemHeight = 12;
+            this._oneSymbolIndustryLB.Location = new System.Drawing.Point(517, 115);
+            this._oneSymbolIndustryLB.Name = "_oneSymbolIndustryLB";
+            this._oneSymbolIndustryLB.Size = new System.Drawing.Size(248, 148);
+            this._oneSymbolIndustryLB.TabIndex = 54;
+            this._oneSymbolIndustryLB.SelectedIndexChanged += new System.EventHandler(this._oneSymbolIndustryLB_SelectedIndexChanged);
+            // 
+            // _oneSymbolConceptLB
+            // 
+            this._oneSymbolConceptLB.FormattingEnabled = true;
+            this._oneSymbolConceptLB.ItemHeight = 12;
+            this._oneSymbolConceptLB.Location = new System.Drawing.Point(773, 115);
+            this._oneSymbolConceptLB.Name = "_oneSymbolConceptLB";
+            this._oneSymbolConceptLB.Size = new System.Drawing.Size(248, 148);
+            this._oneSymbolConceptLB.TabIndex = 55;
+            this._oneSymbolConceptLB.SelectedIndexChanged += new System.EventHandler(this._oneSymbolConceptLB_SelectedIndexChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1602,13 +1620,9 @@
         private System.Windows.Forms.TextBox _oneSymbolQueryTxt;
         private System.Windows.Forms.DataGridView _oneSymbolQueryGV;
         private System.Windows.Forms.Label _oneSymbolConceptLbl;
-        private System.Windows.Forms.ComboBox _oneSymbolConceptCmb;
         private System.Windows.Forms.Label _oneSymbolBizGroupLbl;
-        private System.Windows.Forms.ComboBox _oneSymbolBizGroupCmb;
         private System.Windows.Forms.Label _oneSymbolIndustryLbl;
-        private System.Windows.Forms.ComboBox _oneSymbolIndustryCmb;
         private System.Windows.Forms.Label _oneSymbolPILbl;
-        private System.Windows.Forms.ComboBox _oneSymbolPICmb;
         private System.Windows.Forms.DataGridView _oneSymbolRelateGV;
         private System.Windows.Forms.Button _filterDownVolMinBtn;
         private System.Windows.Forms.Button _filterDownVolMidBtn;
@@ -1616,6 +1630,10 @@
         private System.Windows.Forms.Button _filterUpVolMinBtn;
         private System.Windows.Forms.Button _filterUpVolMidBtn;
         private System.Windows.Forms.Button _filterUpVolMostBtn;
+        private System.Windows.Forms.ListBox _oneSymbolConceptLB;
+        private System.Windows.Forms.ListBox _oneSymbolIndustryLB;
+        private System.Windows.Forms.ListBox _oneSymbolPILB;
+        private System.Windows.Forms.ListBox _oneSymbolBizGroupLB;
     }
 }
 

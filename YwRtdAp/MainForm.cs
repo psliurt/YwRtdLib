@@ -57,8 +57,13 @@ namespace YwRtdAp
         private List<string> _queryOneSymbols { get; set; }
         private List<OneSymbolQuote> _queryOneSymbolQuote { get; set; }
 
+        private List<string> _oneCategoryRelateSymbols { get; set; }
+        private List<CategoryRelatedQuote> _oneCategoryRelateSymbolQuote { get; set; }
+
         private List<string> _dayTradeSymbols { get; set; }
         private List<DayTradeQuote> _dayTradeSymbolQuote { get; set; }
+
+        
 
         private RtdRepository _rep { get; set; }        
 
@@ -108,6 +113,9 @@ namespace YwRtdAp
 
             this._queryOneSymbols = new List<string>();
             this._queryOneSymbolQuote = new List<OneSymbolQuote>();
+
+            this._oneCategoryRelateSymbols = new List<string>();
+            this._oneCategoryRelateSymbolQuote = new List<CategoryRelatedQuote>();
 
             this._dayTradeSymbols = new List<string>();
             this._dayTradeSymbolQuote = new List<DayTradeQuote>();
@@ -1198,7 +1206,7 @@ namespace YwRtdAp
         {
             if (this._filteredIndustryGV.DataSource == null)
             {
-                e.FormattingApplied = true;
+                //e.FormattingApplied = true;
                 return;
             }
             if (this._filteredIndustryGV.Columns[e.ColumnIndex].Name == "Change")
@@ -1207,13 +1215,13 @@ namespace YwRtdAp
                 if (upOrDown > 0)
                 {
                     this._filteredIndustryGV.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
-                    e.FormattingApplied = true;
+                    //e.FormattingApplied = true;
                     return;
                 }
                 if (upOrDown < 0)
                 {
                     this._filteredIndustryGV.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Green;
-                    e.FormattingApplied = true;
+                    //e.FormattingApplied = true;
                     return;
                 }
                 else
@@ -1227,7 +1235,7 @@ namespace YwRtdAp
         {
             if (this._filteredBizGroupGV.DataSource == null)
             {
-                e.FormattingApplied = true;
+                //e.FormattingApplied = true;
                 return;
             }
             if (this._filteredBizGroupGV.Columns[e.ColumnIndex].Name == "Change")
@@ -1236,13 +1244,13 @@ namespace YwRtdAp
                 if (upOrDown > 0)
                 {
                     this._filteredBizGroupGV.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
-                    e.FormattingApplied = true;
+                    //e.FormattingApplied = true;
                     return;
                 }
                 if (upOrDown < 0)
                 {
                     this._filteredBizGroupGV.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Green;
-                    e.FormattingApplied = true;
+                    //e.FormattingApplied = true;
                     return;
                 }
                 else
@@ -1256,7 +1264,7 @@ namespace YwRtdAp
         {
             if (this._filteredConceptGV.DataSource == null)
             {
-                e.FormattingApplied = true;
+                //e.FormattingApplied = true;
                 return;
             }
             if (this._filteredConceptGV.Columns[e.ColumnIndex].Name == "Change")
@@ -1265,13 +1273,13 @@ namespace YwRtdAp
                 if (upOrDown > 0)
                 {
                     this._filteredConceptGV.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
-                    e.FormattingApplied = true;
+                    //e.FormattingApplied = true;
                     return;
                 }
                 if (upOrDown < 0)
                 {
                     this._filteredConceptGV.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Green;
-                    e.FormattingApplied = true;
+                    //e.FormattingApplied = true;
                     return;
                 }
                 else
@@ -1424,7 +1432,7 @@ namespace YwRtdAp
         {
             if (this._filteredPointerIndexGV.DataSource == null)
             {
-                e.FormattingApplied = true;
+                //e.FormattingApplied = true;
                 return;
             }
             if (this._filteredPointerIndexGV.Columns[e.ColumnIndex].Name == "Change")
@@ -1433,13 +1441,13 @@ namespace YwRtdAp
                 if (upOrDown > 0)
                 {
                     this._filteredPointerIndexGV.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
-                    e.FormattingApplied = true;
+                    //e.FormattingApplied = true;
                     return;
                 }
                 if (upOrDown < 0)
                 {
                     this._filteredPointerIndexGV.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Green;
-                    e.FormattingApplied = true;
+                    //e.FormattingApplied = true;
                     return;
                 }
                 else
@@ -2099,45 +2107,86 @@ namespace YwRtdAp
             this._oneSymbolQueryGV.DataSource = this._queryOneSymbolQuote;
             this._oneSymbolQueryGV.Refresh();
 
-            this._oneSymbolPICmb.DataSource = null;
+            this._oneSymbolPILB.DataSource = null;
             var allPointerIndex = from sym in this._rep.Query<PointerIndexSymbol>(x => x.SymbolId == symbolObj.Id)
                                       join pi in this._rep.FetchAll<PointerIndex>()
                                       on sym.PointerIndexId equals pi.Id
-                                      select pi;            
+                                      select pi;
 
-            this._oneSymbolPICmb.ValueMember = "Code";
-            this._oneSymbolPICmb.DisplayMember = "PointerName";
-            this._oneSymbolPICmb.DataSource = allPointerIndex.ToList();            
+            this._oneSymbolPILB.ValueMember = "Code";
+            this._oneSymbolPILB.DisplayMember = "PointerName";
+            this._oneSymbolPILB.DataSource = allPointerIndex.ToList();
 
-            this._oneSymbolIndustryCmb.DataSource = null;
+            this._oneSymbolIndustryLB.DataSource = null;
             var allIndustry = from sym in this._rep.Query<IndustrySymbol>(x => x.SymbolId == symbolObj.Id)
                                   join ind in this._rep.FetchAll<Industry>()
                                   on sym.IndustryId equals ind.Id
                                   select ind;
 
-            this._oneSymbolIndustryCmb.ValueMember = "Code";
-            this._oneSymbolIndustryCmb.DisplayMember = "IndustryName";
-            this._oneSymbolIndustryCmb.DataSource = allIndustry.ToList();
+            this._oneSymbolIndustryLB.ValueMember = "Code";
+            this._oneSymbolIndustryLB.DisplayMember = "IndustryName";
+            this._oneSymbolIndustryLB.DataSource = allIndustry.ToList();
 
-            this._oneSymbolBizGroupCmb.DataSource = null;
+            this._oneSymbolBizGroupLB.DataSource = null;
             var allBizGroup = from sym in this._rep.Query<BizGroupSymbol>(x => x.SymbolId == symbolObj.Id)
                                   join biz in this._rep.FetchAll<BizGroup>()
                                   on sym.BizGroupId equals biz.Id
                                   select biz;
+            
+            this._oneSymbolBizGroupLB.ValueMember = "Code";
+            this._oneSymbolBizGroupLB.DisplayMember = "GroupName";
+            this._oneSymbolBizGroupLB.DataSource = allBizGroup.ToList();
 
-            this._oneSymbolBizGroupCmb.ValueMember = "Code";
-            this._oneSymbolBizGroupCmb.DisplayMember = "GroupName";
-            this._oneSymbolBizGroupCmb.DataSource = allBizGroup.ToList();
-
-            this._oneSymbolConceptCmb.DataSource = null;
+            this._oneSymbolConceptLB.DataSource = null;
             var allConcept = from sym in this._rep.Query<ConceptSymbol>(x => x.SymbolId == symbolObj.Id)
                                  join con in this._rep.FetchAll<Concept>()
                                  on sym.ConceptId equals con.Id
                                  select con.ConceptName;
 
-            this._oneSymbolConceptCmb.ValueMember = "Code";
-            this._oneSymbolConceptCmb.DisplayMember = "ConceptName";
-            this._oneSymbolConceptCmb.DataSource = allConcept.ToList();
+            this._oneSymbolConceptLB.ValueMember = "Code";
+            this._oneSymbolConceptLB.DisplayMember = "ConceptName";
+            this._oneSymbolConceptLB.DataSource = allConcept.ToList();
+
+
+            //this._oneSymbolPICmb.DataSource = null;
+            //var allPointerIndex = from sym in this._rep.Query<PointerIndexSymbol>(x => x.SymbolId == symbolObj.Id)
+            //                          join pi in this._rep.FetchAll<PointerIndex>()
+            //                          on sym.PointerIndexId equals pi.Id
+            //                          select pi;            
+
+            //this._oneSymbolPICmb.ValueMember = "Code";
+            //this._oneSymbolPICmb.DisplayMember = "PointerName";
+            //this._oneSymbolPICmb.DataSource = allPointerIndex.ToList();            
+
+            //this._oneSymbolIndustryCmb.DataSource = null;
+            //var allIndustry = from sym in this._rep.Query<IndustrySymbol>(x => x.SymbolId == symbolObj.Id)
+            //                      join ind in this._rep.FetchAll<Industry>()
+            //                      on sym.IndustryId equals ind.Id
+            //                      select ind;
+
+            //this._oneSymbolIndustryCmb.ValueMember = "Code";
+            //this._oneSymbolIndustryCmb.DisplayMember = "IndustryName";
+            //this._oneSymbolIndustryCmb.DataSource = allIndustry.ToList();
+
+            //this._oneSymbolBizGroupCmb.DataSource = null;
+            //var allBizGroup = from sym in this._rep.Query<BizGroupSymbol>(x => x.SymbolId == symbolObj.Id)
+            //                      join biz in this._rep.FetchAll<BizGroup>()
+            //                      on sym.BizGroupId equals biz.Id
+            //                      select biz;
+
+            //this._oneSymbolBizGroupCmb.ValueMember = "Code";
+            //this._oneSymbolBizGroupCmb.DisplayMember = "GroupName";
+            //this._oneSymbolBizGroupCmb.DataSource = allBizGroup.ToList();
+
+            //this._oneSymbolConceptCmb.DataSource = null;
+            //var allConcept = from sym in this._rep.Query<ConceptSymbol>(x => x.SymbolId == symbolObj.Id)
+            //                     join con in this._rep.FetchAll<Concept>()
+            //                     on sym.ConceptId equals con.Id
+            //                     select con.ConceptName;
+
+            //this._oneSymbolConceptCmb.ValueMember = "Code";
+            //this._oneSymbolConceptCmb.DisplayMember = "ConceptName";
+            //this._oneSymbolConceptCmb.DataSource = allConcept.ToList();
 
         }
 
@@ -2145,7 +2194,7 @@ namespace YwRtdAp
         {
             if (this._oneSymbolQueryGV.DataSource == null)
             {
-                e.FormattingApplied = true;
+                //e.FormattingApplied = true;
                 return;
             }
             if (this._oneSymbolQueryGV.Columns[e.ColumnIndex].Name == "Change")
@@ -2154,13 +2203,13 @@ namespace YwRtdAp
                 if (upOrDown > 0)
                 {
                     this._oneSymbolQueryGV.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
-                    e.FormattingApplied = true;
+                    //e.FormattingApplied = true;
                     return;
                 }
                 if (upOrDown < 0)
                 {
                     this._oneSymbolQueryGV.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Green;
-                    e.FormattingApplied = true;
+                    //e.FormattingApplied = true;
                     return;
                 }
                 else
@@ -2324,7 +2373,7 @@ namespace YwRtdAp
         {
             if (this._dayTradeStockGV.DataSource == null)
             {
-                e.FormattingApplied = true;
+                //e.FormattingApplied = true;
                 return;
             }
             if (this._dayTradeStockGV.Columns[e.ColumnIndex].Name == "VolumeStrength")
@@ -2345,6 +2394,53 @@ namespace YwRtdAp
                     return;
                 }
             }
+        }
+
+        private void _oneSymbolBizGroupLB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BizGroup bizGrp = this._oneSymbolBizGroupLB.SelectedItem as BizGroup;
+            string bizGroupCode = bizGrp.Code;
+            var selectedBizGroup = this._rep.Query<BizGroup>(x => x.Code == bizGroupCode);
+            var allBizGroupSymbolMap = this._rep.FetchAll<BizGroupSymbol>();
+            var symbolIdList = (from bizGroups in selectedBizGroup
+                                join symbols in allBizGroupSymbolMap
+                                on bizGroups.Id equals symbols.BizGroupId
+                                select symbols.SymbolId).ToList();
+            List<string> symbolCodes = this._rep.Query<Symbol>(x => symbolIdList.Contains(x.Id)).Select(x => x.Code).ToList();
+
+            this._dispatcher.RemoveSymbolGridMap(this._oneCategoryRelateSymbols, this._oneSymbolRelateGV);
+            this._oneCategoryRelateSymbols.Clear();
+
+            List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => symbolCodes.Contains(x.Symbol)).OrderByDescending(x => x.CumulativeVolume).ToList();            
+
+            this._oneCategoryRelateSymbolQuote.Clear();
+
+            for (int i = 0; i < filteredCommodities.Count; i++)
+            {
+                YwCommodity c = filteredCommodities[i];
+                this._oneCategoryRelateSymbolQuote.Add(new CategoryRelatedQuote(ref c));
+                this._dispatcher.AddSymbolGridMap(c.Symbol, this._oneSymbolRelateGV, typeof(CategoryRelatedQuote));
+                this._oneCategoryRelateSymbols.Add(c.Symbol);
+            }
+
+            this._oneSymbolRelateGV.DataSource = null;
+            this._oneSymbolRelateGV.DataSource = this._oneCategoryRelateSymbolQuote;
+            this._oneSymbolRelateGV.Refresh();
+        }
+
+        private void _oneSymbolPILB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PointerIndex pi = this._oneSymbolPILB.SelectedItem as PointerIndex;
+        }
+
+        private void _oneSymbolIndustryLB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Industry ind = this._oneSymbolIndustryLB.SelectedItem as Industry;
+        }
+
+        private void _oneSymbolConceptLB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Concept con = this._oneSymbolConceptLB.SelectedItem as Concept;
         }
 
         
