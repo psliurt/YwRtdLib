@@ -53,6 +53,11 @@ namespace YwRtdAp.CombineObject
         [DisplayName("量增減")]
         public decimal? VolumeStrength { get { return this._core.VolumeStrength; } }
         /// <summary>
+        /// 漲跌幅
+        /// </summary>
+        [DisplayName("漲跌幅")]
+        public decimal? ChangePercent { get { return this._core.ChangePercent; } }
+        /// <summary>
         /// 成交/淨值
         /// </summary>
         [DisplayName("成交/淨值")]
@@ -62,11 +67,7 @@ namespace YwRtdAp.CombineObject
         /// </summary>
         [DisplayName("漲跌")]
         public string Change { get { return this._core.Change; } }
-        /// <summary>
-        /// 漲跌幅
-        /// </summary>
-        [DisplayName("漲跌幅")]
-        public decimal? ChangePercent { get { return this._core.ChangePercent; } }
+        
         /// <summary>
         /// 開盤價
         /// </summary>

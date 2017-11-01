@@ -1122,7 +1122,7 @@ namespace YwRtdAp
             this._selectedIndustrySymbols.Clear();            
             List<string> symbolCodes = this._rep.Query<Symbol>(x => symbolIdList.Contains(x.Id)).Select(x => x.Code).ToList();
             this._selectedIndustrySymbols.AddRange(symbolCodes);
-            List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => symbolCodes.Contains(x.Symbol)).ToList();
+            List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => symbolCodes.Contains(x.Symbol)).OrderByDescending(x => x.ChangePercent).ToList();
             this._selectedIndustryQuote.Clear();
             for(int i = 0 ;i < filteredCommodities.Count;i ++)
             {
@@ -1151,7 +1151,7 @@ namespace YwRtdAp
             List<string> symbolCodes = this._rep.Query<Symbol>(x => symbolIdList.Contains(x.Id)).Select(x => x.Code).ToList();
             this._selectedBizGroupSymbols.AddRange(symbolCodes);
 
-            List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => symbolCodes.Contains(x.Symbol)).ToList();
+            List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => symbolCodes.Contains(x.Symbol)).OrderByDescending(x => x.ChangePercent).ToList();
             this._selectedBizGroupQuote.Clear();
             for (int i = 0; i < filteredCommodities.Count; i++)
             {
@@ -1180,7 +1180,7 @@ namespace YwRtdAp
             List<string> symbolCodes = this._rep.Query<Symbol>(x => symbolIdList.Contains(x.Id)).Select(x => x.Code).ToList();
             this._selectedConceptSymbols.AddRange(symbolCodes);
 
-            List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => symbolCodes.Contains(x.Symbol)).ToList();
+            List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => symbolCodes.Contains(x.Symbol)).OrderByDescending(x => x.ChangePercent).ToList();
             this._selectedConceptQuote.Clear();
             for (int i = 0; i < filteredCommodities.Count; i++)
             {
@@ -1203,7 +1203,7 @@ namespace YwRtdAp
             }
             if (this._filteredIndustryGV.Columns[e.ColumnIndex].Name == "Change")
             {
-                decimal upOrDown = Convert.ToDecimal(this._filteredIndustryGV.Rows[e.RowIndex].Cells[8].Value);
+                decimal upOrDown = Convert.ToDecimal(this._filteredIndustryGV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
                 if (upOrDown > 0)
                 {
                     this._filteredIndustryGV.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
@@ -1232,7 +1232,7 @@ namespace YwRtdAp
             }
             if (this._filteredBizGroupGV.Columns[e.ColumnIndex].Name == "Change")
             {
-                decimal upOrDown = Convert.ToDecimal(this._filteredBizGroupGV.Rows[e.RowIndex].Cells[8].Value);
+                decimal upOrDown = Convert.ToDecimal(this._filteredBizGroupGV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
                 if (upOrDown > 0)
                 {
                     this._filteredBizGroupGV.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
@@ -1261,7 +1261,7 @@ namespace YwRtdAp
             }
             if (this._filteredConceptGV.Columns[e.ColumnIndex].Name == "Change")
             {
-                decimal upOrDown = Convert.ToDecimal(this._filteredConceptGV.Rows[e.RowIndex].Cells[8].Value);
+                decimal upOrDown = Convert.ToDecimal(this._filteredConceptGV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
                 if (upOrDown > 0)
                 {
                     this._filteredConceptGV.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
@@ -1406,7 +1406,7 @@ namespace YwRtdAp
             this._selectedPointerIndexSymbols.Clear();
             List<string> symbolCodes = this._rep.Query<Symbol>(x => symbolIdList.Contains(x.Id)).Select(x => x.Code).ToList();
             this._selectedPointerIndexSymbols.AddRange(symbolCodes);
-            List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => symbolCodes.Contains(x.Symbol)).ToList();
+            List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => symbolCodes.Contains(x.Symbol)).OrderByDescending(x => x.ChangePercent).ToList();
             this._selectedPointerIndexQuote.Clear();
             for (int i = 0; i < filteredCommodities.Count; i++)
             {
@@ -1429,7 +1429,7 @@ namespace YwRtdAp
             }
             if (this._filteredPointerIndexGV.Columns[e.ColumnIndex].Name == "Change")
             {
-                decimal upOrDown = Convert.ToDecimal(this._filteredPointerIndexGV.Rows[e.RowIndex].Cells[8].Value);
+                decimal upOrDown = Convert.ToDecimal(this._filteredPointerIndexGV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
                 if (upOrDown > 0)
                 {
                     this._filteredPointerIndexGV.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
@@ -2150,7 +2150,7 @@ namespace YwRtdAp
             }
             if (this._oneSymbolQueryGV.Columns[e.ColumnIndex].Name == "Change")
             {
-                decimal upOrDown = Convert.ToDecimal(this._oneSymbolQueryGV.Rows[e.RowIndex].Cells[8].Value);
+                decimal upOrDown = Convert.ToDecimal(this._oneSymbolQueryGV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
                 if (upOrDown > 0)
                 {
                     this._oneSymbolQueryGV.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
