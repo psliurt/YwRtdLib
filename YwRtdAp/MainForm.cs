@@ -761,7 +761,7 @@ namespace YwRtdAp
             List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.Ceil == x.Price &&
                 x.Ceil != "" && x.Ceil != "無資料" &&
                 x.Price != "" && x.Price != "無資料" &&
-                x.CumulativeVolume.HasValue).OrderByDescending(x => x.CumulativeVolume).ToList();
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.ChangePercent).ToList();
 
             this._dayTradeSymbolQuote.Clear();
             
@@ -787,7 +787,7 @@ namespace YwRtdAp
             List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.Floor == x.Price &&
                 x.Floor != "" && x.Floor != "無資料" &&
                 x.Price != "" && x.Price != "無資料" &&
-                x.CumulativeVolume.HasValue).OrderByDescending(x => x.CumulativeVolume).ToList();
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.ChangePercent).ToList();
 
             this._dayTradeSymbolQuote.Clear();
 
@@ -811,7 +811,7 @@ namespace YwRtdAp
             this._dayTradeSymbols.Clear();
             List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.ChangePercent.HasValue &&
                 x.ChangePercent.Value > 7.50M && x.ChangePercent.Value <= 9.69M &&
-                x.CumulativeVolume.HasValue).OrderByDescending(x => x.CumulativeVolume).ToList();
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.ChangePercent).ToList();
 
             this._dayTradeSymbolQuote.Clear();
 
@@ -838,7 +838,7 @@ namespace YwRtdAp
             this._dayTradeSymbols.Clear();
             List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.ChangePercent.HasValue &&
                 x.ChangePercent.Value > 5.01M && x.ChangePercent.Value <= 7.50M &&
-                x.CumulativeVolume.HasValue).OrderByDescending(x => x.CumulativeVolume).ToList();
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.ChangePercent).ToList();
 
             this._dayTradeSymbolQuote.Clear();
 
@@ -869,7 +869,7 @@ namespace YwRtdAp
             this._dayTradeSymbols.Clear();
             List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.ChangePercent.HasValue &&
                 x.ChangePercent.Value > 2.50M && x.ChangePercent.Value <= 5.01M &&
-                x.CumulativeVolume.HasValue).OrderByDescending(x => x.CumulativeVolume).ToList();
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.ChangePercent).ToList();
 
             this._dayTradeSymbolQuote.Clear();
 
@@ -897,7 +897,7 @@ namespace YwRtdAp
             this._dayTradeSymbols.Clear();
             List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.ChangePercent.HasValue &&
                 x.ChangePercent.Value >= -9.69M && x.ChangePercent.Value < -7.51M &&
-                x.CumulativeVolume.HasValue).OrderByDescending(x => x.CumulativeVolume).ToList();
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.ChangePercent).ToList();
 
             this._dayTradeSymbolQuote.Clear();
 
@@ -924,7 +924,7 @@ namespace YwRtdAp
             this._dayTradeSymbols.Clear();
             List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.ChangePercent.HasValue &&
                 x.ChangePercent.Value >= -7.50M && x.ChangePercent.Value < -5.01M &&
-                x.CumulativeVolume.HasValue).OrderByDescending(x => x.CumulativeVolume).ToList();
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.ChangePercent).ToList();
 
             this._dayTradeSymbolQuote.Clear();
 
@@ -951,7 +951,7 @@ namespace YwRtdAp
             this._dayTradeSymbols.Clear();
             List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.ChangePercent.HasValue &&
                 x.ChangePercent.Value >= -5.00M && x.ChangePercent.Value < -2.50M &&
-                x.CumulativeVolume.HasValue).OrderByDescending(x => x.CumulativeVolume).ToList();
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.ChangePercent).ToList();
 
             this._dayTradeSymbolQuote.Clear();
 
@@ -2083,6 +2083,8 @@ namespace YwRtdAp
 
         private void _oneSymbolQueryBtn_Click(object sender, EventArgs e)
         {
+            ResetSymbolQueryData();
+
             string codeOrName = this._oneSymbolQueryTxt.Text.Trim();
             Symbol symbolObj =
                 this._rep.DefaultOne<Symbol>(x => x.Code == codeOrName || x.SymbolName == codeOrName);
@@ -2139,9 +2141,9 @@ namespace YwRtdAp
 
             this._oneSymbolConceptLB.DataSource = null;
             var allConcept = from sym in this._rep.Query<ConceptSymbol>(x => x.SymbolId == symbolObj.Id)
-                                 join con in this._rep.FetchAll<Concept>()
-                                 on sym.ConceptId equals con.Id
-                                 select con.ConceptName;
+                             join con in this._rep.FetchAll<Concept>()
+                             on sym.ConceptId equals con.Id
+                             select con;
 
             this._oneSymbolConceptLB.ValueMember = "Code";
             this._oneSymbolConceptLB.DisplayMember = "ConceptName";
@@ -2227,7 +2229,7 @@ namespace YwRtdAp
             List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.ChangePercent.HasValue &&
                 x.ChangePercent.Value > 0M && 
                 x.VolumeStrength >= 700M &&
-                x.CumulativeVolume.HasValue).OrderByDescending(x => x.CumulativeVolume).ToList();
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.ChangePercent).ToList();
 
             this._dayTradeSymbolQuote.Clear();
 
@@ -2252,7 +2254,7 @@ namespace YwRtdAp
             List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.ChangePercent.HasValue &&
                 x.ChangePercent.Value > 0M &&
                 x.VolumeStrength >= 500M &&
-                x.CumulativeVolume.HasValue).OrderByDescending(x => x.CumulativeVolume).ToList();
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.ChangePercent).ToList();
 
             this._dayTradeSymbolQuote.Clear();
 
@@ -2277,7 +2279,7 @@ namespace YwRtdAp
             List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.ChangePercent.HasValue &&
                 x.ChangePercent.Value > 0M &&
                 x.VolumeStrength >= 100M &&
-                x.CumulativeVolume.HasValue).OrderByDescending(x => x.CumulativeVolume).ToList();
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.ChangePercent).ToList();
 
             this._dayTradeSymbolQuote.Clear();
 
@@ -2302,7 +2304,7 @@ namespace YwRtdAp
             List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.ChangePercent.HasValue &&
                 x.ChangePercent.Value < 0M &&
                 x.VolumeStrength >= 700M &&
-                x.CumulativeVolume.HasValue).OrderByDescending(x => x.CumulativeVolume).ToList();
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.ChangePercent).ToList();
 
             this._dayTradeSymbolQuote.Clear();
 
@@ -2327,7 +2329,7 @@ namespace YwRtdAp
             List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.ChangePercent.HasValue &&
                 x.ChangePercent.Value < 0M &&
                 x.VolumeStrength >= 500M &&
-                x.CumulativeVolume.HasValue).OrderByDescending(x => x.CumulativeVolume).ToList();
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.ChangePercent).ToList();
 
             this._dayTradeSymbolQuote.Clear();
 
@@ -2352,7 +2354,7 @@ namespace YwRtdAp
             List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.ChangePercent.HasValue &&
                 x.ChangePercent.Value < 0M &&
                 x.VolumeStrength >= 100M &&
-                x.CumulativeVolume.HasValue).OrderByDescending(x => x.CumulativeVolume).ToList();
+                x.CumulativeVolume.HasValue).OrderByDescending(x => x.ChangePercent).ToList();
 
             this._dayTradeSymbolQuote.Clear();
 
@@ -2394,11 +2396,12 @@ namespace YwRtdAp
                     return;
                 }
             }
-        }
+        }        
 
-        private void _oneSymbolBizGroupLB_SelectedIndexChanged(object sender, EventArgs e)
+        private void _oneSymbolBizGroupLB_Click(object sender, EventArgs e)
         {
             BizGroup bizGrp = this._oneSymbolBizGroupLB.SelectedItem as BizGroup;
+            if (bizGrp == null) { return; }
             string bizGroupCode = bizGrp.Code;
             var selectedBizGroup = this._rep.Query<BizGroup>(x => x.Code == bizGroupCode);
             var allBizGroupSymbolMap = this._rep.FetchAll<BizGroupSymbol>();
@@ -2411,7 +2414,8 @@ namespace YwRtdAp
             this._dispatcher.RemoveSymbolGridMap(this._oneCategoryRelateSymbols, this._oneSymbolRelateGV);
             this._oneCategoryRelateSymbols.Clear();
 
-            List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => symbolCodes.Contains(x.Symbol)).OrderByDescending(x => x.CumulativeVolume).ToList();            
+            List<YwCommodity> filteredCommodities = 
+                this._commodities.Values.Where(x => symbolCodes.Contains(x.Symbol)).OrderByDescending(x => x.ChangePercent).ToList();
 
             this._oneCategoryRelateSymbolQuote.Clear();
 
@@ -2428,19 +2432,161 @@ namespace YwRtdAp
             this._oneSymbolRelateGV.Refresh();
         }
 
-        private void _oneSymbolPILB_SelectedIndexChanged(object sender, EventArgs e)
+        private void _oneSymbolPILB_Click(object sender, EventArgs e)
         {
             PointerIndex pi = this._oneSymbolPILB.SelectedItem as PointerIndex;
+            if (pi == null) { return; }
+            string piCode = pi.Code;
+            var selectedPI = this._rep.Query<PointerIndex>(x => x.Code == piCode);
+            var allPISymbolMap = this._rep.FetchAll<PointerIndexSymbol>();
+            var symbolIdList = (from pis in selectedPI
+                                join symbols in allPISymbolMap
+                                on pis.Id equals symbols.PointerIndexId
+                                select symbols.SymbolId).ToList();
+            List<string> symbolCodes = this._rep.Query<Symbol>(x => symbolIdList.Contains(x.Id)).Select(x => x.Code).ToList();
+
+            this._dispatcher.RemoveSymbolGridMap(this._oneCategoryRelateSymbols, this._oneSymbolRelateGV);
+            this._oneCategoryRelateSymbols.Clear();
+
+            List<YwCommodity> filteredCommodities = 
+                this._commodities.Values.Where(x => symbolCodes.Contains(x.Symbol)).OrderByDescending(x => x.ChangePercent).ToList();
+
+            this._oneCategoryRelateSymbolQuote.Clear();
+
+            for (int i = 0; i < filteredCommodities.Count; i++)
+            {
+                YwCommodity c = filteredCommodities[i];
+                this._oneCategoryRelateSymbolQuote.Add(new CategoryRelatedQuote(ref c));
+                this._dispatcher.AddSymbolGridMap(c.Symbol, this._oneSymbolRelateGV, typeof(CategoryRelatedQuote));
+                this._oneCategoryRelateSymbols.Add(c.Symbol);
+            }
+
+            this._oneSymbolRelateGV.DataSource = null;
+            this._oneSymbolRelateGV.DataSource = this._oneCategoryRelateSymbolQuote;
+            this._oneSymbolRelateGV.Refresh();
         }
 
-        private void _oneSymbolIndustryLB_SelectedIndexChanged(object sender, EventArgs e)
+        private void _oneSymbolIndustryLB_Click(object sender, EventArgs e)
         {
             Industry ind = this._oneSymbolIndustryLB.SelectedItem as Industry;
+            if (ind == null) { return; }
+            string indCode = ind.Code;
+            var selectedIndustry = this._rep.Query<Industry>(x => x.Code == indCode);
+            var allIndustrySymbolMap = this._rep.FetchAll<IndustrySymbol>();
+            var symbolIdList = (from inds in selectedIndustry
+                                join symbols in allIndustrySymbolMap
+                                on inds.Id equals symbols.IndustryId
+                                select symbols.SymbolId).ToList();
+            List<string> symbolCodes = this._rep.Query<Symbol>(x => symbolIdList.Contains(x.Id)).Select(x => x.Code).ToList();
+
+            this._dispatcher.RemoveSymbolGridMap(this._oneCategoryRelateSymbols, this._oneSymbolRelateGV);
+            this._oneCategoryRelateSymbols.Clear();
+
+            List<YwCommodity> filteredCommodities = 
+                this._commodities.Values.Where(x => symbolCodes.Contains(x.Symbol)).OrderByDescending(x => x.ChangePercent).ToList();
+
+            this._oneCategoryRelateSymbolQuote.Clear();
+
+            for (int i = 0; i < filteredCommodities.Count; i++)
+            {
+                YwCommodity c = filteredCommodities[i];
+                this._oneCategoryRelateSymbolQuote.Add(new CategoryRelatedQuote(ref c));
+                this._dispatcher.AddSymbolGridMap(c.Symbol, this._oneSymbolRelateGV, typeof(CategoryRelatedQuote));
+                this._oneCategoryRelateSymbols.Add(c.Symbol);
+            }
+
+            this._oneSymbolRelateGV.DataSource = null;
+            this._oneSymbolRelateGV.DataSource = this._oneCategoryRelateSymbolQuote;
+            this._oneSymbolRelateGV.Refresh();
         }
 
-        private void _oneSymbolConceptLB_SelectedIndexChanged(object sender, EventArgs e)
+        private void _oneSymbolConceptLB_Click(object sender, EventArgs e)
         {
             Concept con = this._oneSymbolConceptLB.SelectedItem as Concept;
+            
+            if (con == null) { return; }
+            string conCode = con.Code;
+            var selectedConcept = this._rep.Query<Concept>(x => x.Code == conCode);
+            var allConceptSymbolMap = this._rep.FetchAll<ConceptSymbol>();
+            var symbolIdList = (from cons in selectedConcept
+                                join symbols in allConceptSymbolMap
+                                on cons.Id equals symbols.ConceptId
+                                select symbols.SymbolId).ToList();
+            List<string> symbolCodes = this._rep.Query<Symbol>(x => symbolIdList.Contains(x.Id)).Select(x => x.Code).ToList();
+
+            this._dispatcher.RemoveSymbolGridMap(this._oneCategoryRelateSymbols, this._oneSymbolRelateGV);
+            this._oneCategoryRelateSymbols.Clear();
+
+            List<YwCommodity> filteredCommodities = 
+                this._commodities.Values.Where(x => symbolCodes.Contains(x.Symbol)).OrderByDescending(x => x.ChangePercent).ToList();
+
+            this._oneCategoryRelateSymbolQuote.Clear();
+
+            for (int i = 0; i < filteredCommodities.Count; i++)
+            {
+                YwCommodity c = filteredCommodities[i];
+                this._oneCategoryRelateSymbolQuote.Add(new CategoryRelatedQuote(ref c));
+                this._dispatcher.AddSymbolGridMap(c.Symbol, this._oneSymbolRelateGV, typeof(CategoryRelatedQuote));
+                this._oneCategoryRelateSymbols.Add(c.Symbol);
+            }
+
+            this._oneSymbolRelateGV.DataSource = null;
+            this._oneSymbolRelateGV.DataSource = this._oneCategoryRelateSymbolQuote;
+            this._oneSymbolRelateGV.Refresh();
+        }
+
+        private void _oneSymbolQueryClearBtn_Click(object sender, EventArgs e)
+        {
+            this._oneSymbolQueryTxt.Text = "";
+            ResetSymbolQueryData();
+        }
+
+        private void ResetSymbolQueryData()
+        {            
+            this._dispatcher.RemoveSymbolGridMap(this._queryOneSymbols, this._oneSymbolQueryGV);
+            this._oneSymbolQueryGV.DataSource = null;
+            this._queryOneSymbols.Clear();
+            this._dispatcher.RemoveSymbolGridMap(this._oneCategoryRelateSymbols, this._oneSymbolRelateGV);
+            this._oneSymbolRelateGV.DataSource = null;
+            this._oneCategoryRelateSymbols.Clear();
+
+            this._oneSymbolBizGroupLB.DataSource = null;
+            this._oneSymbolBizGroupLB.Items.Clear();
+            this._oneSymbolConceptLB.DataSource = null;
+            this._oneSymbolConceptLB.Items.Clear();
+            this._oneSymbolIndustryLB.DataSource = null;
+            this._oneSymbolIndustryLB.Items.Clear();
+            this._oneSymbolPILB.DataSource = null;
+            this._oneSymbolPILB.Items.Clear();
+        }
+
+        private void _oneSymbolRelateGV_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (this._oneSymbolRelateGV.DataSource == null)
+            {
+                
+                return;
+            }
+            if (this._oneSymbolRelateGV.Columns[e.ColumnIndex].Name == "Change")
+            {
+                decimal upOrDown = Convert.ToDecimal(this._oneSymbolRelateGV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
+                if (upOrDown > 0)
+                {
+                    this._oneSymbolRelateGV.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
+                    
+                    return;
+                }
+                if (upOrDown < 0)
+                {
+                    this._oneSymbolRelateGV.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Green;
+                    
+                    return;
+                }
+                else
+                {
+                    return;
+                }
+            }
         }
 
         

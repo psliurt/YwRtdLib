@@ -28,11 +28,12 @@ namespace YwRtdAp.CombineObject
         [DisplayName("名稱")]
         public string Name { get { return this._core.Name; } }
 
-        ///// <summary>
-        ///// 股本
-        ///// </summary>
-        //[DisplayName("股本")]
-        //public string Capital { get { return this._core.Capital; } }
+        /// <summary>
+        /// 股本
+        /// </summary>
+        [DisplayName("股本")]
+        public string Capital { get { return this._core.Capital; } }
+
         /// <summary>
         /// 預估量
         /// </summary>

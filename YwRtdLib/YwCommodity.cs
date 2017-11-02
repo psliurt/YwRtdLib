@@ -1777,6 +1777,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 試撮買價
+        /// </summary>
         private decimal? _preOpenAskPrice;
         public bool IsPreOpenAskPriceUpdate = false;
         public decimal? PreOpenAskPrice
@@ -1796,6 +1799,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 試撮買量
+        /// </summary>
         private decimal? _preOpenAskVolume;
         public bool IsPreOpenAskVolumeUpdate = false;
         public decimal? PreOpenAskVolume
@@ -1815,6 +1821,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 試撮賣價
+        /// </summary>
         private decimal? _preOpenBidPrice;
         public bool IsPreOpenBidPriceUpdate = false;
         public decimal? PreOpenBidPrice
@@ -1834,6 +1843,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 試撮賣量
+        /// </summary>
         private decimal? _preOpenBidVolume;
         public bool IsPreOpenBidVolumeUpdate = false;
         public decimal? PreOpenBidVolume
@@ -1853,6 +1865,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 試撮成交價
+        /// </summary>
         private decimal? _preOpenPrice;
         public bool IsPreOpenPriceUpdate = false;
         public decimal? PreOpenPrice
@@ -1872,6 +1887,9 @@ namespace YwRtdLib
             }
         }
 
+        /// <summary>
+        /// 試撮成交量
+        /// </summary>
         private decimal? _preOpenVolume;
         public bool IsPreOpenVolumeUpdate = false;
         public decimal? PreOpenVolume

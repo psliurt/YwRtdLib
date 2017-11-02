@@ -49,6 +49,10 @@
             this._filterUpMostBtn = new System.Windows.Forms.Button();
             this._filterCeilPriceStockBtn = new System.Windows.Forms.Button();
             this._stockInfoPage = new System.Windows.Forms.TabPage();
+            this._oneSymbolConceptLB = new System.Windows.Forms.ListBox();
+            this._oneSymbolIndustryLB = new System.Windows.Forms.ListBox();
+            this._oneSymbolPILB = new System.Windows.Forms.ListBox();
+            this._oneSymbolBizGroupLB = new System.Windows.Forms.ListBox();
             this._oneSymbolRelateGV = new System.Windows.Forms.DataGridView();
             this._oneSymbolConceptLbl = new System.Windows.Forms.Label();
             this._oneSymbolBizGroupLbl = new System.Windows.Forms.Label();
@@ -59,7 +63,6 @@
             this._oneSymbolQueryBtn = new System.Windows.Forms.Button();
             this._oneSymbolQueryLbl = new System.Windows.Forms.Label();
             this._oneSymbolQueryTxt = new System.Windows.Forms.TextBox();
-            this._stockQueryPage = new System.Windows.Forms.TabPage();
             this._pointerIndexQueryPage = new System.Windows.Forms.TabPage();
             this._filteredPointerIndexGV = new System.Windows.Forms.DataGridView();
             this._selectPointerIndexLbl = new System.Windows.Forms.Label();
@@ -76,7 +79,6 @@
             this._filteredConceptGV = new System.Windows.Forms.DataGridView();
             this._conceptSelectLbl = new System.Windows.Forms.Label();
             this._conceptSelectCmb = new System.Windows.Forms.ComboBox();
-            this._testPage = new System.Windows.Forms.TabPage();
             this._symbolManagePage = new System.Windows.Forms.TabPage();
             this._manageConceptQryBtn = new System.Windows.Forms.Button();
             this._manageIndustryQryBtn = new System.Windows.Forms.Button();
@@ -146,10 +148,8 @@
             this._symbolCatPICmb = new System.Windows.Forms.ComboBox();
             this._symbolCatQueryLbl = new System.Windows.Forms.Label();
             this._symbolCatQueryTxt = new System.Windows.Forms.TextBox();
-            this._oneSymbolBizGroupLB = new System.Windows.Forms.ListBox();
-            this._oneSymbolPILB = new System.Windows.Forms.ListBox();
-            this._oneSymbolIndustryLB = new System.Windows.Forms.ListBox();
-            this._oneSymbolConceptLB = new System.Windows.Forms.ListBox();
+            this._stockQueryPage = new System.Windows.Forms.TabPage();
+            this._testPage = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this._symbolGV)).BeginInit();
             this._switchTabCtrl.SuspendLayout();
             this._dayTradePage.SuspendLayout();
@@ -165,10 +165,10 @@
             ((System.ComponentModel.ISupportInitialize)(this._filteredBizGroupGV)).BeginInit();
             this._conceptQueryPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._filteredConceptGV)).BeginInit();
-            this._testPage.SuspendLayout();
             this._symbolManagePage.SuspendLayout();
             this._symbolCategoryPage.SuspendLayout();
             this._symbolCatGrpBox.SuspendLayout();
+            this._testPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // _symbolGV
@@ -207,14 +207,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this._switchTabCtrl.Controls.Add(this._dayTradePage);
             this._switchTabCtrl.Controls.Add(this._stockInfoPage);
-            this._switchTabCtrl.Controls.Add(this._stockQueryPage);
             this._switchTabCtrl.Controls.Add(this._pointerIndexQueryPage);
             this._switchTabCtrl.Controls.Add(this._industryQueryPage);
             this._switchTabCtrl.Controls.Add(this._bizGroupQueryPage);
             this._switchTabCtrl.Controls.Add(this._conceptQueryPage);
-            this._switchTabCtrl.Controls.Add(this._testPage);
             this._switchTabCtrl.Controls.Add(this._symbolManagePage);
             this._switchTabCtrl.Controls.Add(this._symbolCategoryPage);
+            this._switchTabCtrl.Controls.Add(this._stockQueryPage);
+            this._switchTabCtrl.Controls.Add(this._testPage);
             this._switchTabCtrl.Location = new System.Drawing.Point(12, 12);
             this._switchTabCtrl.Name = "_switchTabCtrl";
             this._switchTabCtrl.SelectedIndex = 0;
@@ -428,6 +428,46 @@
             this._stockInfoPage.Text = "個股資訊查詢";
             this._stockInfoPage.UseVisualStyleBackColor = true;
             // 
+            // _oneSymbolConceptLB
+            // 
+            this._oneSymbolConceptLB.FormattingEnabled = true;
+            this._oneSymbolConceptLB.ItemHeight = 12;
+            this._oneSymbolConceptLB.Location = new System.Drawing.Point(773, 115);
+            this._oneSymbolConceptLB.Name = "_oneSymbolConceptLB";
+            this._oneSymbolConceptLB.Size = new System.Drawing.Size(248, 148);
+            this._oneSymbolConceptLB.TabIndex = 55;
+            this._oneSymbolConceptLB.Click += new System.EventHandler(this._oneSymbolConceptLB_Click);
+            // 
+            // _oneSymbolIndustryLB
+            // 
+            this._oneSymbolIndustryLB.FormattingEnabled = true;
+            this._oneSymbolIndustryLB.ItemHeight = 12;
+            this._oneSymbolIndustryLB.Location = new System.Drawing.Point(517, 115);
+            this._oneSymbolIndustryLB.Name = "_oneSymbolIndustryLB";
+            this._oneSymbolIndustryLB.Size = new System.Drawing.Size(248, 148);
+            this._oneSymbolIndustryLB.TabIndex = 54;
+            this._oneSymbolIndustryLB.Click += new System.EventHandler(this._oneSymbolIndustryLB_Click);
+            // 
+            // _oneSymbolPILB
+            // 
+            this._oneSymbolPILB.FormattingEnabled = true;
+            this._oneSymbolPILB.ItemHeight = 12;
+            this._oneSymbolPILB.Location = new System.Drawing.Point(261, 115);
+            this._oneSymbolPILB.Name = "_oneSymbolPILB";
+            this._oneSymbolPILB.Size = new System.Drawing.Size(248, 148);
+            this._oneSymbolPILB.TabIndex = 53;
+            this._oneSymbolPILB.Click += new System.EventHandler(this._oneSymbolPILB_Click);
+            // 
+            // _oneSymbolBizGroupLB
+            // 
+            this._oneSymbolBizGroupLB.FormattingEnabled = true;
+            this._oneSymbolBizGroupLB.ItemHeight = 12;
+            this._oneSymbolBizGroupLB.Location = new System.Drawing.Point(8, 115);
+            this._oneSymbolBizGroupLB.Name = "_oneSymbolBizGroupLB";
+            this._oneSymbolBizGroupLB.Size = new System.Drawing.Size(247, 148);
+            this._oneSymbolBizGroupLB.TabIndex = 52;
+            this._oneSymbolBizGroupLB.Click += new System.EventHandler(this._oneSymbolBizGroupLB_Click);
+            // 
             // _oneSymbolRelateGV
             // 
             this._oneSymbolRelateGV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -442,6 +482,7 @@
             this._oneSymbolRelateGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this._oneSymbolRelateGV.Size = new System.Drawing.Size(1166, 293);
             this._oneSymbolRelateGV.TabIndex = 51;
+            this._oneSymbolRelateGV.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this._oneSymbolRelateGV_CellFormatting);
             // 
             // _oneSymbolConceptLbl
             // 
@@ -501,6 +542,7 @@
             this._oneSymbolQueryClearBtn.TabIndex = 41;
             this._oneSymbolQueryClearBtn.Text = "清除";
             this._oneSymbolQueryClearBtn.UseVisualStyleBackColor = true;
+            this._oneSymbolQueryClearBtn.Click += new System.EventHandler(this._oneSymbolQueryClearBtn_Click);
             // 
             // _oneSymbolQueryBtn
             // 
@@ -527,16 +569,6 @@
             this._oneSymbolQueryTxt.Name = "_oneSymbolQueryTxt";
             this._oneSymbolQueryTxt.Size = new System.Drawing.Size(144, 22);
             this._oneSymbolQueryTxt.TabIndex = 37;
-            // 
-            // _stockQueryPage
-            // 
-            this._stockQueryPage.Location = new System.Drawing.Point(4, 22);
-            this._stockQueryPage.Name = "_stockQueryPage";
-            this._stockQueryPage.Padding = new System.Windows.Forms.Padding(3);
-            this._stockQueryPage.Size = new System.Drawing.Size(1180, 567);
-            this._stockQueryPage.TabIndex = 3;
-            this._stockQueryPage.Text = "股票查詢";
-            this._stockQueryPage.UseVisualStyleBackColor = true;
             // 
             // _pointerIndexQueryPage
             // 
@@ -729,19 +761,6 @@
             this._conceptSelectCmb.Size = new System.Drawing.Size(200, 20);
             this._conceptSelectCmb.TabIndex = 4;
             this._conceptSelectCmb.SelectedIndexChanged += new System.EventHandler(this._conceptSelectCmb_SelectedIndexChanged);
-            // 
-            // _testPage
-            // 
-            this._testPage.Controls.Add(this._symbolTxt);
-            this._testPage.Controls.Add(this._symbolGV);
-            this._testPage.Controls.Add(this._addSymbolBtn);
-            this._testPage.Location = new System.Drawing.Point(4, 22);
-            this._testPage.Name = "_testPage";
-            this._testPage.Padding = new System.Windows.Forms.Padding(3);
-            this._testPage.Size = new System.Drawing.Size(1180, 567);
-            this._testPage.TabIndex = 2;
-            this._testPage.Text = "測試區";
-            this._testPage.UseVisualStyleBackColor = true;
             // 
             // _symbolManagePage
             // 
@@ -1433,45 +1452,28 @@
             this._symbolCatQueryTxt.Size = new System.Drawing.Size(144, 22);
             this._symbolCatQueryTxt.TabIndex = 0;
             // 
-            // _oneSymbolBizGroupLB
+            // _stockQueryPage
             // 
-            this._oneSymbolBizGroupLB.FormattingEnabled = true;
-            this._oneSymbolBizGroupLB.ItemHeight = 12;
-            this._oneSymbolBizGroupLB.Location = new System.Drawing.Point(8, 115);
-            this._oneSymbolBizGroupLB.Name = "_oneSymbolBizGroupLB";
-            this._oneSymbolBizGroupLB.Size = new System.Drawing.Size(247, 148);
-            this._oneSymbolBizGroupLB.TabIndex = 52;
-            this._oneSymbolBizGroupLB.SelectedIndexChanged += new System.EventHandler(this._oneSymbolBizGroupLB_SelectedIndexChanged);
+            this._stockQueryPage.Location = new System.Drawing.Point(4, 22);
+            this._stockQueryPage.Name = "_stockQueryPage";
+            this._stockQueryPage.Padding = new System.Windows.Forms.Padding(3);
+            this._stockQueryPage.Size = new System.Drawing.Size(1180, 567);
+            this._stockQueryPage.TabIndex = 3;
+            this._stockQueryPage.Text = "股票查詢";
+            this._stockQueryPage.UseVisualStyleBackColor = true;
             // 
-            // _oneSymbolPILB
+            // _testPage
             // 
-            this._oneSymbolPILB.FormattingEnabled = true;
-            this._oneSymbolPILB.ItemHeight = 12;
-            this._oneSymbolPILB.Location = new System.Drawing.Point(261, 115);
-            this._oneSymbolPILB.Name = "_oneSymbolPILB";
-            this._oneSymbolPILB.Size = new System.Drawing.Size(248, 148);
-            this._oneSymbolPILB.TabIndex = 53;
-            this._oneSymbolPILB.SelectedIndexChanged += new System.EventHandler(this._oneSymbolPILB_SelectedIndexChanged);
-            // 
-            // _oneSymbolIndustryLB
-            // 
-            this._oneSymbolIndustryLB.FormattingEnabled = true;
-            this._oneSymbolIndustryLB.ItemHeight = 12;
-            this._oneSymbolIndustryLB.Location = new System.Drawing.Point(517, 115);
-            this._oneSymbolIndustryLB.Name = "_oneSymbolIndustryLB";
-            this._oneSymbolIndustryLB.Size = new System.Drawing.Size(248, 148);
-            this._oneSymbolIndustryLB.TabIndex = 54;
-            this._oneSymbolIndustryLB.SelectedIndexChanged += new System.EventHandler(this._oneSymbolIndustryLB_SelectedIndexChanged);
-            // 
-            // _oneSymbolConceptLB
-            // 
-            this._oneSymbolConceptLB.FormattingEnabled = true;
-            this._oneSymbolConceptLB.ItemHeight = 12;
-            this._oneSymbolConceptLB.Location = new System.Drawing.Point(773, 115);
-            this._oneSymbolConceptLB.Name = "_oneSymbolConceptLB";
-            this._oneSymbolConceptLB.Size = new System.Drawing.Size(248, 148);
-            this._oneSymbolConceptLB.TabIndex = 55;
-            this._oneSymbolConceptLB.SelectedIndexChanged += new System.EventHandler(this._oneSymbolConceptLB_SelectedIndexChanged);
+            this._testPage.Controls.Add(this._symbolTxt);
+            this._testPage.Controls.Add(this._symbolGV);
+            this._testPage.Controls.Add(this._addSymbolBtn);
+            this._testPage.Location = new System.Drawing.Point(4, 22);
+            this._testPage.Name = "_testPage";
+            this._testPage.Padding = new System.Windows.Forms.Padding(3);
+            this._testPage.Size = new System.Drawing.Size(1180, 567);
+            this._testPage.TabIndex = 2;
+            this._testPage.Text = "測試區";
+            this._testPage.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -1498,14 +1500,14 @@
             ((System.ComponentModel.ISupportInitialize)(this._filteredBizGroupGV)).EndInit();
             this._conceptQueryPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._filteredConceptGV)).EndInit();
-            this._testPage.ResumeLayout(false);
-            this._testPage.PerformLayout();
             this._symbolManagePage.ResumeLayout(false);
             this._symbolManagePage.PerformLayout();
             this._symbolCategoryPage.ResumeLayout(false);
             this._symbolCategoryPage.PerformLayout();
             this._symbolCatGrpBox.ResumeLayout(false);
             this._symbolCatGrpBox.PerformLayout();
+            this._testPage.ResumeLayout(false);
+            this._testPage.PerformLayout();
             this.ResumeLayout(false);
 
         }
