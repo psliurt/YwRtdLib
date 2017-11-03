@@ -323,6 +323,7 @@
             this._dayTradeStockGV.Size = new System.Drawing.Size(1168, 468);
             this._dayTradeStockGV.TabIndex = 8;
             this._dayTradeStockGV.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this._dayTradeStockGV_CellFormatting);
+            this._dayTradeStockGV.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this._dayTradeStockGV_RowStateChanged);
             // 
             // _filterUpLowBtn
             // 

@@ -2083,6 +2083,11 @@ namespace YwRtdAp
 
         private void _oneSymbolQueryBtn_Click(object sender, EventArgs e)
         {
+            QueryOneSymbol();                 
+        }
+
+        private void QueryOneSymbol()
+        {
             ResetSymbolQueryData();
 
             string codeOrName = this._oneSymbolQueryTxt.Text.Trim();
@@ -2094,7 +2099,7 @@ namespace YwRtdAp
 
             this._dispatcher.RemoveSymbolGridMap(this._queryOneSymbols, this._oneSymbolQueryGV);
             this._queryOneSymbols.Clear();
-            this._queryOneSymbols.Add(symbolObj.Code);            
+            this._queryOneSymbols.Add(symbolObj.Code);
 
             List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.Symbol == symbolObj.Code).ToList();
             this._queryOneSymbolQuote.Clear();
@@ -2111,9 +2116,9 @@ namespace YwRtdAp
 
             this._oneSymbolPILB.DataSource = null;
             var allPointerIndex = from sym in this._rep.Query<PointerIndexSymbol>(x => x.SymbolId == symbolObj.Id)
-                                      join pi in this._rep.FetchAll<PointerIndex>()
-                                      on sym.PointerIndexId equals pi.Id
-                                      select pi;
+                                  join pi in this._rep.FetchAll<PointerIndex>()
+                                  on sym.PointerIndexId equals pi.Id
+                                  select pi;
 
             this._oneSymbolPILB.ValueMember = "Code";
             this._oneSymbolPILB.DisplayMember = "PointerName";
@@ -2121,9 +2126,9 @@ namespace YwRtdAp
 
             this._oneSymbolIndustryLB.DataSource = null;
             var allIndustry = from sym in this._rep.Query<IndustrySymbol>(x => x.SymbolId == symbolObj.Id)
-                                  join ind in this._rep.FetchAll<Industry>()
-                                  on sym.IndustryId equals ind.Id
-                                  select ind;
+                              join ind in this._rep.FetchAll<Industry>()
+                              on sym.IndustryId equals ind.Id
+                              select ind;
 
             this._oneSymbolIndustryLB.ValueMember = "Code";
             this._oneSymbolIndustryLB.DisplayMember = "IndustryName";
@@ -2131,10 +2136,10 @@ namespace YwRtdAp
 
             this._oneSymbolBizGroupLB.DataSource = null;
             var allBizGroup = from sym in this._rep.Query<BizGroupSymbol>(x => x.SymbolId == symbolObj.Id)
-                                  join biz in this._rep.FetchAll<BizGroup>()
-                                  on sym.BizGroupId equals biz.Id
-                                  select biz;
-            
+                              join biz in this._rep.FetchAll<BizGroup>()
+                              on sym.BizGroupId equals biz.Id
+                              select biz;
+
             this._oneSymbolBizGroupLB.ValueMember = "Code";
             this._oneSymbolBizGroupLB.DisplayMember = "GroupName";
             this._oneSymbolBizGroupLB.DataSource = allBizGroup.ToList();
@@ -2147,49 +2152,7 @@ namespace YwRtdAp
 
             this._oneSymbolConceptLB.ValueMember = "Code";
             this._oneSymbolConceptLB.DisplayMember = "ConceptName";
-            this._oneSymbolConceptLB.DataSource = allConcept.ToList();
-
-
-            //this._oneSymbolPICmb.DataSource = null;
-            //var allPointerIndex = from sym in this._rep.Query<PointerIndexSymbol>(x => x.SymbolId == symbolObj.Id)
-            //                          join pi in this._rep.FetchAll<PointerIndex>()
-            //                          on sym.PointerIndexId equals pi.Id
-            //                          select pi;            
-
-            //this._oneSymbolPICmb.ValueMember = "Code";
-            //this._oneSymbolPICmb.DisplayMember = "PointerName";
-            //this._oneSymbolPICmb.DataSource = allPointerIndex.ToList();            
-
-            //this._oneSymbolIndustryCmb.DataSource = null;
-            //var allIndustry = from sym in this._rep.Query<IndustrySymbol>(x => x.SymbolId == symbolObj.Id)
-            //                      join ind in this._rep.FetchAll<Industry>()
-            //                      on sym.IndustryId equals ind.Id
-            //                      select ind;
-
-            //this._oneSymbolIndustryCmb.ValueMember = "Code";
-            //this._oneSymbolIndustryCmb.DisplayMember = "IndustryName";
-            //this._oneSymbolIndustryCmb.DataSource = allIndustry.ToList();
-
-            //this._oneSymbolBizGroupCmb.DataSource = null;
-            //var allBizGroup = from sym in this._rep.Query<BizGroupSymbol>(x => x.SymbolId == symbolObj.Id)
-            //                      join biz in this._rep.FetchAll<BizGroup>()
-            //                      on sym.BizGroupId equals biz.Id
-            //                      select biz;
-
-            //this._oneSymbolBizGroupCmb.ValueMember = "Code";
-            //this._oneSymbolBizGroupCmb.DisplayMember = "GroupName";
-            //this._oneSymbolBizGroupCmb.DataSource = allBizGroup.ToList();
-
-            //this._oneSymbolConceptCmb.DataSource = null;
-            //var allConcept = from sym in this._rep.Query<ConceptSymbol>(x => x.SymbolId == symbolObj.Id)
-            //                     join con in this._rep.FetchAll<Concept>()
-            //                     on sym.ConceptId equals con.Id
-            //                     select con.ConceptName;
-
-            //this._oneSymbolConceptCmb.ValueMember = "Code";
-            //this._oneSymbolConceptCmb.DisplayMember = "ConceptName";
-            //this._oneSymbolConceptCmb.DataSource = allConcept.ToList();
-
+            this._oneSymbolConceptLB.DataSource = allConcept.ToList(); 
         }
 
         private void _oneSymbolQueryGV_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -2587,6 +2550,26 @@ namespace YwRtdAp
                     return;
                 }
             }
+        }
+
+        private void _dayTradeStockGV_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
+        {
+            if (e.StateChanged != DataGridViewElementStates.Selected)
+            { return; }
+            try
+            {
+                if (e.Row.Index < this._dayTradeSymbols.Count)
+                {
+                    string symbol = this._dayTradeSymbols[e.Row.Index];
+                    this._oneSymbolQueryTxt.Text = symbol;
+                    QueryOneSymbol();
+                }                
+            }
+            catch (Exception exc)
+            { 
+                
+            }
+            
         }
 
         
