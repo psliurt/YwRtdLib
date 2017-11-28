@@ -150,7 +150,15 @@ namespace YwRtdAp
             LoadConceptDropListData();
             LoadPointerIndexDropListData();
 
-            LoadManagePageSymbolsData();            
+            LoadManagePageSymbolsData();
+
+            this.InputLanguageChanged += MainForm_InputLanguageChanged;
+        }
+
+        void MainForm_InputLanguageChanged(object sender, InputLanguageChangedEventArgs e)
+        {
+            // 將控制項的ImeMode設為OnHalf
+            this._oneSymbolQueryTxt.ImeMode = System.Windows.Forms.ImeMode.OnHalf;
         }
 
         private void SetUpGridViewDoubleBuffered(DataGridView gv)
