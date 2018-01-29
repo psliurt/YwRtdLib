@@ -85,6 +85,7 @@
     <Compile Include="CombineObject\CategoryRelatedQuote.cs" />
     <Compile Include="CombineObject\CombineQuote.cs" />
     <Compile Include="CombineObject\ConceptQuote.cs" />
+    <Compile Include="CombineObject\DailyMarketTradeData.cs" />
     <Compile Include="CombineObject\DayTradeQuote.cs" />
     <Compile Include="CombineObject\IndustryQuote.cs" />
     <Compile Include="CombineObject\OneSymbolQuote.cs" />
@@ -142,6 +143,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web\DailyMarketInfoDownloader.cs" />
     <Compile Include="Web\DailyMarketUpdater.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

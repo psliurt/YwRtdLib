@@ -63,7 +63,10 @@ namespace YwRtdAp
         private List<string> _dayTradeSymbols { get; set; }
         private List<DayTradeQuote> _dayTradeSymbolQuote { get; set; }
 
-        
+        /// <summary>
+        /// symbol -> dailyMarketTradeData Object
+        /// </summary>
+        private Dictionary<string, DailyMarketTradeData> _dailyMarketTradeInfos { get; set; }
 
         private RtdRepository _rep { get; set; }        
 
@@ -77,6 +80,8 @@ namespace YwRtdAp
             this._commodities = new ConcurrentDictionary<string, YwCommodity>();
             this._afterMarketData = new ConcurrentDictionary<string, PriorAfterMarketStatistic>();
             this._dispatcher = Dispatcher.Instance(this._rtdCore, this._commodities);
+            this._dailyMarketTradeInfos = new Dictionary<string, DailyMarketTradeData>();
+            DailyMarketInfoDownloader.Instance(this._dailyMarketTradeInfos);
             InitializeComponent();
             SetUpDbPath();           
 
