@@ -55,8 +55,7 @@ namespace YwRtdAp.Web
             foreach (string s in selectType)
             {
                 DownloadMarginTradeDataByType(lastDateStr, s);
-            }
-            
+            }            
         }
 
         private void DownloadMarginTradeDataByType(string date, string st)

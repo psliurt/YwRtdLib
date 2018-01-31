@@ -81,7 +81,8 @@ namespace YwRtdAp
             this._afterMarketData = new ConcurrentDictionary<string, PriorAfterMarketStatistic>();
             this._dispatcher = Dispatcher.Instance(this._rtdCore, this._commodities);
             this._dailyMarketTradeInfos = new Dictionary<string, DailyMarketTradeData>();
-            DailyMarketInfoDownloader.Instance(this._dailyMarketTradeInfos);
+            YwRtdAp.Web.Tse.TseDownloader.Instance();
+            //DailyMarketInfoDownloader.Instance(this._dailyMarketTradeInfos);
             InitializeComponent();
             SetUpDbPath();           
 
