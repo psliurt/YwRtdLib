@@ -145,6 +145,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Web\DailyMarketInfoDownloader.cs" />
     <Compile Include="Web\DailyMarketUpdater.cs" />
+    <Compile Include="Web\Tse\Creator\MiIndexJobCreator.cs" />
+    <Compile Include="Web\Tse\JobCreator.cs" />
+    <Compile Include="Web\Tse\JobCreatorFactory.cs" />
     <Compile Include="Web\Tse\TseDownloader.cs" />
     <Compile Include="Web\Tse\TseJob.cs" />
     <EmbeddedResource Include="MainForm.resx">

@@ -4,6 +4,7 @@ using System.Threading;
 using System.Linq;
 using System.Text;
 using System.Collections.Concurrent;
+using HttpRS;
 
 namespace YwRtdAp.Web.Tse
 {
@@ -36,7 +37,7 @@ namespace YwRtdAp.Web.Tse
         {
             this._jobQueue = new ConcurrentQueue<TseJob>();
             this._doJobTimes = 0;
-            this._timerThread = new Timer(DoTseJob, DateTime.Now, new TimeSpan(0, 0, 1), new TimeSpan(0, 0, 2));
+            this._timerThread = new Timer(DoTseJob, DateTime.Now, new TimeSpan(0, 0, 1), new TimeSpan(0, 2, 3));
         }
 
         public void AddJob(TseJob job)
@@ -48,13 +49,31 @@ namespace YwRtdAp.Web.Tse
 
         private void DoTseJob(object state)
         {
-            this._doJobTimes += 1;
+            
             Console.WriteLine("Current Time : {0}", DateTime.Now.ToString("HH:mm:ss fff"));
-            if (this._doJobTimes > 3)
+            TseJob job = null;
+            if (this._jobQueue.TryDequeue(out job))
             {
-                this._timerThread.Change(new TimeSpan(0, 0, GetNextSecond()), new TimeSpan(0, 0, GetNextSecond()));
-                ResetDoJobTimes();
-            }            
+                this._doJobTimes += 1;
+                HttpSender sender = new HttpSender(job.Url);
+                ResponseResult result = sender.SendRequest(HttpRequestMethod.Get, "", job.HttpHeader);
+                if (result.IsResultError == false)
+                { 
+                    //Save data to folder
+                }
+
+                if (this._doJobTimes > 3)
+                {
+                    this._timerThread.Change(new TimeSpan(0, 0, GetNextSecond()), new TimeSpan(0, 0, GetNextSecond()));
+                    ResetDoJobTimes();
+                }
+            }
+            else
+            {
+                this._timerThread.Change(1000, 123000);
+            }
+
+            
         }
 
         private void ResetDoJobTimes()
@@ -66,7 +85,7 @@ namespace YwRtdAp.Web.Tse
         {
             int second = 0;
             Random rnd = new Random((int)DateTime.Now.Ticks);
-            second = 0 + rnd.Next(120);
+            second = 200 + rnd.Next(120);
             Console.WriteLine("---------------------------Next Second: {0}", second);
             return second;
         }

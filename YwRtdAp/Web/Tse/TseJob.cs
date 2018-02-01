@@ -11,6 +11,18 @@ namespace YwRtdAp.Web.Tse
         public HttpHeaderList HttpHeader { get; set; }
         public string Url { get; set; }
 
+        public string JobType { get; set; }
+        
+
+
+
+        public string DateStr { get; set; }
+
+        public DateTime JobDate { get; set; }
+
+        public string MainDirName { get; set; }
+        public string SubDirName { get; set; }
+
         public string SaveDirPath { get; set; }
         public string SaveFileName { get; set; }
     }
