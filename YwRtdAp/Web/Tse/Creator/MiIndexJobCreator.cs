@@ -3,46 +3,87 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 using HttpRS;
+using Newtonsoft.Json;
 
 namespace YwRtdAp.Web.Tse.Creator
 {
     public class MiIndexJobCreator : JobCreator
     {
-        private HttpHeaderList _httpHeader { get; set; }
-        private DateTime _startDate { get; set; }
-        private DateTime _endDate { get; set; }
-        private string _mainDir { get; set; }
+        //private HttpHeaderList _httpHeader { get; set; }
+        //private DateTime _startDate { get; set; }
+        //private DateTime _endDate { get; set; }
+        //private string _mainDir { get; set; }
         private List<string> _subTypeList { get; set; }
+
+        private Dictionary<string, List<DateTime>> _subTypeToFileList { get; set; }
 
         public MiIndexJobCreator()
         {
             SetUpHeader();
             this._startDate = new DateTime(2004, 2, 11);
-            this._endDate = DateTime.Now;
-            this._mainDir = "MI_INDEX";
+            this._endDate = GetLastEndDay();
+            this._mainDir = "MI_INDEX";            
             CreateSubTypeList();
+            CreateSubTypeFileMap();
+            LoadCompleteFileData();
         }
 
         public override TseJob CreateJob()
-        {
-            //TODO:要想辦法隨機產生要抓的日期，這個日期最好是可以檢查目前還沒有抓取到的資料
-
+        {            
             string subType = RandomSelectSubType();
-            string url = string.Format("http://www.tse.com.tw/exchangeReport/MI_INDEX?response=json&date={0}&type={1}", "", subType);
-            TseJob job = new TseJob { 
-                JobType = "MI_INDEX",
-                HttpHeader = this._httpHeader,  
-                Url = url,  
-                MainDirName = this._mainDir,
-                SubDirName = subType,                
+            DateTime? jobDate = GetJobDate(subType);
+            if (jobDate.HasValue == false)
+            {
+                return null;
+            }
 
+            string url = string.Format("http://www.tse.com.tw/exchangeReport/MI_INDEX?response=json&date={0}&type={1}", jobDate.Value.ToString("yyyyMMdd"), subType);
+            TseJob job = new TseJob
+            {
+                CreatorType = JobCreatorType.MiIndex,
+                JobType = "MI_INDEX",
+                HttpHeader = this._httpHeader,
+                Url = url,
+                MainDirName = this._mainDir,
+                SubDirName = subType,
+                JobDate = jobDate.Value,
+                IsSaturdayOrSunday = (jobDate.Value.DayOfWeek == DayOfWeek.Saturday || jobDate.Value.DayOfWeek == DayOfWeek.Sunday) ? true : false,
+                FilePath = string.Format("./{0}/{1}/{2}.json", this._mainDir, subType, jobDate.Value.ToString("yyyy_MM_dd"))
             };
 
             return job;
         }
 
-        private void SetUpHeader()
+        private DateTime? GetJobDate(string subType)
+        { 
+            List<DateTime> dateList = null;
+            if (this._subTypeToFileList.TryGetValue(subType, out dateList))
+            {
+                if (dateList.Contains(this._endDate) == false)
+                {
+                    return this._endDate;
+                }
+
+                DateTime earlyDate = dateList.OrderBy(x => x).FirstOrDefault();
+                DateTime dayBeforeEarlyDate = earlyDate.AddDays(-1);
+                if (dayBeforeEarlyDate < this._startDate)
+                {
+                    return null;
+                }
+                else
+                {
+                    return dayBeforeEarlyDate;
+                }
+                
+            }
+            return null;
+        }
+        /// <summary>
+        /// 設定好每一個TseJob要發送出去的Http Request Header
+        /// </summary>
+        protected override void SetUpHeader()
         {
             this._httpHeader = new HttpHeaderList();
             this._httpHeader.AddHeader("Accept", "application/json, text/javascript, */*; q=0.01");
@@ -110,5 +151,148 @@ namespace YwRtdAp.Web.Tse.Creator
             this._subTypeList.Add("19");
             this._subTypeList.Add("20");
         }
+
+        private void CreateSubTypeFileMap()
+        {
+            this._subTypeToFileList = new Dictionary<string, List<DateTime>>();
+            this._subTypeToFileList.Add("MS", new List<DateTime>());
+            this._subTypeToFileList.Add("MS2", new List<DateTime>());
+            this._subTypeToFileList.Add("ALL", new List<DateTime>());
+            this._subTypeToFileList.Add("ALLBUT0999", new List<DateTime>());
+            this._subTypeToFileList.Add("0049", new List<DateTime>());
+            this._subTypeToFileList.Add("019919T", new List<DateTime>());
+            this._subTypeToFileList.Add("0999", new List<DateTime>());
+            this._subTypeToFileList.Add("0999P", new List<DateTime>());
+            this._subTypeToFileList.Add("0999C", new List<DateTime>());
+            this._subTypeToFileList.Add("0999X", new List<DateTime>());
+            this._subTypeToFileList.Add("0999Y", new List<DateTime>());
+            this._subTypeToFileList.Add("0999GA", new List<DateTime>());
+            this._subTypeToFileList.Add("0999GD", new List<DateTime>());
+            this._subTypeToFileList.Add("0999G9", new List<DateTime>());
+            this._subTypeToFileList.Add("CB", new List<DateTime>());
+            this._subTypeToFileList.Add("01", new List<DateTime>());
+            this._subTypeToFileList.Add("02", new List<DateTime>());
+            this._subTypeToFileList.Add("03", new List<DateTime>());
+            this._subTypeToFileList.Add("04", new List<DateTime>());
+            this._subTypeToFileList.Add("05", new List<DateTime>());
+            this._subTypeToFileList.Add("06", new List<DateTime>());
+            this._subTypeToFileList.Add("07", new List<DateTime>());
+            this._subTypeToFileList.Add("21", new List<DateTime>());
+            this._subTypeToFileList.Add("22", new List<DateTime>());
+            this._subTypeToFileList.Add("08", new List<DateTime>());
+            this._subTypeToFileList.Add("09", new List<DateTime>());
+            this._subTypeToFileList.Add("10", new List<DateTime>());
+            this._subTypeToFileList.Add("11", new List<DateTime>());
+            this._subTypeToFileList.Add("12", new List<DateTime>());
+            this._subTypeToFileList.Add("13", new List<DateTime>());
+            this._subTypeToFileList.Add("24", new List<DateTime>());
+            this._subTypeToFileList.Add("25", new List<DateTime>());
+            this._subTypeToFileList.Add("26", new List<DateTime>());
+            this._subTypeToFileList.Add("27", new List<DateTime>());
+            this._subTypeToFileList.Add("28", new List<DateTime>());
+            this._subTypeToFileList.Add("29", new List<DateTime>());
+            this._subTypeToFileList.Add("30", new List<DateTime>());
+            this._subTypeToFileList.Add("31", new List<DateTime>());
+            this._subTypeToFileList.Add("14", new List<DateTime>());
+            this._subTypeToFileList.Add("15", new List<DateTime>());
+            this._subTypeToFileList.Add("16", new List<DateTime>());
+            this._subTypeToFileList.Add("17", new List<DateTime>());
+            this._subTypeToFileList.Add("18", new List<DateTime>());
+            this._subTypeToFileList.Add("9299", new List<DateTime>());
+            this._subTypeToFileList.Add("23", new List<DateTime>());
+            this._subTypeToFileList.Add("19", new List<DateTime>());
+            this._subTypeToFileList.Add("20", new List<DateTime>());
+        }
+
+        /// <summary>
+        /// 載入目前已完成的工作資料
+        /// </summary>
+        protected override void LoadCompleteFileData()
+        {
+            //FileInfo recordFile = new FileInfo("./Data/TseMeta/MI_INDEX.txt");
+            string fileContent = null;
+            using (StreamReader sr = new StreamReader("./Data/TseMeta/MI_INDEX.txt"))
+            {
+                fileContent = sr.ReadToEnd();
+            }
+
+            string[] jsonStrings = fileContent.Split(new string[] { "\n\r" }, StringSplitOptions.None);
+            foreach (string json in jsonStrings)
+            {
+                if (string.IsNullOrEmpty(json) == false)
+                {
+                    MiIndexMeta metaData = JsonConvert.DeserializeObject<MiIndexMeta>(json);
+                    List<DateTime> fileList = null;
+                    if (this._subTypeToFileList.TryGetValue(metaData.St, out fileList))
+                    {
+                        if (fileList.Contains(metaData.Dd) == false)
+                        {
+                            fileList.Add(metaData.Dd);
+                        }
+                    }
+                    else
+                    {
+                        fileList = new List<DateTime>();
+                        fileList.Add(metaData.Dd);
+                        this._subTypeToFileList.Add(metaData.St, fileList);
+                    }
+                }                
+            }            
+        }
+
+        public override void AddCompleteJob(TseJob job)
+        {
+            List<DateTime> dateList = null;
+            if (this._subTypeToFileList.TryGetValue(job.SubDirName, out dateList))
+            {
+                dateList.Add(job.JobDate);
+            }
+            //TODO:把TseJob Map成MiIndexMeta  然後寫入檔案內
+
+            MiIndexMeta meta = new MiIndexMeta
+            {
+                St = job.SubDirName,
+                Dd = job.JobDate,
+                IsH = job.IsSaturdayOrSunday,
+                IsE = job.IsComplete,
+                HasErr = job.WithErr
+            };
+
+            string metaRow = JsonConvert.SerializeObject(meta);
+            using (StreamWriter sw = new StreamWriter("./Data/TseMeta/MI_INDEX.txt", true))
+            {
+                sw.WriteLine(metaRow);
+            }
+        }
+
+        
+    }
+
+    class MiIndexMeta
+    {
+        /// <summary>
+        /// SubType
+        /// </summary>
+        public string St { get; set; }
+
+        /// <summary>
+        /// DataDate
+        /// </summary>
+        public DateTime Dd { get; set; }
+
+        /// <summary>
+        /// IsHoilday
+        /// </summary>
+        public bool IsH { get; set; }
+
+        /// <summary>
+        /// IsEnd
+        /// </summary>
+        public bool IsE { get; set; }
+
+        /// <summary>
+        /// HasError
+        /// </summary>
+        public bool HasErr { get; set; }
     }
 }

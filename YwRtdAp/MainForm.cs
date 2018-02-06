@@ -82,7 +82,7 @@ namespace YwRtdAp
             this._dispatcher = Dispatcher.Instance(this._rtdCore, this._commodities);
             this._dailyMarketTradeInfos = new Dictionary<string, DailyMarketTradeData>();
             YwRtdAp.Web.Tse.TseDownloader.Instance();
-            //DailyMarketInfoDownloader.Instance(this._dailyMarketTradeInfos);
+            
             InitializeComponent();
             SetUpDbPath();           
 

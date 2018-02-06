@@ -145,7 +145,20 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Web\DailyMarketInfoDownloader.cs" />
     <Compile Include="Web\DailyMarketUpdater.cs" />
+    <Compile Include="Web\Tse\Creator\BfiamuJobCreator.cs" />
+    <Compile Include="Web\Tse\Creator\FmnptkJobCreator.cs" />
+    <Compile Include="Web\Tse\Creator\FmsrfkJobCreator.cs" />
+    <Compile Include="Web\Tse\Creator\FmtqikJobCreator.cs" />
+    <Compile Include="Web\Tse\Creator\Mi5MinsJobCreator.cs" />
+    <Compile Include="Web\Tse\Creator\MiIndex20JobCreator.cs" />
     <Compile Include="Web\Tse\Creator\MiIndexJobCreator.cs" />
+    <Compile Include="Web\Tse\Creator\MiMarginJobCreator.cs" />
+    <Compile Include="Web\Tse\Creator\StockDayAvgJobCreator.cs" />
+    <Compile Include="Web\Tse\Creator\StockDayJobCreator.cs" />
+    <Compile Include="Web\Tse\Creator\StockFirstJobCreator.cs" />
+    <Compile Include="Web\Tse\Creator\Twt72uJobCreator.cs" />
+    <Compile Include="Web\Tse\Creator\Twt93uJobCreator.cs" />
+    <Compile Include="Web\Tse\Creator\TwtasuJobCreator.cs" />
     <Compile Include="Web\Tse\JobCreator.cs" />
     <Compile Include="Web\Tse\JobCreatorFactory.cs" />
     <Compile Include="Web\Tse\TseDownloader.cs" />
@@ -231,6 +244,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\SymbolList.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\TseMeta\FMTQIK.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\TseMeta\MI_INDEX.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\TseMeta\MI_MARGIN.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\TseMeta\TWT72U.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Db\RtdBase.mdf">
