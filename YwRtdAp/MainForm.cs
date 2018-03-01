@@ -503,7 +503,7 @@ namespace YwRtdAp
             var allSymbols= this._rep.FetchAll<Symbol>();
             foreach (Symbol s in allSymbols)
             { 
-                string symbolCode = s.Code.Trim();
+                string symbolCode = s.Code.Trim();                
                 if(string.IsNullOrEmpty(symbolCode) == false)
                 {
                     this._rtdCore.AddSymbol(symbolCode);
@@ -2114,7 +2114,7 @@ namespace YwRtdAp
             this._dispatcher.RemoveSymbolGridMap(this._queryOneSymbols, this._oneSymbolQueryGV);
             this._queryOneSymbols.Clear();
             this._queryOneSymbols.Add(symbolObj.Code);
-
+            
             List<YwCommodity> filteredCommodities = this._commodities.Values.Where(x => x.Symbol == symbolObj.Code).ToList();
             this._queryOneSymbolQuote.Clear();
             for (int i = 0; i < filteredCommodities.Count; i++)

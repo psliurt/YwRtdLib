@@ -143,7 +143,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Web\DailyMarketInfoDownloader.cs" />
     <Compile Include="Web\DailyMarketUpdater.cs" />
     <Compile Include="Web\Tse\Creator\BfiamuJobCreator.cs" />
     <Compile Include="Web\Tse\Creator\FmnptkJobCreator.cs" />
