@@ -52,9 +52,16 @@ namespace YwRtdAp.Web.Tse.Creator
         }
 
         protected override void LoadCompleteFileData()
-        {
-            
+        {            
             string fileContent = null;
+
+            //檢查Meta檔案是否存在，不存在會建立出來
+            FileInfo fi = new FileInfo("./Data/TseMeta/MI_MARGIN.txt");
+            if (fi.Exists == false)
+            {
+                fi.Create().Close();
+            }
+            //Meat檔案會記錄到目前為止，MiMargin這類型的資料已經處理到哪一天了
             using (StreamReader sr = new StreamReader("./Data/TseMeta/MI_MARGIN.txt"))
             {
                 fileContent = sr.ReadToEnd();
@@ -84,6 +91,10 @@ namespace YwRtdAp.Web.Tse.Creator
             }  
         }
 
+        /// <summary>
+        /// 建立一個MiMargin類型的TseJob
+        /// </summary>
+        /// <returns></returns>
         public override TseJob CreateJob()
         {
             string subType = RandomSelectSubType();
@@ -136,7 +147,6 @@ namespace YwRtdAp.Web.Tse.Creator
                 {
                     return dayBeforeEarlyDate;
                 }
-
             }
             return null;
         }

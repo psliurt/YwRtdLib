@@ -120,6 +120,7 @@ namespace YwRtdAp.Web.Tse
     {
         /// <summary>
         /// MI_MARGIN, 交易資訊 > 融資融券與可借券賣出額度 > 融資融券餘額。date(yyyyMMdd)。start from 2001/01/01
+        /// 資券餘額資料
         /// </summary>
         MiMargin = 0,
 

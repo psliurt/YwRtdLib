@@ -56,6 +56,13 @@ namespace YwRtdAp.Web.Tse.Creator
         protected override void LoadCompleteFileData()
         {
             string fileContent = null;
+
+            FileInfo fi = new FileInfo("./Data/TseMeta/TWT72U.txt");
+            if (fi.Exists == false)
+            {
+                fi.Create().Close();
+            }
+
             using (StreamReader sr = new StreamReader("./Data/TseMeta/TWT72U.txt"))
             {
                 fileContent = sr.ReadToEnd();
@@ -97,7 +104,7 @@ namespace YwRtdAp.Web.Tse.Creator
             string url = string.Format("http://www.tse.com.tw/exchangeReport/TWT72U?response=json&date={0}&selectType={1}", jobDate.Value.ToString("yyyyMMdd"), subType);
             TseJob job = new TseJob
             {
-                CreatorType = JobCreatorType.MiIndex,
+                CreatorType = JobCreatorType.Twt72u,
                 JobType = "TWT72U",
                 HttpHeader = this._httpHeader,
                 Url = url,
