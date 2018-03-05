@@ -358,6 +358,19 @@ namespace YwRtdLib
             {
                 int topicCount = 0;
                 Array rawNewData = this._rtdCore._ywRtdCom.RefreshData(ref topicCount);
+                
+                //if (topicCount > 0)
+                //{
+                //    int a = topicCount;
+                //    while (a > 0)
+                //    {
+                //        if (rawNewData.GetValue(1, topicCount - a).ToString().StartsWith("2340"))
+                //        {
+                //            Console.WriteLine("We Found 2340");
+                //        }
+                //        a = a - 1;
+                //    }                    
+                //}
                 this._inputQueue.Enqueue(new NotifyData
                 {
                     TopicCount = topicCount,
@@ -395,8 +408,7 @@ namespace YwRtdLib
                         string data = newData.GetValue(1, topicCount - 1).ToString();
                         if (data.Trim() != "無資料" &&
                             data.Trim() != "不是一個數字")
-                        {
-                            
+                        {                            
                             this._rtdCoreQueue.Enqueue(new ChangeData
                             {
                                 Data = data,
@@ -404,7 +416,8 @@ namespace YwRtdLib
                             });                            
                         }
 
-                        YwCommodity commodity = null;
+                        YwCommodity commodity = null;                        
+
                         if (this._rtdCore._subscribeCommodities.TryGetValue(info.Symbol, out commodity))
                         {
                             SetObjectPropData<YwCommodity>(ref commodity, ref info, data);
@@ -412,7 +425,7 @@ namespace YwRtdLib
                             if(this._rtdCore._subscribeSymbolsForRemove.Contains(info.Symbol))
                             {
                                 if (this._rtdCore.CommodityChangeHandler != null)
-                                {
+                                {                                    
                                     this._rtdCore.CommodityChangeHandler(commodity);
                                     this._rtdCore._subscribeSymbolsForRemove.Remove(info.Symbol);
                                 }

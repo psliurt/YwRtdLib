@@ -31,10 +31,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MoneyCome">
-      <HintPath>C:\Users\Trader\AppData\Local\Apps\2.0\HD3OYK75.NZ5\ZEAAKJDT.YOV\moneycome_58ea6a5dc69b3700_0004.0000_none_8a186938df5a5102\MoneyCome.dll</HintPath>
+      <HintPath>C:\Users\Trader\AppData\Local\Apps\2.0\HD3OYK75.NZ5\ZEAAKJDT.YOV\moneycome_58ea6a5dc69b3700_0004.0000_none_54dddae8573b190d\MoneyCome.dll</HintPath>
     </Reference>
-    <Reference Include="Muse">
-      <HintPath>C:\Users\Trader\AppData\Local\Apps\2.0\HD3OYK75.NZ5\ZEAAKJDT.YOV\mone..tion_0c1f5014a7fa11b9_0004.07e1_1317a64c351f00ed\Muse.dll</HintPath>
+    <Reference Include="Muse, Version=4.0.6605.25403, Culture=neutral, PublicKeyToken=5d02b29a81a679d3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\Trader\AppData\Local\Apps\2.0\HD3OYK75.NZ5\ZEAAKJDT.YOV\mone..tion_0000000000000000_0004.07e2_20defb37ff455675\Muse.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

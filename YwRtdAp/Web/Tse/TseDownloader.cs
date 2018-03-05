@@ -15,7 +15,11 @@ namespace YwRtdAp.Web.Tse
 
         private ConcurrentQueue<TseJob> _jobQueue { get; set; }
 
-        private int _baseSecond = 15; //20 sec
+        //private int _baseSecond = 20; //20 sec
+        /// <summary>
+        /// 發出request給證交所的基本間隔秒數
+        /// </summary>
+        private int _baseSecond = 2; //2sec
 
         /// <summary>
         /// 下載資料的TimerThread
@@ -51,9 +55,10 @@ namespace YwRtdAp.Web.Tse
             this._creatorFactory = JobCreatorFactory.GetFactory();
             this._jobQueue = new ConcurrentQueue<TseJob>();
             this._doJobTimes = 0;
+            //建立一個thread來執行TseJob，每隔2+N秒(N取決於亂數)會執行一次TseJob
             this._timerThread = new Timer(DoTseJob, DateTime.Now, new TimeSpan(0, 0, 1), new TimeSpan(0, 0, _baseSecond));
-
-            this._creatorThread = new Timer(CreateJob, DateTime.Now, 100, 30000);
+            //建立一個thread用來建立TseJob，每隔10秒會建立一個TseJob
+            this._creatorThread = new Timer(CreateJob, DateTime.Now, 100, 10000);
         }
 
         /// <summary>
@@ -166,8 +171,8 @@ namespace YwRtdAp.Web.Tse
         {
             int second = 0;
             Random rnd = new Random((int)DateTime.Now.Ticks);
-            second = _baseSecond + rnd.Next(13);
-            Console.WriteLine("[ GetNextSecond ] -------------------Next Second: {0}", second);
+            second = _baseSecond + rnd.Next(4);
+            Console.WriteLine("---------------------------Next Second: {0}", second);
             return second;
         }
 

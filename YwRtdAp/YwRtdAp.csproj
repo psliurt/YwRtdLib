@@ -143,7 +143,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Web\DailyMarketInfoDownloader.cs" />
     <Compile Include="Web\DailyMarketUpdater.cs" />
     <Compile Include="Web\Tse\Creator\BfiamuJobCreator.cs" />
     <Compile Include="Web\Tse\Creator\FmnptkJobCreator.cs" />
@@ -246,18 +245,10 @@
     <Content Include="Data\SymbolList.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data\TseMeta\FMTQIK.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\TseMeta\MI_INDEX.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\TseMeta\MI_MARGIN.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\TseMeta\TWT72U.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Data\TseMeta\FMTQIK.txt" />
+    <Content Include="Data\TseMeta\MI_INDEX.txt" />
+    <Content Include="Data\TseMeta\MI_MARGIN.txt" />
+    <Content Include="Data\TseMeta\TWT72U.txt" />
     <Content Include="Db\RtdBase.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

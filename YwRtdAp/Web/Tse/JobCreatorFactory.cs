@@ -126,6 +126,7 @@ namespace YwRtdAp.Web.Tse
         /// <summary>
         /// TWT72U, http://www.tse.com.tw/zh/page/trading/exchange/TWT72U.html
         /// date(yyyyMMdd)。start from 2004/11/22
+        /// 資券餘額資料
         /// </summary>
         Twt72u = 0,
 

@@ -56,6 +56,13 @@ namespace YwRtdAp.Web.Tse.Creator
         protected override void LoadCompleteFileData()
         {
             string fileContent = null;
+
+            FileInfo fi = new FileInfo("./Data/TseMeta/TWT72U.txt");
+            if (fi.Exists == false)
+            {
+                fi.Create().Close();
+            }
+
             using (StreamReader sr = new StreamReader("./Data/TseMeta/TWT72U.txt"))
             {
                 fileContent = sr.ReadToEnd();
