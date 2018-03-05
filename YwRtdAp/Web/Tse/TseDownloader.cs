@@ -15,7 +15,7 @@ namespace YwRtdAp.Web.Tse
 
         private ConcurrentQueue<TseJob> _jobQueue { get; set; }
 
-        private int _baseSecond = 20; //20 sec
+        private int _baseSecond = 15; //20 sec
 
         /// <summary>
         /// 下載資料的TimerThread
@@ -53,7 +53,7 @@ namespace YwRtdAp.Web.Tse
             this._doJobTimes = 0;
             this._timerThread = new Timer(DoTseJob, DateTime.Now, new TimeSpan(0, 0, 1), new TimeSpan(0, 0, _baseSecond));
 
-            this._creatorThread = new Timer(CreateJob, DateTime.Now, 100, 20000);
+            this._creatorThread = new Timer(CreateJob, DateTime.Now, 100, 30000);
         }
 
         /// <summary>
@@ -166,8 +166,8 @@ namespace YwRtdAp.Web.Tse
         {
             int second = 0;
             Random rnd = new Random((int)DateTime.Now.Ticks);
-            second = _baseSecond + rnd.Next(17);
-            Console.WriteLine("---------------------------Next Second: {0}", second);
+            second = _baseSecond + rnd.Next(13);
+            Console.WriteLine("[ GetNextSecond ] -------------------Next Second: {0}", second);
             return second;
         }
 

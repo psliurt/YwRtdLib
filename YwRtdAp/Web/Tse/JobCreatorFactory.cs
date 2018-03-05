@@ -27,20 +27,23 @@ namespace YwRtdAp.Web.Tse
         private JobCreatorFactory()
         {
             this._jobCreatorMap = new Dictionary<JobCreatorType, JobCreator>();
-            this._mainCreatorQty = 2;
+            this._mainCreatorQty = 1;
         }
 
         public JobCreator RandomProduce()
         {
             Random rnd = new Random(DateTime.Now.Millisecond);
             int rndNo = rnd.Next(this._mainCreatorQty);
-
+            Console.WriteLine("[ RandomProduce ] 隨機產生一個JobCreatorType->[ {0} ]", rndNo);
             return Produce((JobCreatorType)rndNo);
         }
 
         private JobCreator Produce(JobCreatorType t)
         {
             JobCreator creator = null;
+
+            Console.WriteLine("[ Produce ] 準備產生JobCreatorType->[ {0} ]", t);
+
             if (this._jobCreatorMap.TryGetValue(t, out creator) == false)
             {
                 switch (t)
@@ -94,20 +97,22 @@ namespace YwRtdAp.Web.Tse
 
                 if (creator != null)
                 {
+                    Console.WriteLine("[ Produce ] 把[ {0} ]類型的JobCreator放入集合中", t.ToString().ToUpper());
                     this._jobCreatorMap.Add(t, creator);
                 }
             }
 
             if (creator != null)
             {
-                Console.WriteLine("[ Produce ] 這次產生[ {0} ]類型的JobCreator", t.ToString().ToUpper());
+                Console.WriteLine("[ Produce ] 這次產生(或找到)[ {0} ]類型的JobCreator", t.ToString().ToUpper());
             }           
 
             return creator;
         }
 
         public void SetCompleteJob(TseJob job)
-        { 
+        {
+            Console.WriteLine("[ SetCompleteJob ] 準備把任務[ {0} ]設定為完成", job.MainDirName);
             JobCreator creator = null;
             if (this._jobCreatorMap.TryGetValue(job.CreatorType, out creator))
             {
@@ -119,15 +124,17 @@ namespace YwRtdAp.Web.Tse
     public enum JobCreatorType : int
     {
         /// <summary>
-        /// MI_MARGIN, 交易資訊 > 融資融券與可借券賣出額度 > 融資融券餘額。date(yyyyMMdd)。start from 2001/01/01
-        /// </summary>
-        MiMargin = 0,
-
-        /// <summary>
         /// TWT72U, http://www.tse.com.tw/zh/page/trading/exchange/TWT72U.html
         /// date(yyyyMMdd)。start from 2004/11/22
         /// </summary>
-        Twt72u = 1,
+        Twt72u = 0,
+
+        /// <summary>
+        /// MI_MARGIN, 交易資訊 > 融資融券與可借券賣出額度 > 融資融券餘額。date(yyyyMMdd)。start from 2001/01/01
+        /// </summary>
+        MiMargin = 1,
+
+        
         /// <summary>
         /// TWT93U, 交易資訊 > 融資融券與可借券賣出額度 > 融券借券賣出餘額。date(yyyyMMdd)。start from 2005/07/01
         /// </summary>

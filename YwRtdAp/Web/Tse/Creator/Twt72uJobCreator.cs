@@ -97,7 +97,7 @@ namespace YwRtdAp.Web.Tse.Creator
             string url = string.Format("http://www.tse.com.tw/exchangeReport/TWT72U?response=json&date={0}&selectType={1}", jobDate.Value.ToString("yyyyMMdd"), subType);
             TseJob job = new TseJob
             {
-                CreatorType = JobCreatorType.MiIndex,
+                CreatorType = JobCreatorType.Twt72u,
                 JobType = "TWT72U",
                 HttpHeader = this._httpHeader,
                 Url = url,
@@ -114,6 +114,7 @@ namespace YwRtdAp.Web.Tse.Creator
         public override void AddCompleteJob(TseJob job)
         {
             List<DateTime> dateList = null;
+            Console.WriteLine("[ AddCompleteJob ] 把任務的次類型[ {0} ]設定為已完成，任務日期[ {1} ]", job.SubDirName, job.JobDate.ToString("yyyy-MM-dd"));
             if (this._subTypeToFileList.TryGetValue(job.SubDirName, out dateList))
             {
                 dateList.Add(job.JobDate);
@@ -132,6 +133,7 @@ namespace YwRtdAp.Web.Tse.Creator
             string metaRow = JsonConvert.SerializeObject(meta);
             using (StreamWriter sw = new StreamWriter("./Data/TseMeta/TWT72U.txt", true))
             {
+                Console.WriteLine("[ AddCompleteJob ] 把任務的次類型[ {0} ]的完成資訊寫入檔案，任務日期[ {1} ]", job.SubDirName, job.JobDate.ToString("yyyy-MM-dd"));
                 sw.WriteLine(metaRow);
             }
         }
